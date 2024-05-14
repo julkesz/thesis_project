@@ -1,0 +1,418 @@
+{
+  "printerSchedules": {
+    "printer1": {
+      "schedule": [
+        {
+          "start": "1::kwi::2024 08::20::00",
+          "stop": "1::kwi::2024 08::40::00",
+          "tasks": [
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 50,
+              "width": 30,
+              "executionTime": 20,
+              "filament": 2
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 09::00::00",
+          "stop": "1::kwi::2024 09::15::00",
+          "tasks": [
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 40,
+              "width": 20,
+              "executionTime": 15,
+              "filament": 3
+            },
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 40,
+              "width": 20,
+              "executionTime": 15,
+              "filament": 3
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 09::35::00",
+          "stop": "1::kwi::2024 10::00::00",
+          "tasks": [
+            {
+              "orderNumber": "002",
+              "deadline": "2024-02-20",
+              "length": 60,
+              "width": 40,
+              "executionTime": 25,
+              "filament": 1
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 10::20::00",
+          "stop": "1::kwi::2024 10::38::00",
+          "tasks": [
+            {
+              "orderNumber": "003",
+              "deadline": "2024-02-25",
+              "length": 45,
+              "width": 35,
+              "executionTime": 18,
+              "filament": 4
+            },
+            {
+              "orderNumber": "003",
+              "deadline": "2024-02-25",
+              "length": 45,
+              "width": 35,
+              "executionTime": 18,
+              "filament": 4
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 10::58::00",
+          "stop": "1::kwi::2024 11::28::00",
+          "tasks": [
+            {
+              "orderNumber": "004",
+              "deadline": "2024-03-05",
+              "length": 70,
+              "width": 50,
+              "executionTime": 30,
+              "filament": 5
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 11::28::00",
+          "stop": "1::kwi::2024 11::58::00",
+          "tasks": [
+            {
+              "orderNumber": "004",
+              "deadline": "2024-03-05",
+              "length": 70,
+              "width": 50,
+              "executionTime": 30,
+              "filament": 5
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 12::18::00",
+          "stop": "1::kwi::2024 12::40::00",
+          "tasks": [
+            {
+              "orderNumber": "005",
+              "deadline": "2024-03-10",
+              "length": 55,
+              "width": 25,
+              "executionTime": 22,
+              "filament": 2
+            },
+            {
+              "orderNumber": "005",
+              "deadline": "2024-03-10",
+              "length": 55,
+              "width": 25,
+              "executionTime": 22,
+              "filament": 2
+            }
+          ]
+        }
+      ]
+    },
+    "printer2": {
+      "schedule": [
+        {
+          "start": "1::kwi::2024 08::00::00",
+          "stop": "1::kwi::2024 08::20::00",
+          "tasks": [
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 50,
+              "width": 30,
+              "executionTime": 20,
+              "filament": 2
+            },
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 50,
+              "width": 30,
+              "executionTime": 20,
+              "filament": 2
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 08::20::00",
+          "stop": "1::kwi::2024 08::40::00",
+          "tasks": [
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 50,
+              "width": 30,
+              "executionTime": 20,
+              "filament": 2
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 09::00::00",
+          "stop": "1::kwi::2024 09::15::00",
+          "tasks": [
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 40,
+              "width": 20,
+              "executionTime": 15,
+              "filament": 3
+            },
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 40,
+              "width": 20,
+              "executionTime": 15,
+              "filament": 3
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 09::15::00",
+          "stop": "1::kwi::2024 09::30::00",
+          "tasks": [
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 40,
+              "width": 20,
+              "executionTime": 15,
+              "filament": 3
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 09::50::00",
+          "stop": "1::kwi::2024 10::15::00",
+          "tasks": [
+            {
+              "orderNumber": "002",
+              "deadline": "2024-02-20",
+              "length": 60,
+              "width": 40,
+              "executionTime": 25,
+              "filament": 1
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 10::35::00",
+          "stop": "1::kwi::2024 10::53::00",
+          "tasks": [
+            {
+              "orderNumber": "003",
+              "deadline": "2024-02-25",
+              "length": 45,
+              "width": 35,
+              "executionTime": 18,
+              "filament": 4
+            },
+            {
+              "orderNumber": "003",
+              "deadline": "2024-02-25",
+              "length": 45,
+              "width": 35,
+              "executionTime": 18,
+              "filament": 4
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 11::13::00",
+          "stop": "1::kwi::2024 11::43::00",
+          "tasks": [
+            {
+              "orderNumber": "004",
+              "deadline": "2024-03-05",
+              "length": 70,
+              "width": 50,
+              "executionTime": 30,
+              "filament": 5
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 12::03::00",
+          "stop": "1::kwi::2024 12::25::00",
+          "tasks": [
+            {
+              "orderNumber": "005",
+              "deadline": "2024-03-10",
+              "length": 55,
+              "width": 25,
+              "executionTime": 22,
+              "filament": 2
+            },
+            {
+              "orderNumber": "005",
+              "deadline": "2024-03-10",
+              "length": 55,
+              "width": 25,
+              "executionTime": 22,
+              "filament": 2
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 12::25::00",
+          "stop": "1::kwi::2024 12::47::00",
+          "tasks": [
+            {
+              "orderNumber": "005",
+              "deadline": "2024-03-10",
+              "length": 55,
+              "width": 25,
+              "executionTime": 22,
+              "filament": 2
+            }
+          ]
+        }
+      ]
+    },
+    "printer3": {
+      "schedule": [
+        {
+          "start": "1::kwi::2024 08::20::00",
+          "stop": "1::kwi::2024 08::40::00",
+          "tasks": [
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 50,
+              "width": 30,
+              "executionTime": 20,
+              "filament": 2
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 09::00::00",
+          "stop": "1::kwi::2024 09::15::00",
+          "tasks": [
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 40,
+              "width": 20,
+              "executionTime": 15,
+              "filament": 3
+            },
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 40,
+              "width": 20,
+              "executionTime": 15,
+              "filament": 3
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 09::15::00",
+          "stop": "1::kwi::2024 09::30::00",
+          "tasks": [
+            {
+              "orderNumber": "001",
+              "deadline": "2024-02-15",
+              "length": 40,
+              "width": 20,
+              "executionTime": 15,
+              "filament": 3
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 09::50::00",
+          "stop": "1::kwi::2024 10::15::00",
+          "tasks": [
+            {
+              "orderNumber": "002",
+              "deadline": "2024-02-20",
+              "length": 60,
+              "width": 40,
+              "executionTime": 25,
+              "filament": 1
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 10::35::00",
+          "stop": "1::kwi::2024 10::53::00",
+          "tasks": [
+            {
+              "orderNumber": "003",
+              "deadline": "2024-02-25",
+              "length": 45,
+              "width": 35,
+              "executionTime": 18,
+              "filament": 4
+            },
+            {
+              "orderNumber": "003",
+              "deadline": "2024-02-25",
+              "length": 45,
+              "width": 35,
+              "executionTime": 18,
+              "filament": 4
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 11::13::00",
+          "stop": "1::kwi::2024 11::43::00",
+          "tasks": [
+            {
+              "orderNumber": "004",
+              "deadline": "2024-03-05",
+              "length": 70,
+              "width": 50,
+              "executionTime": 30,
+              "filament": 5
+            }
+          ]
+        },
+        {
+          "start": "1::kwi::2024 12::03::00",
+          "stop": "1::kwi::2024 12::25::00",
+          "tasks": [
+            {
+              "orderNumber": "005",
+              "deadline": "2024-03-10",
+              "length": 55,
+              "width": 25,
+              "executionTime": 22,
+              "filament": 2
+            },
+            {
+              "orderNumber": "005",
+              "deadline": "2024-03-10",
+              "length": 55,
+              "width": 25,
+              "executionTime": 22,
+              "filament": 2
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

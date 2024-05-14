@@ -1,0 +1,24 @@
+{
+  "orders": [
+    {
+      "orderNumber": "001",
+      "deadline": "2024-02-15",
+      "tasks": [
+        {
+          "length": 50,
+          "width": 30,
+          "quantity": 5,
+          "executionTime": 20,
+          "filament": 2
+        },
+        {
+          "length": 40,
+          "width": 20,
+          "quantity": 8,
+          "executionTime": 15,
+          "filament": 3
+        }
+      ]
+    }
+  ]
+}
