@@ -47,7 +47,7 @@ public class Task implements Serializable {
         return executionTime;
     }
 
-    public void setExecution_time(long executionTime) {
+    public void setExecutionTime(long executionTime) {
         this.executionTime = executionTime;
     }
 

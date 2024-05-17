@@ -1,4 +1,4 @@
-package Agents; /**
+package agents; /**
  * ***************************************************************
  * JADE - Java Agent DEvelopment Framework is a framework to develop
  * multi-agent systems in compliance with the FIPA specifications.
@@ -24,7 +24,6 @@ package Agents; /**
  */
 
 import entities.AtomicTask;
-import jade.core.Agent;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
@@ -37,35 +36,12 @@ import model.InformMessage;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
-public class ResourceAgent extends Agent {
-
-	private int filament;
-	private int boardSize;
-	private ArrayList<ArrayList<AtomicTask>> atomicTasksList;
-	private int totalExecutionTime;
-	private int totalSize;
-	static final int filamentReplacementTime = 20;
-
-	static final double boardHeuristics = 0.8;
+public class SimpleResourceAgent extends ResourceAgent {
 
 	protected void setup() {
 
-		Object[] args = getArguments();
-		if (args != null && args.length == 2) {
-			boardSize = Integer.parseInt((String) args[0]);;
-			filament = Integer.parseInt((String) args[1]);;
-			System.out.println("Agent "+getLocalName()+" has board of size " + boardSize + " and filament number " + filament +".");
-		}
-		else {
-			System.out.println("No arguments provided.");
-		}
-
-		atomicTasksList = new ArrayList();
-		totalExecutionTime = 0;
-		totalSize = 0;
+		super.setup();
 
 		System.out.println("Agent "+getLocalName()+" waiting for CFP...");
 		MessageTemplate template = MessageTemplate.and(
@@ -107,14 +83,14 @@ public class ResourceAgent extends Agent {
 					task = (AtomicTask) cfp.getContentObject();
 					timeSlot = calculateTimeSlot(task);
 
-					if(atomicTasksList.size() == timeSlot){
-						atomicTasksList.add(new ArrayList<>());
+					if(atomicTaskList.size() == timeSlot){
+						atomicTaskList.add(new ArrayList<>());
 					}
 
-					atomicTasksList.get(timeSlot).add(task);
+					atomicTaskList.get(timeSlot).add(task);
 
 					int taskSize = task.getLength()* task.getWidth();
-					if(totalSize!=0 && totalSize + taskSize > boardHeuristics * boardSize) {
+					if(totalSize!=0 && totalSize + taskSize > BOARD_HEURISTICS * boardSize) {
 						totalSize = taskSize;
 					}else{
 						totalSize = totalSize + taskSize;
@@ -149,18 +125,18 @@ public class ResourceAgent extends Agent {
 
 		long executionTime = task.getExecutionTime();
 
-		if (atomicTasksList.isEmpty()){
+		if (atomicTaskList.isEmpty()){
 			if (filament != task.getFilament()){
-				executionTime = executionTime + filamentReplacementTime;
+				executionTime = executionTime + FILAMENT_REPLACEMENT_TIME;
 			}
 		} else{
-			int lastTimeSlot = atomicTasksList.size() - 1;
-			int lastFilament = atomicTasksList.get(lastTimeSlot).get(0).getFilament();
-			int lastTimeSlotSize = atomicTasksList.get(lastTimeSlot).size();
-			AtomicTask lastTask = atomicTasksList.get(lastTimeSlot).get(lastTimeSlotSize-1);
+			int lastTimeSlot = atomicTaskList.size() - 1;
+			int lastFilament = atomicTaskList.get(lastTimeSlot).get(0).getFilament();
+			int lastTimeSlotSize = atomicTaskList.get(lastTimeSlot).size();
+			AtomicTask lastTask = atomicTaskList.get(lastTimeSlot).get(lastTimeSlotSize-1);
 			if (lastFilament != task.getFilament()){
-				executionTime = totalExecutionTime + filamentReplacementTime + executionTime;
-			} else if(totalSize + taskSize > boardHeuristics * boardSize) {
+				executionTime = totalExecutionTime + FILAMENT_REPLACEMENT_TIME + executionTime;
+			} else if(totalSize + taskSize > BOARD_HEURISTICS * boardSize) {
 				executionTime = totalExecutionTime + executionTime;
 			} else{
 				executionTime = Math.max(executionTime, totalExecutionTime);
@@ -179,10 +155,10 @@ public class ResourceAgent extends Agent {
 		int taskSize =  task.getLength() * task.getWidth();
 		int timeSlot = 0;
 
-		if (!atomicTasksList.isEmpty()){
-			int lastTimeSlot = atomicTasksList.size() - 1;
-			if (atomicTasksList.get(lastTimeSlot).get(0).getFilament() != task.getFilament()
-			|| totalSize + taskSize > boardHeuristics * boardSize){
+		if (!atomicTaskList.isEmpty()){
+			int lastTimeSlot = atomicTaskList.size() - 1;
+			if (atomicTaskList.get(lastTimeSlot).get(0).getFilament() != task.getFilament()
+			|| totalSize + taskSize > BOARD_HEURISTICS * boardSize){
 				timeSlot = lastTimeSlot + 1;
 			} else{
 				timeSlot =  lastTimeSlot;

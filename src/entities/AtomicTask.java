@@ -8,13 +8,13 @@ public class AtomicTask implements Serializable {
     private String deadline;
     private int length;
     private int width;
-    private long executionTime;
+    private int executionTime;
     private int filament;
 
     public AtomicTask() {
     }
 
-    public AtomicTask(String orderNumber, String deadline, int length, int width, long executionTime, int filament) {
+    public AtomicTask(String orderNumber, String deadline, int length, int width, int executionTime, int filament) {
         this.orderNumber = orderNumber;
         this.deadline = deadline;
         this.length = length;
@@ -55,11 +55,11 @@ public class AtomicTask implements Serializable {
         this.width = width;
     }
 
-    public long getExecutionTime() {
+    public int getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(long executionTime) {
+    public void setExecutionTime(int executionTime) {
         this.executionTime = executionTime;
     }
 

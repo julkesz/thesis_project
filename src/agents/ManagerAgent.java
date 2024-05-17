@@ -1,4 +1,4 @@
-package Agents; /**
+package agents; /**
  * ***************************************************************
  * JADE - Java Agent DEvelopment Framework is a framework to develop
  * multi-agent systems in compliance with the FIPA specifications.
@@ -28,10 +28,7 @@ import com.google.gson.GsonBuilder;
 import entities.PrinterSchedule;
 import entities.Schedule;
 import entities.TimeSlot;
-import jade.core.AgentContainer;
 import jade.lang.acl.UnreadableException;
-import jade.wrapper.AgentController;
-import jade.wrapper.ControllerException;
 import model.InformMessage;
 import utils.LocalDateTimeTypeAdapter;
 import utils.TaskReader;
@@ -48,8 +45,6 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
-
-import static jade.core.MicroRuntime.getAgent;
 
 public class ManagerAgent extends Agent {
 	static final int filamentReplacementTime = 20;
