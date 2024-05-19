@@ -31,14 +31,8 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
     }
 
     private AtomicTask extractAtomicTaskFromMessage(ACLMessage msg) throws Exception {
-        // Implement the logic to extract the Task object from the message content
-        // This might involve deserialization or parsing depending on how you serialize the task
-        // For this example, we will assume the task is serialized as a string
         String content = msg.getContent();
-        // Deserialize the content to a Task object
-        // Example:
-        // Task task = (Task) deserialize(content);
-        AtomicTask atomicTask = new AtomicTask(); // Replace this with actual deserialization logic
+        AtomicTask atomicTask = new AtomicTask();
         return atomicTask;
     }
 

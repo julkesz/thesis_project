@@ -6,7 +6,7 @@ public class Task implements Serializable {
     private int length;
     private int width;
     private int quantity;
-    private long executionTime;
+    private int executionTime;
     private int filament;
 
     @Override
@@ -43,11 +43,11 @@ public class Task implements Serializable {
         this.quantity = quantity;
     }
 
-    public long getExecutionTime() {
+    public int getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(long executionTime) {
+    public void setExecutionTime(int executionTime) {
         this.executionTime = executionTime;
     }
 

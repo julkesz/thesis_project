@@ -1,12 +1,12 @@
 package ontologies;
 
+import entities.AtomicTask;
 import entities.AtomicTaskList;
 import jade.content.onto.BasicOntology;
 import jade.content.onto.Ontology;
 import jade.content.onto.OntologyException;
 import jade.content.schema.AgentActionSchema;
 import jade.content.schema.ConceptSchema;
-import jade.content.schema.ObjectSchema;
 import jade.content.schema.PrimitiveSchema;
 
 public class AtomicTaskOntology extends Ontology {
@@ -43,14 +43,15 @@ public class AtomicTaskOntology extends Ontology {
             atomicTaskSchema.add(ATOMIC_TASK_WIDTH, (PrimitiveSchema) getSchema(BasicOntology.INTEGER));
             atomicTaskSchema.add(ATOMIC_TASK_EXECUTION_TIME, (PrimitiveSchema) getSchema(BasicOntology.INTEGER));
             atomicTaskSchema.add(ATOMIC_TASK_FILAMENT, (PrimitiveSchema) getSchema(BasicOntology.INTEGER));
-            add(atomicTaskSchema, entities.AtomicTask.class);
+            add(atomicTaskSchema, AtomicTask.class);
 
-            // TaskList schema
-            AgentActionSchema taskListSchema = new AgentActionSchema(ATOMIC_TASK_LIST);
-            taskListSchema.add(ATOMIC_TASK_LIST_ATOMIC_TASKS, (ConceptSchema) getSchema(ATOMIC_TASK), 0, ObjectSchema.UNLIMITED);
-            add(taskListSchema, AtomicTaskList.class);
+            // AtomicTaskList schema
+            AgentActionSchema atomicTaskListSchema = new AgentActionSchema(ATOMIC_TASK_LIST);
+            atomicTaskListSchema.add(ATOMIC_TASK_LIST_ATOMIC_TASKS, (ConceptSchema) getSchema(BasicOntology.SEQUENCE));
+            add(atomicTaskListSchema, AtomicTaskList.class);
         } catch (OntologyException e) {
             e.printStackTrace();
         }
     }
 }
+

@@ -22,16 +22,13 @@ public class AdvancedResourceAgent extends ResourceAgent {
     protected void setup() {
         super.setup();
 
-        // Register the ontology and language
         getContentManager().registerLanguage(new SLCodec());
         getContentManager().registerOntology(AtomicTaskOntology.getInstance());
 
-        // Create a parallel behavior to handle multiple behaviors concurrently
         ParallelBehaviour parallelBehaviour = new ParallelBehaviour();
         parallelBehaviour.addSubBehaviour(new MessageReceiverBehaviour());
         parallelBehaviour.addSubBehaviour(new AuctionResponseBehaviour());
 
-        // Add the parallel behavior to the agent
         addBehaviour(parallelBehaviour);
     }
 
@@ -45,10 +42,10 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
                     if (content instanceof AtomicTaskList) {
                         AtomicTaskList atomicTaskList = (AtomicTaskList) content;
-                        for (AtomicTask atomicTask : atomicTaskList.getAtomicTasks()) {
-                            // Initiate auction for each task
-                            addBehaviour(new AuctionInitiationBehaviour(atomicTask));
-                        }
+                        //for (AtomicTask atomicTask : atomicTaskList.getAtomicTasks()) {
+                        //    // Initiate auction for each task
+                        //addBehaviour(new AuctionInitiationBehaviour(atomicTask));
+                        //}
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -67,7 +64,6 @@ public class AdvancedResourceAgent extends ResourceAgent {
         }
 
         public void action() {
-            // Initiate Contract Net Protocol for the atomic task
             ACLMessage cfp = new ACLMessage(ACLMessage.CFP);
             cfp.setContent(atomicTask.toString());
             cfp.setOntology(AtomicTaskOntology.ONTOLOGY_NAME);
@@ -75,7 +71,6 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
             List<AID> receivers = getReceivers();
 
-            // Specify the agents to send the CFP to (e.g., all ResourceAgents)
             for (AID receiver : receivers) {
                 cfp.addReceiver(receiver);
             }
@@ -85,9 +80,9 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
         private List<AID> getReceivers() {
             List<AID> receivers = new ArrayList<>();
-            // Add your receiver agents here
-            // Example:
-            receivers.add(new AID("AnotherResourceAgent", AID.ISLOCALNAME));
+            receivers.add(new AID("printer1", AID.ISLOCALNAME));
+            receivers.add(new AID("printer2", AID.ISLOCALNAME));
+            receivers.add(new AID("printer3", AID.ISLOCALNAME));
             return receivers;
         }
     }
