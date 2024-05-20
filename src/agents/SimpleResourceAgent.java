@@ -167,13 +167,5 @@ public class SimpleResourceAgent extends ResourceAgent {
 		return timeSlot;
 	}
 
-	private boolean performTask() {
-		// Simulate action execution by generating a random number
-		return (Math.random() > 0.2);
-	}
-
-	public int getFilament() {
-		return filament;
-	}
 }
 

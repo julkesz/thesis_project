@@ -20,7 +20,7 @@ public class ContractNetInitiatorBehaviour extends ContractNetInitiator {
     }
 
     protected void handlePropose(ACLMessage propose, Vector v) {
-        //System.out.println("Agent " + propose.getSender().getName() + " proposed " + propose.getContent());
+        System.out.println("Agent " + propose.getSender().getName() + " proposed " + propose.getContent());
     }
 
     protected void handleRefuse(ACLMessage refuse) {
@@ -38,6 +38,7 @@ public class ContractNetInitiatorBehaviour extends ContractNetInitiator {
     }
 
     protected void handleAllResponses(Vector responses, Vector acceptances) {
+        System.out.println("HALOOOOO");
         if (responses.size() < nResponders) {
             System.out.println("Timeout expired: missing "+(nResponders - responses.size())+" responses");
         }
@@ -45,6 +46,7 @@ public class ContractNetInitiatorBehaviour extends ContractNetInitiator {
         int bestProposal = Integer.MAX_VALUE;
         AID bestProposer = null;
         ACLMessage accept = null;
+
 
         Enumeration e = responses.elements();
         while (e.hasMoreElements()) {

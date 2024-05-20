@@ -23,7 +23,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
         ParallelBehaviour parallelBehaviour = new ParallelBehaviour();
         parallelBehaviour.addSubBehaviour(new MessageReceiverBehaviour());
-        parallelBehaviour.addSubBehaviour(new AuctionResponseBehaviour());
+        parallelBehaviour.addSubBehaviour(new AuctionResponseBehaviour(this, MessageTemplate.MatchPerformative(ACLMessage.CFP)));
 
         addBehaviour(parallelBehaviour);
     }
