@@ -10,10 +10,9 @@ import jade.core.behaviours.OneShotBehaviour;
 import jade.core.behaviours.ParallelBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.content.ContentElement;
-import jade.content.lang.sl.SLCodec;
+import jade.lang.acl.MessageTemplate;
 
-import ontologies.AtomicTaskOntology;
-
+import java.io.IOException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -21,9 +20,6 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
     protected void setup() {
         super.setup();
-
-        getContentManager().registerLanguage(new SLCodec());
-        getContentManager().registerOntology(AtomicTaskOntology.getInstance());
 
         ParallelBehaviour parallelBehaviour = new ParallelBehaviour();
         parallelBehaviour.addSubBehaviour(new MessageReceiverBehaviour());
@@ -34,18 +30,15 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
     private class MessageReceiverBehaviour extends CyclicBehaviour {
         public void action() {
-            ACLMessage msg = receive();
+            ACLMessage msg = receive(MessageTemplate.MatchPerformative(ACLMessage.REQUEST));
 
             if (msg != null) {
                 try {
-                    ContentElement content = getContentManager().extractContent(msg);
+                    AtomicTaskList atomicTaskList = (AtomicTaskList) msg.getContentObject();
+                    System.out.println("Agent " + myAgent.getAID().getLocalName() + " received: " + atomicTaskList);
 
-                    if (content instanceof AtomicTaskList) {
-                        AtomicTaskList atomicTaskList = (AtomicTaskList) content;
-                        //for (AtomicTask atomicTask : atomicTaskList.getAtomicTasks()) {
-                        //    // Initiate auction for each task
-                        //addBehaviour(new AuctionInitiationBehaviour(atomicTask));
-                        //}
+                    for (AtomicTask atomicTask : atomicTaskList.getAtomicTasks()) {
+                    addBehaviour(new AuctionInitiationBehaviour(atomicTask));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -65,9 +58,11 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
         public void action() {
             ACLMessage cfp = new ACLMessage(ACLMessage.CFP);
-            cfp.setContent(atomicTask.toString());
-            cfp.setOntology(AtomicTaskOntology.ONTOLOGY_NAME);
-            cfp.setLanguage(new SLCodec().getName());
+            try {
+                cfp.setContentObject(atomicTask);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
             List<AID> receivers = getReceivers();
 

@@ -23,7 +23,7 @@ public class TaskReader {
         ObjectMapper om = new ObjectMapper();
 
         try {
-            orderList = om.readValue(new File("src/resources/set5.json"), OrderList.class);
+            orderList = om.readValue(new File("src/resources/set1.json"), OrderList.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

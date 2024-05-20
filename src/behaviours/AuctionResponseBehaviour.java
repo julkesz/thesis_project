@@ -14,13 +14,16 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
         ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.CFP));
 
         if (msg != null) {
-            // Extract the task from the message content
             try {
-                AtomicTask atomicTask = extractAtomicTaskFromMessage(msg);
+                AtomicTask atomicTask = (AtomicTask) msg.getContentObject();
 
                 ACLMessage reply = msg.createReply();
                 reply.setPerformative(ACLMessage.PROPOSE);
-                reply.setContent(String.valueOf(evaluateAtomicTask(atomicTask)));
+                int proposal = evaluateAtomicTask(atomicTask);
+
+                reply.setContent(String.valueOf(proposal));
+                System.out.println("Agent " + myAgent.getLocalName() + " proposed " + proposal + " for a task: " + atomicTask);
+
                 myAgent.send(reply);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -28,12 +31,6 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
         } else {
             block();
         }
-    }
-
-    private AtomicTask extractAtomicTaskFromMessage(ACLMessage msg) throws Exception {
-        String content = msg.getContent();
-        AtomicTask atomicTask = new AtomicTask();
-        return atomicTask;
     }
 
     private int evaluateAtomicTask(AtomicTask atomicTask) {

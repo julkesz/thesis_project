@@ -5,9 +5,7 @@ import entities.AtomicTaskList;
 import jade.content.onto.BasicOntology;
 import jade.content.onto.Ontology;
 import jade.content.onto.OntologyException;
-import jade.content.schema.AgentActionSchema;
-import jade.content.schema.ConceptSchema;
-import jade.content.schema.PrimitiveSchema;
+import jade.content.schema.*;
 
 public class AtomicTaskOntology extends Ontology {
     public static final String ONTOLOGY_NAME = "Atomic-Task-Ontology";
@@ -47,7 +45,7 @@ public class AtomicTaskOntology extends Ontology {
 
             // AtomicTaskList schema
             AgentActionSchema atomicTaskListSchema = new AgentActionSchema(ATOMIC_TASK_LIST);
-            atomicTaskListSchema.add(ATOMIC_TASK_LIST_ATOMIC_TASKS, (ConceptSchema) getSchema(BasicOntology.SEQUENCE));
+            atomicTaskListSchema.add(ATOMIC_TASK_LIST_ATOMIC_TASKS, (AggregateSchema) getSchema(BasicOntology.SEQUENCE));
             add(atomicTaskListSchema, AtomicTaskList.class);
         } catch (OntologyException e) {
             e.printStackTrace();

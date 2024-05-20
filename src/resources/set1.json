@@ -7,14 +7,14 @@
         {
           "length": 50,
           "width": 30,
-          "quantity": 5,
+          "quantity": 1,
           "executionTime": 20,
           "filament": 2
         },
         {
           "length": 40,
           "width": 20,
-          "quantity": 8,
+          "quantity": 2,
           "executionTime": 15,
           "filament": 3
         }

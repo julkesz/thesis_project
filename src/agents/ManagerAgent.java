@@ -42,6 +42,7 @@ import jade.domain.FIPANames;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -80,12 +81,14 @@ public class ManagerAgent extends Agent {
 		taskReader.retrieveOrders();
 		nTasks = taskReader.getAtomicTasksList().size();
 
-		for (AtomicTask task : taskReader.getAtomicTasksList()) {
+		for (int i = 0; i< nTasks; i++) {
+
+			AtomicTask task = (AtomicTask) taskReader.getAtomicTasksList().get(i);
 
 			// Fill the CFP message
 			ACLMessage msg = new ACLMessage(ACLMessage.CFP);
-			for (int i = 0; i < args.length; ++i) {
-				msg.addReceiver(new AID((String) args[i], AID.ISLOCALNAME));
+			for (int j = 0; j < args.length; ++j) {
+				msg.addReceiver(new AID((String) args[j], AID.ISLOCALNAME));
 			}
 			msg.setProtocol(FIPANames.InteractionProtocol.FIPA_CONTRACT_NET);
 			// We want to receive a reply in 10 secs
@@ -128,6 +131,7 @@ public class ManagerAgent extends Agent {
 					int bestProposal = Integer.MAX_VALUE;
 					AID bestProposer = null;
 					ACLMessage accept = null;
+
 					Enumeration e = responses.elements();
 					while (e.hasMoreElements()) {
 						ACLMessage msg = (ACLMessage) e.nextElement();

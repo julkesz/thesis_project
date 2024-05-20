@@ -1,5 +1,6 @@
 package agents;
 
+import entities.AtomicTask;
 import entities.AtomicTaskList;
 import jade.core.AID;
 import jade.core.Agent;
@@ -9,14 +10,13 @@ import jade.content.lang.sl.SLCodec;
 import ontologies.AtomicTaskOntology;
 import utils.TaskReader;
 
-import jade.util.leap.ArrayList;
-import jade.util.leap.List;
+import java.util.ArrayList;
 
 public class SupervisorAgent extends Agent {
     protected void setup() {
         // Register the ontology and language
-        getContentManager().registerLanguage(new SLCodec());
-        getContentManager().registerOntology(AtomicTaskOntology.getInstance());
+        //getContentManager().registerLanguage(new SLCodec());
+        //getContentManager().registerOntology(AtomicTaskOntology.getInstance());
 
         // Add behavior for task allocation
         addBehaviour(new TaskGroupingBehavior());
@@ -27,17 +27,19 @@ public class SupervisorAgent extends Agent {
 
             TaskReader taskReader = new TaskReader();
             taskReader.retrieveOrders();
-            List allTasks = (List) taskReader.getAtomicTasksList();
+            ArrayList<AtomicTask> allTasks = taskReader.getAtomicTasksList();
 
-            List taskList1 = new ArrayList();
-            List taskList2 = new ArrayList();
+            ArrayList<AtomicTask> taskList1 = new ArrayList<>();
+            ArrayList<AtomicTask> taskList2 = new ArrayList<>();
 
             for(int i = 0; i < allTasks.size()/2; i++){
                 taskList1.add(allTasks.get(i));
+                System.out.println(allTasks.get(i));
             }
 
             for(int i = allTasks.size()/2; i < allTasks.size(); i++){
                 taskList2.add(allTasks.get(i));
+                System.out.println(allTasks.get(i));
             }
 
             // Create AtomicTaskList objects
@@ -49,14 +51,15 @@ public class SupervisorAgent extends Agent {
             sendTaskList("printer2", atomicTaskList2);
         }
 
-        private void sendTaskList(String agentName, AtomicTaskList taskList) {
+        private void sendTaskList(String agentName, AtomicTaskList atomicTaskList) {
             ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
             msg.addReceiver(new AID(agentName, AID.ISLOCALNAME));
-            msg.setOntology(AtomicTaskOntology.ONTOLOGY_NAME);
-            msg.setLanguage(new SLCodec().getName());
+            //msg.setOntology(AtomicTaskOntology.ONTOLOGY_NAME);
+            //msg.setLanguage(new SLCodec().getName());
 
             try {
-                getContentManager().fillContent(msg, taskList);
+                msg.setContentObject(atomicTaskList);
+                //getContentManager().fillContent(msg, taskList);
             } catch (Exception e) {
                 e.printStackTrace();
             }

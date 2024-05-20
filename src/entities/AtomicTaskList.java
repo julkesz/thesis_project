@@ -1,22 +1,29 @@
 package entities;
 
-// TaskList.java
-import jade.content.AgentAction;
-import jade.util.leap.List;
 
-public class AtomicTaskList implements AgentAction {
-    private List atomicTasks;
+import java.io.Serializable;
+import java.util.ArrayList;
 
-    public AtomicTaskList(List atomicTasks) {
+public class AtomicTaskList implements Serializable {
+    private ArrayList<AtomicTask> atomicTasks;
+
+    public AtomicTaskList(ArrayList<AtomicTask> atomicTasks) {
         this.atomicTasks = atomicTasks;
     }
 
-    public List getAtomicTasks() {
+    public ArrayList<AtomicTask> getAtomicTasks() {
         return atomicTasks;
     }
 
-    public void setAtomicTasks(List atomicTasks) {
+    public void setAtomicTasks(ArrayList<AtomicTask> atomicTasks) {
         this.atomicTasks = atomicTasks;
+    }
+
+    @Override
+    public String toString() {
+        return "AtomicTaskList{" +
+                "atomicTasks=" + atomicTasks +
+                '}';
     }
 }
 
