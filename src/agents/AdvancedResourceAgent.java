@@ -9,7 +9,6 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.core.behaviours.ParallelBehaviour;
 import jade.lang.acl.ACLMessage;
-import jade.content.ContentElement;
 import jade.lang.acl.MessageTemplate;
 
 import java.io.IOException;

@@ -6,19 +6,15 @@ import jade.core.AID;
 import jade.core.Agent;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.lang.acl.ACLMessage;
-import jade.content.lang.sl.SLCodec;
-import ontologies.AtomicTaskOntology;
 import utils.TaskReader;
 
 import java.util.ArrayList;
 
 public class SupervisorAgent extends Agent {
     protected void setup() {
-        // Register the ontology and language
         //getContentManager().registerLanguage(new SLCodec());
         //getContentManager().registerOntology(AtomicTaskOntology.getInstance());
 
-        // Add behavior for task allocation
         addBehaviour(new TaskGroupingBehavior());
     }
 
