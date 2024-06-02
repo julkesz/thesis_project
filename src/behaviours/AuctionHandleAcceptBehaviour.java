@@ -42,6 +42,10 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
                         resourceAgent.setTotalSize(resourceAgent.getTotalSize() + taskSize);
                     }
                     resourceAgent.setTotalExecutionTime(auctionProposal.getProposal());
+
+                    ACLMessage reply = msg.createReply();
+                    reply.setPerformative(ACLMessage.INFORM);
+                    myAgent.send(reply);
                 } catch (UnreadableException e) {
                     throw new RuntimeException(e);
                 }
