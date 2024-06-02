@@ -2,6 +2,7 @@ package behaviours;
 
 import agents.ResourceAgent;
 import entities.AtomicTask;
+import entities.AuctionProposal;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -21,7 +22,8 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
                 reply.setPerformative(ACLMessage.PROPOSE);
                 int proposal = evaluateAtomicTask(atomicTask);
 
-                reply.setContent(String.valueOf(proposal));
+                AuctionProposal auctionProposal = new AuctionProposal(atomicTask, proposal);
+                reply.setContentObject(auctionProposal);
                 System.out.println("Agent " + myAgent.getLocalName() + " proposed " + proposal + " for a task: " + atomicTask);
 
                 myAgent.send(reply);
@@ -45,6 +47,7 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
         int executionTime = atomicTask.getExecutionTime();
 
         if (resourceAgent.getAtomicTaskList().isEmpty()){
+            System.out.println(myAgent.getLocalName() + " IS EMPTY");
             if (resourceAgent.getFilament() != atomicTask.getFilament()){
                 executionTime = executionTime + ResourceAgent.FILAMENT_REPLACEMENT_TIME;
             }

@@ -1,10 +1,14 @@
 package behaviours;
 
+import entities.AtomicTask;
+import entities.AuctionProposal;
 import jade.core.AID;
 import jade.core.Agent;
+import jade.lang.acl.UnreadableException;
 import jade.proto.ContractNetInitiator;
 import jade.lang.acl.ACLMessage;
 
+import java.io.IOException;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -45,6 +49,8 @@ public class ContractNetInitiatorBehaviour extends ContractNetInitiator {
         int bestProposal = Integer.MAX_VALUE;
         AID bestProposer = null;
         ACLMessage accept = null;
+        AtomicTask atomicTask = null;
+        
 
         Enumeration e = responses.elements();
         while (e.hasMoreElements()) {
@@ -53,10 +59,19 @@ public class ContractNetInitiatorBehaviour extends ContractNetInitiator {
                 ACLMessage reply = msg.createReply();
                 reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
                 acceptances.addElement(reply);
-                int proposal = Integer.parseInt(msg.getContent());
+
+                AuctionProposal auctionProposal;
+                try {
+                    auctionProposal = (AuctionProposal) msg.getContentObject();
+                } catch (UnreadableException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                int proposal = auctionProposal.getProposal();
                 if (proposal < bestProposal) {
                     bestProposal = proposal;
                     bestProposer = msg.getSender();
+                    atomicTask = auctionProposal.getAtomicTask();
                     accept = reply;
                 }
             }
@@ -65,6 +80,12 @@ public class ContractNetInitiatorBehaviour extends ContractNetInitiator {
         if (accept != null) {
             System.out.println("Accepting proposal "+bestProposal+" from responder "+bestProposer.getLocalName());
             accept.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
+            AuctionProposal acceptProposal = new AuctionProposal(atomicTask, bestProposal);
+            try {
+                accept.setContentObject(acceptProposal);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         }
     }
 

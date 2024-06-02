@@ -51,4 +51,23 @@ public class ResourceAgent extends Agent {
         return totalSize;
     }
 
+    public void setBoardSize(int boardSize) {
+        this.boardSize = boardSize;
+    }
+
+    public void setFilament(int filament) {
+        this.filament = filament;
+    }
+
+    public void setAtomicTaskList(ArrayList<ArrayList<AtomicTask>> atomicTaskList) {
+        this.atomicTaskList = atomicTaskList;
+    }
+
+    public void setTotalExecutionTime(int totalExecutionTime) {
+        this.totalExecutionTime = totalExecutionTime;
+    }
+
+    public void setTotalSize(int totalSize) {
+        this.totalSize = totalSize;
+    }
 }

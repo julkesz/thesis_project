@@ -1,5 +1,6 @@
 package agents;
 
+import behaviours.AuctionHandleAcceptBehaviour;
 import behaviours.AuctionResponseBehaviour;
 import behaviours.ContractNetInitiatorBehaviour;
 import entities.AtomicTask;
@@ -23,6 +24,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
         ParallelBehaviour parallelBehaviour = new ParallelBehaviour();
         parallelBehaviour.addSubBehaviour(new MessageReceiverBehaviour());
         parallelBehaviour.addSubBehaviour(new AuctionResponseBehaviour());
+        parallelBehaviour.addSubBehaviour(new AuctionHandleAcceptBehaviour());
 
         addBehaviour(parallelBehaviour);
     }
@@ -49,7 +51,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
     }
 
     private class AuctionInitiationBehaviour extends OneShotBehaviour {
-        private AtomicTask atomicTask;
+        private final AtomicTask atomicTask;
 
         public AuctionInitiationBehaviour(AtomicTask atomicTask) {
             this.atomicTask = atomicTask;
