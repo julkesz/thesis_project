@@ -3,13 +3,15 @@ package behaviours;
 import agents.ResourceAgent;
 import entities.AtomicTask;
 import entities.AuctionProposal;
+import entities.PrinterSchedule;
+import entities.TimeSlot;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
-import model.InformMessage;
 
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
 
@@ -19,21 +21,29 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
         if (msg != null) {
             try {
                 AuctionProposal auctionProposal;
-                int timeSlot = 0;
+                int timeSlotNumber = 0;
 
                 try {
                     auctionProposal = (AuctionProposal) msg.getContentObject();
                     AtomicTask atomicTask = auctionProposal.getAtomicTask();
-                    timeSlot = calculateTimeSlot(atomicTask);
+                    timeSlotNumber = calculateTimeSlot(atomicTask);
 
                     ResourceAgent resourceAgent = (ResourceAgent) myAgent;
-                    ArrayList<ArrayList<AtomicTask>> atomicTaskList = resourceAgent.getAtomicTaskList();
+                    PrinterSchedule printerSchedule = resourceAgent.getPrinterSchedule();
 
-                    if(atomicTaskList.size() == timeSlot){
-                        atomicTaskList.add(new ArrayList<>());
+                    if(printerSchedule.getSchedule().size() == timeSlotNumber){
+                        printerSchedule.addTimeSlot(resourceAgent.getTotalExecutionTime());
                     }
 
-                    atomicTaskList.get(timeSlot).add(atomicTask);
+                    TimeSlot timeSlot = printerSchedule.getSchedule().get(timeSlotNumber);
+                    timeSlot.addTask(atomicTask);
+
+                    int maxExecutionTime = timeSlot.getTasks().stream()
+                            .mapToInt(AtomicTask::getExecutionTime).max().orElseThrow(NoSuchElementException::new);
+
+                    int start = printerSchedule.getSchedule().get(timeSlotNumber).getStart();
+                    int stop = start + maxExecutionTime;
+                    printerSchedule.getSchedule().get(timeSlotNumber).setStop(stop);
 
                     int taskSize = atomicTask.getLength()* atomicTask.getWidth();
                     if(resourceAgent.getTotalSize()!=0 && resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardSize()) {
@@ -41,7 +51,7 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
                     }else{
                         resourceAgent.setTotalSize(resourceAgent.getTotalSize() + taskSize);
                     }
-                    resourceAgent.setTotalExecutionTime(auctionProposal.getProposal());
+                    resourceAgent.setTotalExecutionTime(stop);
 
                     ACLMessage reply = msg.createReply();
                     reply.setPerformative(ACLMessage.INFORM);
@@ -62,11 +72,11 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
 
         int taskSize =  task.getLength() * task.getWidth();
         int timeSlot = 0;
-        ArrayList<ArrayList<AtomicTask>> atomicTaskList = resourceAgent.getAtomicTaskList();
+        PrinterSchedule printerSchedule = resourceAgent.getPrinterSchedule();
 
-        if (!atomicTaskList.isEmpty()){
-            int lastTimeSlot = atomicTaskList.size() - 1;
-            if (atomicTaskList.get(lastTimeSlot).get(0).getFilament() != task.getFilament()
+        if (!printerSchedule.isEmpty()){
+            int lastTimeSlot = printerSchedule.getSchedule().size() - 1;
+            if (printerSchedule.getSchedule().get(lastTimeSlot).getTasks().get(0).getFilament() != task.getFilament()
                     || resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardSize()){
                 timeSlot = lastTimeSlot + 1;
             } else{

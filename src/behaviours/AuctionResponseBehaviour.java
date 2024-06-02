@@ -3,6 +3,7 @@ package behaviours;
 import agents.ResourceAgent;
 import entities.AtomicTask;
 import entities.AuctionProposal;
+import entities.TimeSlot;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -46,17 +47,16 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
 
         int executionTime = atomicTask.getExecutionTime();
 
-        if (resourceAgent.getAtomicTaskList().isEmpty()){
-            System.out.println(myAgent.getLocalName() + " IS EMPTY");
+        if (resourceAgent.getPrinterSchedule().isEmpty()){
             if (resourceAgent.getFilament() != atomicTask.getFilament()){
                 executionTime = executionTime + ResourceAgent.FILAMENT_REPLACEMENT_TIME;
             }
         } else{
-            ArrayList<ArrayList<AtomicTask>> atomicTaskList = resourceAgent.getAtomicTaskList();
-            int lastTimeSlot = atomicTaskList.size() - 1;
-            int lastFilament = atomicTaskList.get(lastTimeSlot).get(0).getFilament();
-            int lastTimeSlotSize = atomicTaskList.get(lastTimeSlot).size();
-            AtomicTask lastTask = atomicTaskList.get(lastTimeSlot).get(lastTimeSlotSize-1);
+            ArrayList<TimeSlot> timeSlotList = resourceAgent.getPrinterSchedule().getSchedule();
+            int lastTimeSlot = timeSlotList.size() - 1;
+            int lastFilament = timeSlotList.get(lastTimeSlot).getTasks().get(0).getFilament();
+            int lastTimeSlotSize = timeSlotList.get(lastTimeSlot).getTasks().size();
+            AtomicTask lastAtomicTask = timeSlotList.get(lastTimeSlot).getTasks().get(lastTimeSlotSize-1);
             if (lastFilament != atomicTask.getFilament()){
                 executionTime = resourceAgent.getTotalExecutionTime() + ResourceAgent.FILAMENT_REPLACEMENT_TIME + executionTime;
             } else if(resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardSize()) {
@@ -64,7 +64,7 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
             } else{
                 executionTime = Math.max(executionTime, resourceAgent.getTotalExecutionTime());
             }
-            if (lastTask.equals(atomicTask)){
+            if (lastAtomicTask.equals(atomicTask)){
                 executionTime--;
             }
         }

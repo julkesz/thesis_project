@@ -17,6 +17,14 @@ public class PrinterSchedule implements Serializable {
         return schedule;
     }
 
+    public void addTimeSlot(int start){
+        schedule.add(new TimeSlot(start, 0));
+    }
+
+    public boolean isEmpty(){
+        return schedule.isEmpty();
+    }
+
     @Override
     public String toString() {
         return "PrinterSchedule{" +

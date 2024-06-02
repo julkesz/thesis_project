@@ -82,13 +82,13 @@ public class SimpleResourceAgent extends ResourceAgent {
 				try {
 					task = (AtomicTask) cfp.getContentObject();
 					timeSlot = calculateTimeSlot(task);
-
+					/*
 					if(atomicTaskList.size() == timeSlot){
 						atomicTaskList.add(new ArrayList<>());
 					}
 
 					atomicTaskList.get(timeSlot).add(task);
-
+					*/
 					int taskSize = task.getLength()* task.getWidth();
 					if(totalSize!=0 && totalSize + taskSize > BOARD_HEURISTICS * boardSize) {
 						totalSize = taskSize;
@@ -123,8 +123,8 @@ public class SimpleResourceAgent extends ResourceAgent {
 			return 0;
 		}
 
-		long executionTime = task.getExecutionTime();
-
+		int executionTime = task.getExecutionTime();
+		/*
 		if (atomicTaskList.isEmpty()){
 			if (filament != task.getFilament()){
 				executionTime = executionTime + FILAMENT_REPLACEMENT_TIME;
@@ -147,14 +147,16 @@ public class SimpleResourceAgent extends ResourceAgent {
 
 		}
 
-		return (int) executionTime;
+		*/
+
+		return executionTime;
 	}
 
 
 	private int calculateTimeSlot(AtomicTask task) {
 		int taskSize =  task.getLength() * task.getWidth();
 		int timeSlot = 0;
-
+		/*
 		if (!atomicTaskList.isEmpty()){
 			int lastTimeSlot = atomicTaskList.size() - 1;
 			if (atomicTaskList.get(lastTimeSlot).get(0).getFilament() != task.getFilament()
@@ -164,6 +166,8 @@ public class SimpleResourceAgent extends ResourceAgent {
 				timeSlot =  lastTimeSlot;
 			}
 		}
+
+		*/
 		return timeSlot;
 	}
 
