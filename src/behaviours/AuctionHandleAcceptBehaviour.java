@@ -31,7 +31,9 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
                     ResourceAgent resourceAgent = (ResourceAgent) myAgent;
                     PrinterSchedule printerSchedule = resourceAgent.getPrinterSchedule();
 
-                    if(printerSchedule.getSchedule().size() == timeSlotNumber){
+                    if(printerSchedule.getSchedule().size() == timeSlotNumber && atomicTask.getFilament() != resourceAgent.getFilament()){
+                        printerSchedule.addTimeSlot(resourceAgent.getTotalExecutionTime() + resourceAgent.FILAMENT_REPLACEMENT_TIME);
+                    }else if(printerSchedule.getSchedule().size() == timeSlotNumber){
                         printerSchedule.addTimeSlot(resourceAgent.getTotalExecutionTime());
                     }
 
@@ -52,6 +54,7 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
                         resourceAgent.setTotalSize(resourceAgent.getTotalSize() + taskSize);
                     }
                     resourceAgent.setTotalExecutionTime(stop);
+                    resourceAgent.setFilament(atomicTask.getFilament());
 
                     ACLMessage reply = msg.createReply();
                     reply.setPerformative(ACLMessage.INFORM);

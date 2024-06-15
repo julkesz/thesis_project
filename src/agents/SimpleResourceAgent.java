@@ -176,8 +176,5 @@ public class SimpleResourceAgent extends ResourceAgent {
 		return (Math.random() > 0.2);
 	}
 
-	public int getFilament() {
-		return filament;
-	}
 }
 
