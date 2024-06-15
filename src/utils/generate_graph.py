@@ -75,7 +75,7 @@ def plot_schedule_from_files(directory, output_file):
     handles = [Patch(color=color, label=f'Zamówienie {order}') for order, color in order_color_map.items()]
     filament_patch = Patch(color='lightgrey', label='Zmiana filamentu')
     handles.append(filament_patch)
-    ax.legend(handles=handles, loc='center left', bbox_to_anchor=(1, 0.5))
+    ax.legend(handles=handles, loc='upper center', bbox_to_anchor=(0.5, -0.2))
 
     # Save the plot to a file
     plt.savefig(output_file, bbox_inches='tight')
