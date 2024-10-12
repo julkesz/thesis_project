@@ -3,22 +3,21 @@ package entities;
 import java.io.Serializable;
 
 public class Task implements Serializable {
+    private String taskId;
     private int length;
     private int width;
     private int quantity;
     private int executionTime;
     private int filament;
 
-    @Override
-    public String toString() {
-        return "Task{" +
-                "length=" + length +
-                ", width=" + width +
-                ", quantity=" + quantity +
-                ", executionTime=" + executionTime +
-                ", filament=" + filament +
-                '}';
+    public String getTaskId() {
+        return taskId;
     }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+
     public int getLength() {
         return length;
     }
@@ -59,4 +58,15 @@ public class Task implements Serializable {
         this.filament = filament;
     }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "taskId='" + taskId + '\'' +
+                ", length=" + length +
+                ", width=" + width +
+                ", quantity=" + quantity +
+                ", executionTime=" + executionTime +
+                ", filament=" + filament +
+                '}';
+    }
 }

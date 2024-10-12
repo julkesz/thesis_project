@@ -2,6 +2,7 @@
 out/
 .idea/
 thesis_project.iml
+src/plots/plots.iml
 
 ## JADE
 APDescription.txt

@@ -217,7 +217,7 @@ public class ManagerAgent extends Agent {
 
 		String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 		String fileName = "output" + date + ".json";
-		try (FileWriter fileWriter = new FileWriter("src/output/"+fileName)) {
+		try (FileWriter fileWriter = new FileWriter("src/output/output_jsons/"+fileName)) {
 			String jsonString = gson.toJson(finalSchedule);
 			fileWriter.write(jsonString);
 			System.out.println("JSON Schedule generated");

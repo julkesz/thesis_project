@@ -212,7 +212,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
             String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
             String fileName = myAgent.getLocalName() + "schedule_" + date + ".json";
-            try (FileWriter fileWriter = new FileWriter("src/output/"+fileName)) {
+            try (FileWriter fileWriter = new FileWriter("src/output/output_jsons/"+fileName)) {
                 String jsonString = gson.toJson(printerSchedule);
                 fileWriter.write(jsonString);
                 System.out.println("JSON Schedule generated");

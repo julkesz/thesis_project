@@ -10,7 +10,6 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
 
-import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
 public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
