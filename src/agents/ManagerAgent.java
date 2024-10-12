@@ -188,22 +188,22 @@ public class ManagerAgent extends Agent {
 				(printer, printerTemporarySchedule) -> {
 
 					finalSchedule.getPrinterSchedules().put(printer,new PrinterSchedule());
-					LocalDateTime start = LocalDateTime.of(2024, 4, 01, 8, 0);
+					int start = 0;
 					Integer printerFilament = printerFilaments.get(printer);
 
 
 					for (ArrayList<AtomicTask> taskArray : printerTemporarySchedule) {
 						if (taskArray.get(0).getFilament() != printerFilament){
-							start = start.plusMinutes(filamentReplacementTime);
+							start = start + filamentReplacementTime;
 						}
-						long maxExecutionTime = taskArray.stream()
-								.mapToLong(AtomicTask::getExecutionTime).max().orElseThrow(NoSuchElementException::new);
-						LocalDateTime stop = start.plusMinutes(maxExecutionTime);
+						int maxExecutionTime = taskArray.stream()
+								.mapToInt(AtomicTask::getExecutionTime).max().orElseThrow(NoSuchElementException::new);
+						int stop = start + maxExecutionTime;
 
 						TimeSlot timeSlot = new TimeSlot(start,stop);
 						timeSlot.setTasks(taskArray);
 						finalSchedule.getPrinterSchedules().get(printer).getSchedule().add(timeSlot);
-						start = start.plusMinutes(maxExecutionTime);
+						start = start + maxExecutionTime;
 						printerFilament = taskArray.get(0).getFilament();
 					}
 				});
@@ -217,7 +217,7 @@ public class ManagerAgent extends Agent {
 
 		String date = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 		String fileName = "output" + date + ".json";
-		try (FileWriter fileWriter = new FileWriter("src/output/"+fileName)) {
+		try (FileWriter fileWriter = new FileWriter("src/output/output_jsons/"+fileName)) {
 			String jsonString = gson.toJson(finalSchedule);
 			fileWriter.write(jsonString);
 			System.out.println("JSON Schedule generated");

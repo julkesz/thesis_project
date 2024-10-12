@@ -1,6 +1,7 @@
 package agents;
 
 import entities.AtomicTask;
+import entities.PrinterSchedule;
 import jade.core.Agent;
 
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ public class ResourceAgent extends Agent {
 
     protected int boardSize;
     protected int filament;
-    protected ArrayList<ArrayList<AtomicTask>> atomicTaskList;
+    protected PrinterSchedule printerSchedule;
     protected int totalExecutionTime;
     protected int totalSize;
     public static final int FILAMENT_REPLACEMENT_TIME = 20;
@@ -26,7 +27,7 @@ public class ResourceAgent extends Agent {
             System.out.println("No arguments provided.");
         }
 
-        atomicTaskList = new ArrayList();
+        printerSchedule = new PrinterSchedule();
         totalExecutionTime = 0;
         totalSize = 0;
     }
@@ -39,8 +40,8 @@ public class ResourceAgent extends Agent {
         return filament;
     }
 
-    public ArrayList<ArrayList<AtomicTask>> getAtomicTaskList() {
-        return atomicTaskList;
+    public PrinterSchedule getPrinterSchedule() {
+        return printerSchedule;
     }
 
     public int getTotalExecutionTime() {
@@ -51,4 +52,19 @@ public class ResourceAgent extends Agent {
         return totalSize;
     }
 
+    public void setBoardSize(int boardSize) {
+        this.boardSize = boardSize;
+    }
+
+    public void setFilament(int filament) {
+        this.filament = filament;
+    }
+
+    public void setTotalExecutionTime(int totalExecutionTime) {
+        this.totalExecutionTime = totalExecutionTime;
+    }
+
+    public void setTotalSize(int totalSize) {
+        this.totalSize = totalSize;
+    }
 }

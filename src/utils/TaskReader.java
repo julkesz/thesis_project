@@ -33,7 +33,7 @@ public class TaskReader {
             String deadline = order.getDeadline();
             for (Task task : order.getTasks()) {
                 for (int i = 0; i < task.getQuantity(); i++) {
-                    atomicTasksList.add(new AtomicTask(orderNumber, deadline, task.getLength(), task.getWidth(), task.getExecutionTime(), task.getFilament()));
+                    atomicTasksList.add(new AtomicTask(orderNumber, deadline, task.getTaskId(), task.getLength(), task.getWidth(), task.getExecutionTime(), task.getFilament()));
                 }
             }
         }

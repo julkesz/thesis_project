@@ -4,30 +4,32 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TimeSlot {
-    private LocalDateTime start;
-    private LocalDateTime stop;
+    private int start;
+    private int stop;
 
-    private ArrayList<AtomicTask> tasks;
+    private ArrayList<AtomicTask> tasks = new ArrayList<>();
 
-    public TimeSlot(LocalDateTime start, LocalDateTime stop) {
+    public TimeSlot(int start, int stop) {
         this.start = start;
         this.stop = stop;
-        this.tasks = new ArrayList<>();
     }
 
-    public LocalDateTime getStart() {
+    public TimeSlot() {
+    }
+
+    public int getStart() {
         return start;
     }
 
-    public void setStart(LocalDateTime start) {
+    public void setStart(int start) {
         this.start = start;
     }
 
-    public LocalDateTime getStop() {
+    public int getStop() {
         return stop;
     }
 
-    public void setStop(LocalDateTime stop) {
+    public void setStop(int stop) {
         this.stop = stop;
     }
 

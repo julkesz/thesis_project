@@ -1,8 +1,12 @@
-### IntelliJ IDEA ###
+## IntelliJ IDEA
 out/
 .idea/
 thesis_project.iml
+src/plots/plots.iml
 
 ## JADE
 APDescription.txt
 MTPs-Main-Container.txt
+
+## Results
+src/output/
