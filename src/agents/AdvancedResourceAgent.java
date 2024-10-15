@@ -13,6 +13,10 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.core.behaviours.ParallelBehaviour;
 import jade.core.behaviours.SequentialBehaviour;
+import jade.domain.DFService;
+import jade.domain.FIPAAgentManagement.DFAgentDescription;
+import jade.domain.FIPAAgentManagement.ServiceDescription;
+import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
@@ -27,9 +31,24 @@ import java.util.*;
 
 public class AdvancedResourceAgent extends ResourceAgent {
     private int completionMessageCount = 0;
+    private List<AID> cachedReceivers = null;
 
     protected void setup() {
         super.setup();
+
+        DFAgentDescription dfd = new DFAgentDescription();
+        dfd.setName(getAID());
+
+        ServiceDescription sd = new ServiceDescription();
+        sd.setType("printer-service");
+        sd.setName("PrinterAgentService");
+        dfd.addServices(sd);
+
+        try {
+            DFService.register(this, dfd);
+        } catch (FIPAException fe) {
+            fe.printStackTrace();
+        }
 
         ParallelBehaviour parallelBehaviour = new ParallelBehaviour();
         parallelBehaviour.addSubBehaviour(new MessageReceiverBehaviour());
@@ -39,6 +58,37 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
         addBehaviour(parallelBehaviour);
     }
+
+    public List<AID> getReceivers() {
+        if (cachedReceivers == null) {  // Check if the receivers list is already initialized
+            cachedReceivers = new ArrayList<>();  // Initialize the list
+            try {
+                // Create a template for the agent description we're searching for
+                DFAgentDescription template = new DFAgentDescription();
+                ServiceDescription sd = new ServiceDescription();
+
+                // Set the service type to "printer-service"
+                sd.setType("printer-service");
+                template.addServices(sd);
+
+                // Search the DF for agents that match the template
+                DFAgentDescription[] result = DFService.search(this, template);
+
+                // Process the results
+                for (DFAgentDescription agentDesc : result) {
+                    AID agentAID = agentDesc.getName();
+                    cachedReceivers.add(agentAID);  // Add the AID of the agent to the cached list
+                }
+                System.out.println("LOOKING INTO DF");
+
+            } catch (FIPAException fe) {
+                fe.printStackTrace();
+            }
+        }
+
+        return cachedReceivers;
+    }
+
 
     private class MessageReceiverBehaviour extends CyclicBehaviour {
         public void action() {
@@ -51,7 +101,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
                     SequentialBehaviour auctionSequence = new SequentialBehaviour();
                     for (AtomicTask atomicTask : atomicTaskList.getAtomicTasks()) {
-                        auctionSequence.addSubBehaviour(new AuctionInitiatorBehaviour(myAgent, atomicTask));
+                        auctionSequence.addSubBehaviour(new AuctionInitiatorBehaviour(myAgent, atomicTask, getReceivers()));
                     }
                     auctionSequence.addSubBehaviour(new AuctionsCompletionBehaviour());
                     addBehaviour(auctionSequence);
@@ -68,10 +118,10 @@ public class AdvancedResourceAgent extends ResourceAgent {
         private final AtomicTask atomicTask;
         private final List<AID> receivers;
 
-        public AuctionInitiatorBehaviour(Agent a, AtomicTask atomicTask) {
-            super(a, createCFP(atomicTask, getReceivers()));
+        public AuctionInitiatorBehaviour(Agent a, AtomicTask atomicTask, List<AID> receivers) {
+            super(a, createCFP(atomicTask, receivers));
             this.atomicTask = atomicTask;
-            this.receivers = getReceivers();
+            this.receivers = receivers;
         }
 
         private static ACLMessage createCFP(AtomicTask atomicTask, List<AID> receivers) {
@@ -88,13 +138,6 @@ public class AdvancedResourceAgent extends ResourceAgent {
             return cfp;
         }
 
-        private static List<AID> getReceivers() {
-            List<AID> receivers = new ArrayList<>();
-            receivers.add(new AID("printer1", AID.ISLOCALNAME));
-            receivers.add(new AID("printer2", AID.ISLOCALNAME));
-            receivers.add(new AID("printer3", AID.ISLOCALNAME));
-            return receivers;
-        }
 
         protected void handlePropose(ACLMessage propose, Vector v) {
             // Handle propose
@@ -175,16 +218,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
             for (AID receiver : receivers) {
                 completionMessage.addReceiver(receiver);
             }
-
             send(completionMessage);
-        }
-
-        private List<AID> getReceivers() {
-            List<AID> receivers = new ArrayList<>();
-            receivers.add(new AID("printer1", AID.ISLOCALNAME));
-            receivers.add(new AID("printer2", AID.ISLOCALNAME));
-            receivers.add(new AID("printer3", AID.ISLOCALNAME));
-            return receivers;
         }
     }
 

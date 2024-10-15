@@ -3,19 +3,20 @@ package entities;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AtomicTaskList implements Serializable {
-    private ArrayList<AtomicTask> atomicTasks;
+    private List<AtomicTask> atomicTasks;
 
-    public AtomicTaskList(ArrayList<AtomicTask> atomicTasks) {
+    public AtomicTaskList(List<AtomicTask> atomicTasks) {
         this.atomicTasks = atomicTasks;
     }
 
-    public ArrayList<AtomicTask> getAtomicTasks() {
+    public List<AtomicTask> getAtomicTasks() {
         return atomicTasks;
     }
 
-    public void setAtomicTasks(ArrayList<AtomicTask> atomicTasks) {
+    public void setAtomicTasks(List<AtomicTask> atomicTasks) {
         this.atomicTasks = atomicTasks;
     }
 
