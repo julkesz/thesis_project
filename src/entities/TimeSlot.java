@@ -1,6 +1,5 @@
 package entities;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class TimeSlot {

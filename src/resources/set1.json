@@ -2,21 +2,22 @@
   "orders": [
     {
       "orderNumber": "01",
-      "deadline": "2024-02-15",
       "tasks": [
         {
+          "taskId": "01",
           "length": 50,
           "width": 30,
-          "quantity": 1,
-          "executionTime": 20,
-          "filament": 2
+          "height": 20,
+          "filament": 2,
+          "quantity": 5
         },
         {
+          "taskId": "02",
           "length": 40,
           "width": 20,
-          "quantity": 2,
-          "executionTime": 15,
-          "filament": 3
+          "height": 15,
+          "filament": 3,
+          "quantity": 2
         }
       ]
     }

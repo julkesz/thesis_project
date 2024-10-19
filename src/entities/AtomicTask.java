@@ -5,23 +5,21 @@ import java.util.Objects;
 
 public class AtomicTask implements Serializable {
     private String orderNumber;
-    private String deadline;
     private String taskId;
     private int length;
     private int width;
-    private int executionTime;
+    private int height;
     private int filament;
 
     public AtomicTask() {
     }
 
-    public AtomicTask(String orderNumber, String deadline, String taskId, int length, int width, int executionTime, int filament) {
+    public AtomicTask(String orderNumber, String taskId, int length, int width, int height, int filament) {
         this.orderNumber = orderNumber;
-        this.deadline = deadline;
         this.taskId = taskId;
         this.length = length;
         this.width = width;
-        this.executionTime = executionTime;
+        this.height = height;
         this.filament = filament;
     }
 
@@ -31,14 +29,6 @@ public class AtomicTask implements Serializable {
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
-    }
-
-    public String getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(String deadline) {
-        this.deadline = deadline;
     }
 
     public String getTaskId() {
@@ -65,13 +55,11 @@ public class AtomicTask implements Serializable {
         this.width = width;
     }
 
-    public int getExecutionTime() {
-        return executionTime;
+    public int getHeight() {
+        return height;
     }
 
-    public void setExecutionTime(int executionTime) {
-        this.executionTime = executionTime;
-    }
+    public void setHeight(int height) {this.height = height; }
 
     public int getFilament() {
         return filament;
@@ -85,11 +73,10 @@ public class AtomicTask implements Serializable {
     public String toString() {
         return "AtomicTask{" +
                 "orderNumber='" + orderNumber + '\'' +
-                ", deadline='" + deadline + '\'' +
                 ", taskId='" + taskId + '\'' +
                 ", length=" + length +
                 ", width=" + width +
-                ", executionTime=" + executionTime +
+                ", height=" + height +
                 ", filament=" + filament +
                 '}';
     }
@@ -99,11 +86,11 @@ public class AtomicTask implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AtomicTask that = (AtomicTask) o;
-        return length == that.length && width == that.width && executionTime == that.executionTime && filament == that.filament && Objects.equals(orderNumber, that.orderNumber) && Objects.equals(deadline, that.deadline) && Objects.equals(taskId, that.taskId);
+        return length == that.length && width == that.width && height == that.height && filament == that.filament && Objects.equals(orderNumber, that.orderNumber) && Objects.equals(taskId, that.taskId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderNumber, deadline, taskId, length, width, executionTime, filament);
+        return Objects.hash(orderNumber, taskId, length, width, height, filament);
     }
 }

@@ -6,9 +6,9 @@ public class Task implements Serializable {
     private String taskId;
     private int length;
     private int width;
-    private int quantity;
-    private int executionTime;
+    private int height;
     private int filament;
+    private int quantity;
 
     public String getTaskId() {
         return taskId;
@@ -34,6 +34,14 @@ public class Task implements Serializable {
         this.width = width;
     }
 
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
     public int getQuantity() {
         return quantity;
     }
@@ -42,13 +50,6 @@ public class Task implements Serializable {
         this.quantity = quantity;
     }
 
-    public int getExecutionTime() {
-        return executionTime;
-    }
-
-    public void setExecutionTime(int executionTime) {
-        this.executionTime = executionTime;
-    }
 
     public int getFilament() {
         return filament;
@@ -64,9 +65,9 @@ public class Task implements Serializable {
                 "taskId='" + taskId + '\'' +
                 ", length=" + length +
                 ", width=" + width +
-                ", quantity=" + quantity +
-                ", executionTime=" + executionTime +
+                ", height=" + height +
                 ", filament=" + filament +
+                ", quantity=" + quantity +
                 '}';
     }
 }

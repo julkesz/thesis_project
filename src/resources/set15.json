@@ -2,300 +2,315 @@
   "orders": [
     {
       "orderNumber": "01",
-      "deadline": "2024-02-15",
       "tasks": [
         {
+          "taskId": "01",
           "length": 50,
           "width": 30,
-          "quantity": 5,
-          "executionTime": 20,
-          "filament": 2
+          "height": 20,
+          "filament": 2,
+          "quantity": 5
         },
         {
+          "taskId": "02",
           "length": 40,
           "width": 20,
-          "quantity": 8,
-          "executionTime": 15,
-          "filament": 3
+          "height": 15,
+          "filament": 3,
+          "quantity": 8
         }
       ]
     },
     {
       "orderNumber": "02",
-      "deadline": "2024-02-20",
       "tasks": [
         {
+          "taskId": "01",
           "length": 60,
           "width": 40,
-          "quantity": 3,
-          "executionTime": 25,
-          "filament": 1
+          "height": 25,
+          "filament": 1,
+          "quantity": 3
         },
         {
+          "taskId": "02",
           "length": 30,
           "width": 25,
-          "quantity": 10,
-          "executionTime": 12,
-          "filament": 4
+          "height": 12,
+          "filament": 4,
+          "quantity": 10
         }
       ]
     },
     {
       "orderNumber": "03",
-      "deadline": "2024-02-25",
       "tasks": [
         {
+          "taskId": "01",
           "length": 45,
           "width": 35,
-          "quantity": 6,
-          "executionTime": 18,
-          "filament": 4
+          "height": 18,
+          "filament": 4,
+          "quantity": 6
         },
         {
+          "taskId": "02",
           "length": 55,
           "width": 45,
-          "quantity": 4,
-          "executionTime": 22,
-          "filament": 5
+          "height": 22,
+          "filament": 5,
+          "quantity": 4
         }
       ]
     },
     {
       "orderNumber": "04",
-      "deadline": "2024-03-05",
       "tasks": [
         {
+          "taskId": "01",
           "length": 70,
           "width": 50,
-          "quantity": 4,
-          "executionTime": 30,
-          "filament": 5
+          "height": 30,
+          "filament": 5,
+          "quantity": 4
         },
         {
+          "taskId": "02",
           "length": 35,
           "width": 30,
-          "quantity": 7,
-          "executionTime": 16,
-          "filament": 3
+          "height": 16,
+          "filament": 3,
+          "quantity": 7
         }
       ]
     },
     {
       "orderNumber": "05",
-      "deadline": "2024-03-10",
       "tasks": [
         {
+          "taskId": "01",
           "length": 55,
           "width": 25,
-          "quantity": 7,
-          "executionTime": 22,
-          "filament": 2
+          "height": 22,
+          "filament": 2,
+          "quantity": 7
         },
         {
+          "taskId": "02",
           "length": 65,
           "width": 40,
-          "quantity": 5,
-          "executionTime": 28,
-          "filament": 1
+          "height": 28,
+          "filament": 1,
+          "quantity": 5
         }
       ]
     },
     {
       "orderNumber": "06",
-      "deadline": "2024-03-15",
       "tasks": [
         {
+          "taskId": "01",
           "length": 45,
           "width": 30,
-          "quantity": 6,
-          "executionTime": 18,
-          "filament": 3
+          "height": 18,
+          "filament": 3,
+          "quantity": 6
         },
         {
+          "taskId": "02",
           "length": 15,
           "width": 20,
-          "quantity": 3,
-          "executionTime": 35,
-          "filament": 4
+          "height": 35,
+          "filament": 4,
+          "quantity": 3
         }
       ]
     },
     {
       "orderNumber": "07",
-      "deadline": "2024-03-20",
       "tasks": [
         {
+          "taskId": "01",
           "length": 60,
           "width": 35,
-          "quantity": 4,
-          "executionTime": 24,
-          "filament": 2
+          "height": 24,
+          "filament": 2,
+          "quantity": 4
         },
         {
+          "taskId": "02",
           "length": 50,
           "width": 20,
-          "quantity": 9,
-          "executionTime": 20,
-          "filament": 5
+          "height": 20,
+          "filament": 5,
+          "quantity": 9
         }
       ]
     },
     {
       "orderNumber": "08",
-      "deadline": "2024-03-25",
       "tasks": [
         {
+          "taskId": "01",
           "length": 55,
           "width": 25,
-          "quantity": 7,
-          "executionTime": 22,
-          "filament": 1
+          "height": 22,
+          "filament": 1,
+          "quantity": 7
         },
         {
+          "taskId": "02",
           "length": 35,
           "width": 30,
-          "quantity": 6,
-          "executionTime": 16,
-          "filament": 4
+          "height": 16,
+          "filament": 4,
+          "quantity": 6
         }
       ]
     },
     {
       "orderNumber": "09",
-      "deadline": "2024-03-30",
       "tasks": [
         {
+          "taskId": "01",
           "length": 70,
           "width": 40,
-          "quantity": 5,
-          "executionTime": 28,
-          "filament": 3
+          "height": 28,
+          "filament": 3,
+          "quantity": 5
         },
         {
+          "taskId": "02",
           "length": 45,
           "width": 35,
-          "quantity": 8,
-          "executionTime": 18,
-          "filament": 2
+          "height": 18,
+          "filament": 2,
+          "quantity": 8
         }
       ]
     },
     {
       "orderNumber": "10",
-      "deadline": "2024-04-05",
       "tasks": [
         {
+          "taskId": "01",
           "length": 50,
           "width": 30,
-          "quantity": 5,
-          "executionTime": 20,
-          "filament": 5
+          "height": 20,
+          "filament": 5,
+          "quantity": 5
         },
         {
+          "taskId": "02",
           "length": 40,
           "width": 20,
-          "quantity": 8,
-          "executionTime": 15,
-          "filament": 1
+          "height": 15,
+          "filament": 1,
+          "quantity": 8
         }
       ]
     },
     {
       "orderNumber": "11",
-      "deadline": "2024-04-10",
       "tasks": [
         {
+          "taskId": "01",
           "length": 60,
           "width": 40,
-          "quantity": 3,
-          "executionTime": 25,
-          "filament": 2
+          "height": 25,
+          "filament": 2,
+          "quantity": 3
         },
         {
+          "taskId": "02",
           "length": 30,
           "width": 25,
-          "quantity": 10,
-          "executionTime": 12,
-          "filament": 3
+          "height": 12,
+          "filament": 3,
+          "quantity": 10
         }
       ]
     },
     {
       "orderNumber": "12",
-      "deadline": "2024-04-15",
       "tasks": [
         {
+          "taskId": "01",
           "length": 45,
           "width": 35,
-          "quantity": 6,
-          "executionTime": 18,
-          "filament": 4
+          "height": 18,
+          "filament": 4,
+          "quantity": 6
         },
         {
+          "taskId": "02",
           "length": 55,
           "width": 45,
-          "quantity": 4,
-          "executionTime": 22,
-          "filament": 1
+          "height": 22,
+          "filament": 1,
+          "quantity": 4
         }
       ]
     },
     {
       "orderNumber": "13",
-      "deadline": "2024-04-20",
       "tasks": [
         {
+          "taskId": "01",
           "length": 70,
           "width": 50,
-          "quantity": 4,
-          "executionTime": 30,
-          "filament": 5
+          "height": 30,
+          "filament": 5,
+          "quantity": 4
         },
         {
+          "taskId": "02",
           "length": 35,
           "width": 30,
-          "quantity": 7,
-          "executionTime": 16,
-          "filament": 2
+          "height": 16,
+          "filament": 2,
+          "quantity": 7
         }
       ]
     },
     {
       "orderNumber": "14",
-      "deadline": "2024-04-25",
       "tasks": [
         {
+          "taskId": "01",
           "length": 55,
           "width": 25,
           "quantity": 7,
-          "executionTime": 22,
+          "height": 22,
           "filament": 3
         },
         {
+          "taskId": "02",
           "length": 65,
           "width": 40,
           "quantity": 5,
-          "executionTime": 28,
+          "height": 28,
           "filament": 4
         }
       ]
     },
     {
       "orderNumber": "15",
-      "deadline": "2024-04-30",
       "tasks": [
         {
+          "taskId": "01",
           "length": 45,
           "width": 30,
           "quantity": 6,
-          "executionTime": 18,
+          "height": 18,
           "filament": 1
         },
         {
+          "taskId": "02",
           "length": 15,
           "width": 60,
           "quantity": 3,
-          "executionTime": 35,
+          "height": 35,
           "filament": 5
         }
       ]

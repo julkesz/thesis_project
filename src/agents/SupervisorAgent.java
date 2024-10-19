@@ -108,6 +108,8 @@ public class SupervisorAgent extends Agent {
                 case "random":
                     Collections.shuffle(allAtomicTasks);
                     break;
+                default:
+                    break;
             }
 
             // Initialize empty lists for each group

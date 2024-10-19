@@ -30,10 +30,9 @@ public class TaskReader {
 
         for (Order order : orderList.getOrders()) {
             String orderNumber = order.getOrderNumber();
-            String deadline = order.getDeadline();
             for (Task task : order.getTasks()) {
                 for (int i = 0; i < task.getQuantity(); i++) {
-                    atomicTasksList.add(new AtomicTask(orderNumber, deadline, task.getTaskId(), task.getLength(), task.getWidth(), task.getExecutionTime(), task.getFilament()));
+                    atomicTasksList.add(new AtomicTask(orderNumber, task.getTaskId(), task.getLength(), task.getWidth(), task.getHeight(), task.getFilament()));
                 }
             }
         }
