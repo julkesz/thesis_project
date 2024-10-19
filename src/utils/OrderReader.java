@@ -10,11 +10,13 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class TaskReader {
+public class OrderReader {
+    private String filePath;
     private OrderList orderList;
     private ArrayList<AtomicTask> atomicTasksList;
 
-    public TaskReader() {
+    public OrderReader(int orderCount) {
+        filePath = "src/resources/set" + orderCount + ".json";
         orderList = new OrderList();
         atomicTasksList = new ArrayList<>();
     }
@@ -23,7 +25,7 @@ public class TaskReader {
         ObjectMapper om = new ObjectMapper();
 
         try {
-            orderList = om.readValue(new File("src/resources/set5.json"), OrderList.class);
+            orderList = om.readValue(new File(filePath), OrderList.class);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

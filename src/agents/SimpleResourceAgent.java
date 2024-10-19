@@ -99,7 +99,7 @@ public class SimpleResourceAgent extends ResourceAgent {
 			return 0;
 		}
 
-		int executionTime = task.getExecutionTime();
+		int executionTime = task.getHeight();
 		/*
 		if (atomicTaskList.isEmpty()){
 			if (filament != task.getFilament()){

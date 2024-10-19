@@ -104,7 +104,7 @@ def set_plot_properties(ax, machine, machine_schedules, source_directory, date_t
     #print("Total height: ", total_height)
     # Set x-axis limit based on the maximum stop time
     ax.set_xlim(0, get_max_stop_time(source_directory, date_time) * scale + 20)
-    print("MACHINE: ", machine)
+    #print("MACHINE: ", machine)
     machine_offsets = [(i+1) * bar_height + i * machine_padding + 0.3 for i in range(machine)] #baseline_offset
     # Calculate y-tick positions: place the label at the vertical midpoint of each machine schedule
     ytick_positions = [machine_offsets[j] - bar_height / 2 for j in range(machine)]
@@ -187,7 +187,7 @@ def fill_schedule_gaps(ax, schedule, machine_num, machine_offset, bar_height, sc
     prev_stop = 0
     for start, stop in schedule:
         if start > prev_stop:
-            print("Machine offset for ", machine_num, ":  ", machine_offset)
+            #print("Machine offset for ", machine_num, ":  ", machine_offset)
             ax.broken_barh([(prev_stop * scale, (start - prev_stop) * scale)], (machine_offset - bar_height, bar_height), facecolors='lightgrey', edgecolor='black', linewidth=0.5)
         prev_stop = stop
 

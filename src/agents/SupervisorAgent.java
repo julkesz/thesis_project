@@ -10,13 +10,14 @@ import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
 import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
-import utils.TaskReader;
+import utils.OrderReader;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class SupervisorAgent extends Agent {
+    private int orderCount = 1;
     private int groupCount = 1;
     private String divisionMode = "random";
 
@@ -26,12 +27,12 @@ public class SupervisorAgent extends Agent {
         Object[] args = getArguments();
         if (args != null && args.length > 0) {
             try {
-                // First argument: number of groups
-                groupCount = Integer.parseInt(args[0].toString());
-                // Second argument: task division mode
-                if (args.length > 1) {
-                    divisionMode = args[1].toString();
-                }
+                // First argument: number of orders
+                orderCount = Integer.parseInt(args[0].toString());
+                // Second argument: number of groups
+                groupCount = Integer.parseInt(args[1].toString());
+                // Third argument: task division mode
+                divisionMode = args[2].toString();
             } catch (Exception e) {
                 System.err.println("Error parsing agent parameters: " + e.getMessage());
             }
@@ -44,9 +45,9 @@ public class SupervisorAgent extends Agent {
     private class TaskGroupingBehavior extends OneShotBehaviour {
         public void action() {
             // Read tasks
-            TaskReader taskReader = new TaskReader();
-            taskReader.retrieveOrders();
-            List<AtomicTask> allAtomicTasks = taskReader.getAtomicTasksList();
+            OrderReader orderReader = new OrderReader(orderCount);
+            orderReader.retrieveOrders();
+            List<AtomicTask> allAtomicTasks = orderReader.getAtomicTasksList();
 
             // Divide the tasks into groups
             List<List<AtomicTask>> taskGroups = divideTasksIntoGroups(allAtomicTasks, groupCount, divisionMode);
@@ -59,6 +60,12 @@ public class SupervisorAgent extends Agent {
             if (printers.size() < taskGroups.size()) {
                 System.err.println("Not enough printers available! Only " + printers.size() + " found.");
                 return;
+            }
+
+            // Inform printers how many auction initiators there are going to be
+            for (int i = 0; i < printers.size(); i++) {
+                AID printerAID = printers.get(i);
+                sendNumberOfAuctionInitiators(printerAID);
             }
 
             // Send each group to a printer
@@ -137,5 +144,18 @@ public class SupervisorAgent extends Agent {
             }
             send(msg);
         }
+
+        private void sendNumberOfAuctionInitiators(AID printerAID) {
+            ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
+            msg.addReceiver(printerAID);
+
+            try {
+                msg.setContent(String.valueOf(groupCount));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            send(msg);
+        }
+
     }
 }

@@ -8,7 +8,7 @@ import entities.TimeSlot;
 import jade.lang.acl.UnreadableException;
 import model.InformMessage;
 import utils.LocalDateTimeTypeAdapter;
-import utils.TaskReader;
+import utils.OrderReader;
 import entities.AtomicTask;
 
 import jade.core.Agent;
@@ -19,12 +19,12 @@ import jade.domain.FIPANames;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
 public class ManagerAgent extends Agent {
+	private int orderCount;
 	static final int filamentReplacementTime = 20;
 	private int nResponders;
 
@@ -54,13 +54,13 @@ public class ManagerAgent extends Agent {
 
 		System.out.println("FILAMENTS: " + printerFilaments);
 
-		TaskReader taskReader = new TaskReader();
-		taskReader.retrieveOrders();
-		nTasks = taskReader.getAtomicTasksList().size();
+		OrderReader orderReader = new OrderReader(orderCount);
+		orderReader.retrieveOrders();
+		nTasks = orderReader.getAtomicTasksList().size();
 
 		for (int i = 0; i< nTasks; i++) {
 
-			AtomicTask task = (AtomicTask) taskReader.getAtomicTasksList().get(i);
+			AtomicTask task = (AtomicTask) orderReader.getAtomicTasksList().get(i);
 
 			// Fill the CFP message
 			ACLMessage msg = new ACLMessage(ACLMessage.CFP);
@@ -174,7 +174,7 @@ public class ManagerAgent extends Agent {
 							start = start + filamentReplacementTime;
 						}
 						int maxExecutionTime = taskArray.stream()
-								.mapToInt(AtomicTask::getExecutionTime).max().orElseThrow(NoSuchElementException::new);
+								.mapToInt(AtomicTask::getHeight).max().orElseThrow(NoSuchElementException::new);
 						int stop = start + maxExecutionTime;
 
 						TimeSlot timeSlot = new TimeSlot(start,stop);

@@ -45,7 +45,7 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
             return 0;
         }
 
-        int executionTime = atomicTask.getExecutionTime();
+        int executionTime = atomicTask.getHeight();
 
         if (resourceAgent.getPrinterSchedule().isEmpty()){
             if (resourceAgent.getFilament() != atomicTask.getFilament()){

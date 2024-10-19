@@ -9,10 +9,7 @@ import entities.AtomicTaskList;
 import entities.AuctionProposal;
 import jade.core.AID;
 import jade.core.Agent;
-import jade.core.behaviours.CyclicBehaviour;
-import jade.core.behaviours.OneShotBehaviour;
-import jade.core.behaviours.ParallelBehaviour;
-import jade.core.behaviours.SequentialBehaviour;
+import jade.core.behaviours.*;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
 import jade.domain.FIPAAgentManagement.ServiceDescription;
@@ -30,6 +27,7 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class AdvancedResourceAgent extends ResourceAgent {
+    private int auctionInitiatorCount = -1;
     private int completionMessageCount = 0;
     private List<AID> cachedReceivers = null;
 
@@ -49,6 +47,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
         } catch (FIPAException fe) {
             fe.printStackTrace();
         }
+        addBehaviour(new InitiatorCountMessageReceiverBehaviour());
 
         ParallelBehaviour parallelBehaviour = new ParallelBehaviour();
         parallelBehaviour.addSubBehaviour(new MessageReceiverBehaviour());
@@ -230,7 +229,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
             if (msg != null && "All auctions have been completed".equals(msg.getContent())) {
                 completionMessageCount++;
 
-                if (completionMessageCount == 2) {
+                if (completionMessageCount == auctionInitiatorCount) {
                     generateJSONSchedule();
                 }
             } else {
@@ -256,5 +255,23 @@ public class AdvancedResourceAgent extends ResourceAgent {
         }
     }
 
-}
+    private class InitiatorCountMessageReceiverBehaviour extends SimpleBehaviour {
+        private boolean receivedMessage = false;
 
+        @Override
+        public void action() {
+            ACLMessage msg = receive(MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+            if (msg != null && msg.getContent().matches("\\d+")) {
+                auctionInitiatorCount = Integer.parseInt(msg.getContent());
+                receivedMessage = true;
+            } else {
+                block();
+            }
+        }
+
+        @Override
+        public boolean done() {
+            return receivedMessage;
+        }
+    }
+}
