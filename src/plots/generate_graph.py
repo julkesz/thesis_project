@@ -7,8 +7,8 @@ import matplotlib.colors as mcolors
 from matplotlib.patches import Patch, Rectangle
 
 
-def plot_schedule_from_files(date_time, source_directory, output_directory, scale=1.2, machine_board_size=4000):
-    fig, ax = plt.subplots(figsize=(32, 20))  # Adjust the figure size as needed
+def plot_schedule_from_files(date_time, source_directory, output_directory, scale=1.2, machine_board_size=6000):
+    fig, ax = plt.subplots(figsize=(32, 20))
     colors = list(mcolors.TABLEAU_COLORS.values())
     filament_colors = list(mcolors.CSS4_COLORS.values())
 
@@ -29,7 +29,7 @@ def plot_schedule_from_files(date_time, source_directory, output_directory, scal
             machine_schedules.append((machine, machine_schedule))
             machine += 1
 
-    set_plot_properties(ax, machine, machine_schedules, source_directory, date_time, scale, bar_height=1.0)  # Default height is now 1 (machine fully occupied)
+    set_plot_properties(ax, machine, machine_schedules, source_directory, date_time, scale, bar_height=1.0)
 
     add_legends(fig, ax, order_color_map, filament_color_map)
 
@@ -66,8 +66,7 @@ def process_machine_schedule_with_occupancy(ax, filename, source_directory, colo
         # Filament y-position: aligned with the tasks, no space between filament and tasks
         filament_y_pos = machine_offset - bar_height - filament_bar_height
         filament_y_pos = round(filament_y_pos, 1)
-        #print(" Machine offset for machine ", machine, ": ", machine_offset)
-        #print(" Filament ypos for machine ", machine, ": ", filament_y_pos)
+
         ax.broken_barh([(start * scale, (stop - start) * scale)], (filament_y_pos, filament_bar_height), facecolors=filament_color, edgecolors='black', linewidth=0.5)
         ax.text(((start + stop) / 2) * scale, filament_y_pos + filament_bar_height / 2, f'{filament_number}', ha='center', va='center', color='black', fontsize='x-small')
 

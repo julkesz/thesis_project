@@ -115,7 +115,18 @@ public class SupervisorAgent extends Agent {
                 case "random":
                     Collections.shuffle(allAtomicTasks);
                     break;
-                default:
+                case "size":
+                    allAtomicTasks.sort((task1, task2) -> {
+                        int size1 = task1.getLength() * task1.getWidth();
+                        int size2 = task2.getLength() * task2.getWidth();
+
+                        if (size1 != size2) {
+                            return Integer.compare(size2, size1);
+                        }
+                        return task1.getOrderNumber().compareTo(task2.getOrderNumber());
+                    });
+                    break;
+                case "order":
                     break;
             }
 
