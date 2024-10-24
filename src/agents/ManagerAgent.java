@@ -164,7 +164,7 @@ public class ManagerAgent extends Agent {
 		temporarySchedule.forEach(
 				(printer, printerTemporarySchedule) -> {
 
-					finalSchedule.getPrinterSchedules().put(printer,new PrinterSchedule());
+					finalSchedule.getPrinterSchedules().put(printer,new PrinterSchedule("",1,1,1,1));
 					int start = 0;
 					Integer printerFilament = printerFilaments.get(printer);
 

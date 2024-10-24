@@ -47,7 +47,7 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
                     printerSchedule.getSchedule().get(timeSlotNumber).setStop(stop);
 
                     int taskSize = atomicTask.getLength()* atomicTask.getWidth();
-                    if(resourceAgent.getTotalSize()!=0 && resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardSize()) {
+                    if(resourceAgent.getTotalSize()!=0 && resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardLength()*resourceAgent.getBoardWidth()) {
                         resourceAgent.setTotalSize(taskSize);
                     }else{
                         resourceAgent.setTotalSize(resourceAgent.getTotalSize() + taskSize);
@@ -79,7 +79,7 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
         if (!printerSchedule.isEmpty()){
             int lastTimeSlot = printerSchedule.getSchedule().size() - 1;
             if (printerSchedule.getSchedule().get(lastTimeSlot).getTasks().get(0).getFilament() != task.getFilament()
-                    || resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardSize()){
+                    || resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardWidth() * resourceAgent.getBoardLength()){
                 timeSlot = lastTimeSlot + 1;
             } else{
                 timeSlot =  lastTimeSlot;

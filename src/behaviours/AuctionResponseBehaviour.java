@@ -41,7 +41,8 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
         ResourceAgent resourceAgent = (ResourceAgent) myAgent;
 
         int taskSize =  atomicTask.getLength() * atomicTask.getWidth();
-        if (taskSize > resourceAgent.getBoardSize()) {
+        int boardSize = resourceAgent.getBoardWidth()*resourceAgent.getBoardLength();
+        if (taskSize > boardSize) {
             return 0;
         }
 
@@ -59,7 +60,7 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
             AtomicTask lastAtomicTask = timeSlotList.get(lastTimeSlot).getTasks().get(lastTimeSlotSize-1);
             if (lastFilament != atomicTask.getFilament()){
                 executionTime = resourceAgent.getTotalExecutionTime() + ResourceAgent.FILAMENT_REPLACEMENT_TIME + executionTime;
-            } else if(resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardSize()) {
+            } else if(resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * boardSize) {
                 executionTime = resourceAgent.getTotalExecutionTime() + executionTime;
             } else{
                 executionTime = Math.max(executionTime, resourceAgent.getTotalExecutionTime());

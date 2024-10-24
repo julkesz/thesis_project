@@ -7,8 +7,11 @@ import jade.core.Agent;
 import java.util.ArrayList;
 
 public class ResourceAgent extends Agent {
+    protected int boardWidth;
+    protected int boardLength;
+    protected int maxHeight;
+    protected int printingSpeed;
 
-    protected int boardSize;
     protected int filament;
     protected PrinterSchedule printerSchedule;
     protected int totalExecutionTime;
@@ -19,21 +22,51 @@ public class ResourceAgent extends Agent {
     protected void setup() {
 
         Object[] args = getArguments();
-        if (args != null && args.length == 2) {
-            boardSize = Integer.parseInt((String) args[0]);
-            filament = Integer.parseInt((String) args[1]);
-            System.out.println("Agent " + getLocalName() + " has board of size " + boardSize + " and filament number " + filament + ".");
+        if (args != null && args.length == 5) {
+            boardWidth = Integer.parseInt((String) args[0]);
+            boardLength = Integer.parseInt((String) args[1]);
+            maxHeight = Integer.parseInt((String) args[2]);
+            printingSpeed = Integer.parseInt((String) args[3]);
+            filament = Integer.parseInt((String) args[4]);
         } else {
             System.out.println("No arguments provided.");
         }
 
-        printerSchedule = new PrinterSchedule();
+        printerSchedule = new PrinterSchedule(getLocalName(), boardWidth, boardLength, maxHeight, printingSpeed);
         totalExecutionTime = 0;
         totalSize = 0;
     }
 
-    public int getBoardSize() {
-        return boardSize;
+    public int getBoardWidth() {
+        return boardWidth;
+    }
+
+    public void setBoardWidth(int boardWidth) {
+        this.boardWidth = boardWidth;
+    }
+
+    public int getBoardLength() {
+        return boardLength;
+    }
+
+    public void setBoardLength(int boardLength) {
+        this.boardLength = boardLength;
+    }
+
+    public int getMaxHeight() {
+        return maxHeight;
+    }
+
+    public void setMaxHeight(int maxHeight) {
+        this.maxHeight = maxHeight;
+    }
+
+    public int getPrintingSpeed() {
+        return printingSpeed;
+    }
+
+    public void setPrintingSpeed(int printingSpeed) {
+        this.printingSpeed = printingSpeed;
     }
 
     public int getFilament() {
@@ -50,10 +83,6 @@ public class ResourceAgent extends Agent {
 
     public int getTotalSize() {
         return totalSize;
-    }
-
-    public void setBoardSize(int boardSize) {
-        this.boardSize = boardSize;
     }
 
     public void setFilament(int filament) {

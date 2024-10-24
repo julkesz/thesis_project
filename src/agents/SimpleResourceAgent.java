@@ -66,7 +66,7 @@ public class SimpleResourceAgent extends ResourceAgent {
 					atomicTaskList.get(timeSlot).add(task);
 					*/
 					int taskSize = task.getLength()* task.getWidth();
-					if(totalSize!=0 && totalSize + taskSize > BOARD_HEURISTICS * boardSize) {
+					if(totalSize!=0 && totalSize + taskSize > BOARD_HEURISTICS * boardLength * boardWidth) {
 						totalSize = taskSize;
 					}else{
 						totalSize = totalSize + taskSize;
@@ -95,7 +95,7 @@ public class SimpleResourceAgent extends ResourceAgent {
 
 	private int evaluateTask(AtomicTask task) {
 		int taskSize =  task.getLength() * task.getWidth();
-		if (taskSize > boardSize) {
+		if (taskSize > boardWidth*boardLength) {
 			return 0;
 		}
 
