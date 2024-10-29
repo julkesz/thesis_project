@@ -126,7 +126,7 @@ public class SupervisorAgent extends Agent {
                         return task1.getOrderNumber().compareTo(task2.getOrderNumber());
                     });
                     break;
-                case "order":
+                case "deadline":
                     break;
             }
 

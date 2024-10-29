@@ -5,12 +5,14 @@ import java.util.ArrayList;
 
 public class Order implements Serializable {
     private String orderNumber;
+    private int deadline;
     public ArrayList<Task> tasks;
 
     @Override
     public String toString() {
         return "Order{" +
                 "orderNumber='" + orderNumber + '\'' +
+                ", deadline=" + deadline +
                 ", tasks=" + tasks +
                 '}';
     }
@@ -21,6 +23,14 @@ public class Order implements Serializable {
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public int getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(int deadline) {
+        this.deadline = deadline;
     }
 
     public ArrayList<Task> getTasks() {

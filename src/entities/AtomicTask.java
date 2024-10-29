@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class AtomicTask implements Serializable {
     private String orderNumber;
+    private int deadline;
     private String taskId;
     private int length;
     private int width;
@@ -14,8 +15,9 @@ public class AtomicTask implements Serializable {
     public AtomicTask() {
     }
 
-    public AtomicTask(String orderNumber, String taskId, int length, int width, int height, int filament) {
+    public AtomicTask(String orderNumber, int deadline, String taskId, int length, int width, int height, int filament) {
         this.orderNumber = orderNumber;
+        this.deadline = deadline;
         this.taskId = taskId;
         this.length = length;
         this.width = width;
@@ -29,6 +31,14 @@ public class AtomicTask implements Serializable {
 
     public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
+    }
+
+    public int getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(int deadline) {
+        this.deadline = deadline;
     }
 
     public String getTaskId() {
@@ -73,6 +83,7 @@ public class AtomicTask implements Serializable {
     public String toString() {
         return "AtomicTask{" +
                 "orderNumber='" + orderNumber + '\'' +
+                ", deadline=" + deadline +
                 ", taskId='" + taskId + '\'' +
                 ", length=" + length +
                 ", width=" + width +
@@ -86,11 +97,11 @@ public class AtomicTask implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AtomicTask that = (AtomicTask) o;
-        return length == that.length && width == that.width && height == that.height && filament == that.filament && Objects.equals(orderNumber, that.orderNumber) && Objects.equals(taskId, that.taskId);
+        return length == that.length && width == that.width && height == that.height && filament == that.filament && deadline == that.deadline && Objects.equals(orderNumber, that.orderNumber)  && Objects.equals(taskId, that.taskId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderNumber, taskId, length, width, height, filament);
+        return Objects.hash(orderNumber, deadline, taskId, length, width, height, filament);
     }
 }

@@ -2,6 +2,7 @@
   "orders": [
     {
       "orderNumber": "01",
+      "deadline": 200,
       "tasks": [
         {
           "taskId": "01",
@@ -23,6 +24,7 @@
     },
     {
       "orderNumber": "02",
+      "deadline": 210,
       "tasks": [
         {
           "taskId": "01",
@@ -36,6 +38,7 @@
     },
     {
       "orderNumber": "03",
+      "deadline": 230,
       "tasks": [
         {
           "taskId": "01",
@@ -49,6 +52,7 @@
     },
     {
       "orderNumber": "04",
+      "deadline": 250,
       "tasks": [
         {
           "taskId": "01",
@@ -62,6 +66,7 @@
     },
     {
       "orderNumber": "05",
+      "deadline": 270,
       "tasks": [
         {
           "taskId": "01",

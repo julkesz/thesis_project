@@ -2,6 +2,7 @@
   "orders": [
     {
       "orderNumber": "01",
+      "deadline": 200,
       "tasks": [
         {
           "taskId": "01",

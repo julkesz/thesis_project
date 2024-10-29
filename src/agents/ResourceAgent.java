@@ -1,10 +1,8 @@
 package agents;
 
-import entities.AtomicTask;
 import entities.PrinterSchedule;
 import jade.core.Agent;
 
-import java.util.ArrayList;
 
 public class ResourceAgent extends Agent {
     protected int boardWidth;

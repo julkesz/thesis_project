@@ -7,7 +7,7 @@ import matplotlib.colors as mcolors
 from matplotlib.patches import Patch, Rectangle
 
 
-def plot_schedule_from_files(date_time, source_directory, output_directory, scale=1.2, machine_board_size=6000):
+def plot_schedule_from_files(date_time, source_directory, output_directory, scale=1.2, machine_board_size=10000):
     fig, ax = plt.subplots(figsize=(32, 20))
     colors = list(mcolors.TABLEAU_COLORS.values())
     filament_colors = list(mcolors.CSS4_COLORS.values())
