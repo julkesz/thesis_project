@@ -1,4 +1,3 @@
-
 import sys
 import os
 import json
@@ -6,8 +5,7 @@ import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
 from matplotlib.patches import Patch, Rectangle
 
-
-def plot_schedule_from_files(date_time, source_directory, output_directory, scale=1.2, machine_board_size=10000):
+def plot_schedule_from_files(date_time, source_directory, output_directory, scale=1):
     fig, ax = plt.subplots(figsize=(32, 20))
     colors = list(mcolors.TABLEAU_COLORS.values())
     filament_colors = list(mcolors.CSS4_COLORS.values())
@@ -30,7 +28,7 @@ def plot_schedule_from_files(date_time, source_directory, output_directory, scal
         if filename.endswith(date_time + '.json'):
             machine_schedule, machine_y_pos, color_index, filament_color_index = process_machine_schedule_with_occupancy(
                 ax, filename, source_directory, colors, filament_colors, order_color_map, filament_color_map,
-                color_index, filament_color_index, machine_number, scale, machine_board_size,
+                color_index, filament_color_index, machine_number, scale,
                 machine_padding, bottom_margin, bar_height, filament_bar_height)
             machine_schedules.append((machine_number, machine_y_pos, machine_schedule))
             machine_number += 1
@@ -45,26 +43,26 @@ def plot_schedule_from_files(date_time, source_directory, output_directory, scal
 
 
 def process_machine_schedule_with_occupancy(ax, filename, source_directory, colors, filament_colors, order_color_map, filament_color_map,
-                                            color_index, filament_color_index, machine_number, scale, machine_board_size,
+                                            color_index, filament_color_index, machine_number, scale,
                                             machine_padding, bottom_margin, bar_height, filament_bar_height):
     filepath = os.path.join(source_directory, filename)
 
     with open(filepath, 'r') as f:
         data = json.load(f)
 
+    machine_board_size = data['boardWidth'] * data['boardLength']
     machine_schedule = []
-
     machine_y_pos = (machine_number+1) * bar_height + machine_number * machine_padding + bottom_margin
 
-    for item in data['schedule']:
-        start = item['start']
-        stop = item['stop']
-        total_task_area = sum(task['width'] * task['length'] for task in item['tasks'])
-        task_heights = [task['width'] * task['length'] / machine_board_size for task in item['tasks']]
+    for timeslot in data['schedule']:
+        start = timeslot['start']
+        stop = timeslot['stop']
+        total_task_area = sum(task['width'] * task['length'] for task in timeslot['tasks'])
+        task_heights = [task['width'] * task['length'] / machine_board_size for task in timeslot['tasks']]
         total_task_height = sum(task_heights)
 
         # Filament handling
-        filament_number = item['tasks'][0]['filament']
+        filament_number = timeslot['tasks'][0]['filament']
         filament_color, filament_color_index = get_color_for_filament(filament_number, filament_colors, filament_color_map, filament_color_index)
 
         # Filament y-position: aligned with the tasks, no space between filament and tasks
@@ -76,7 +74,7 @@ def process_machine_schedule_with_occupancy(ax, filename, source_directory, colo
 
         # Task bars: stacked on top of the filament bar
         current_y_pos = machine_y_pos - bar_height
-        for task_index, task in enumerate(item['tasks']):
+        for task_index, task in enumerate(timeslot['tasks']):
             task_height = task_heights[task_index]
             order_number = task['orderNumber']
             task_number = task['taskId']
@@ -173,8 +171,11 @@ def get_max_stop_time(source_directory, date_time):
             filepath = os.path.join(source_directory, filename)
             with open(filepath, 'r') as f:
                 data = json.load(f)
-            stop_times = [item['stop'] for item in data['schedule']]
-            max_stop = max(max_stop, max(stop_times))
+            stop_times = [timeslot['stop'] for timeslot in data['schedule']]
+            if len(stop_times) == 0:
+                max_stop = 0
+            else:
+                max_stop = max(max_stop, max(stop_times))
     return max_stop
 
 
@@ -191,7 +192,10 @@ def add_machine_borders(ax, machine_schedules, bar_height, scale):
     for machine_number, machine_y_pos, schedule in machine_schedules:
         end_times = [s[1] for s in schedule]
         start = 0
-        end = max(end_times)
+        if len(end_times)==0:
+            end = 0
+        else:
+            end = max(end_times)
 
         # Add border for task schedule
         rect = Rectangle((start * scale, machine_y_pos - bar_height), (end - start) * scale, bar_height, fill=False, edgecolor='black', linewidth=1)
