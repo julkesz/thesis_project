@@ -39,11 +39,13 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
                     TimeSlot timeSlot = printerSchedule.getSchedule().get(timeSlotNumber);
                     timeSlot.addTask(atomicTask);
 
-                    int maxExecutionTime = timeSlot.getTasks().stream()
+                    int maxHeight = timeSlot.getTasks().stream()
                             .mapToInt(AtomicTask::getHeight).max().orElseThrow(NoSuchElementException::new);
 
+                    int executionTime = Math.round((float) maxHeight / resourceAgent.getPrintingSpeed() * 60);
+
                     int start = printerSchedule.getSchedule().get(timeSlotNumber).getStart();
-                    int stop = start + maxExecutionTime;
+                    int stop = start + executionTime;
                     printerSchedule.getSchedule().get(timeSlotNumber).setStop(stop);
 
                     int taskSize = atomicTask.getLength()* atomicTask.getWidth();

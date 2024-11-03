@@ -8,7 +8,7 @@ public class ResourceAgent extends Agent {
     protected int boardWidth;
     protected int boardLength;
     protected int maxHeight;
-    protected int printingSpeed;
+    protected int printingSpeed; //20-36 mm/h
 
     protected int filament;
     protected PrinterSchedule printerSchedule;

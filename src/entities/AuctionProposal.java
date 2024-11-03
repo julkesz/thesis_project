@@ -6,34 +6,58 @@ import java.util.ArrayList;
 
 public class AuctionProposal implements Serializable {
     private AtomicTask atomicTask;
-    private int proposal;
 
-    public AuctionProposal(AtomicTask atomicTask, int proposal) {
+    private int timeSlotNumber;
+
+    private int executionTime;
+    private float price;
+
+    public AuctionProposal(AtomicTask atomicTask, int timeSlotNumber, int executionTime, float price) {
         this.atomicTask = atomicTask;
-        this.proposal = proposal;
+        this.timeSlotNumber = timeSlotNumber;
+        this.executionTime = executionTime;
+        this.price = price;
     }
 
     public AtomicTask getAtomicTask() {
         return atomicTask;
     }
 
-    public int getProposal() {
-        return proposal;
-    }
-
     public void setAtomicTask(AtomicTask atomicTask) {
         this.atomicTask = atomicTask;
     }
 
-    public void setProposal(int proposal) {
-        this.proposal = proposal;
+    public int getTimeSlotNumber() {
+        return timeSlotNumber;
+    }
+
+    public void setTimeSlotNumber(int timeSlotNumber) {
+        this.timeSlotNumber = timeSlotNumber;
+    }
+
+    public int getExecutionTime() {
+        return executionTime;
+    }
+
+    public void setExecutionTime(int executionTime) {
+        this.executionTime = executionTime;
+    }
+
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
     }
 
     @Override
     public String toString() {
         return "AuctionProposal{" +
                 "atomicTask=" + atomicTask +
-                ", proposal=" + proposal +
+                ", timeSlotNumber=" + timeSlotNumber +
+                ", executionTime=" + executionTime +
+                ", price=" + price +
                 '}';
     }
 }

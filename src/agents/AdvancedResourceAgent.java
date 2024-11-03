@@ -26,6 +26,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.*;
 
+import static java.lang.Float.MAX_VALUE;
+
 public class AdvancedResourceAgent extends ResourceAgent {
     private int auctionInitiatorCount = -1;
     private int completionMessageCount = 0;
@@ -78,7 +80,6 @@ public class AdvancedResourceAgent extends ResourceAgent {
                     AID agentAID = agentDesc.getName();
                     cachedReceivers.add(agentAID);  // Add the AID of the agent to the cached list
                 }
-                System.out.println("LOOKING INTO DF");
 
             } catch (FIPAException fe) {
                 fe.printStackTrace();
@@ -134,6 +135,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
             for (AID receiver : receivers) {
                 cfp.addReceiver(receiver);
             }
+            System.out.println("Started auction for: " + atomicTask);
             return cfp;
         }
 
@@ -159,10 +161,12 @@ public class AdvancedResourceAgent extends ResourceAgent {
                 System.out.println("Timeout expired: missing " + (receivers.size() - responses.size()) + " responses");
             }
 
-            int bestProposal = Integer.MAX_VALUE;
+            float bestProposal = Float.MAX_VALUE;
             AID bestProposer = null;
             ACLMessage accept = null;
             AtomicTask atomicTask = null;
+            int timeSlotNumber = -1;
+            int executionTime = 0;
 
             Enumeration e = responses.elements();
             while (e.hasMoreElements()) {
@@ -179,11 +183,13 @@ public class AdvancedResourceAgent extends ResourceAgent {
                         throw new RuntimeException(ex);
                     }
 
-                    int proposal = auctionProposal.getProposal();
+                    float proposal = auctionProposal.getPrice();
                     if (proposal < bestProposal) {
                         bestProposal = proposal;
                         bestProposer = msg.getSender();
                         atomicTask = auctionProposal.getAtomicTask();
+                        timeSlotNumber = auctionProposal.getTimeSlotNumber();
+                        executionTime = auctionProposal.getExecutionTime();
                         accept = reply;
                     }
                 }
@@ -192,7 +198,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
             if (accept != null) {
                 System.out.println("Accepting proposal " + bestProposal + " from responder " + bestProposer.getLocalName());
                 accept.setPerformative(ACLMessage.ACCEPT_PROPOSAL);
-                AuctionProposal acceptProposal = new AuctionProposal(atomicTask, bestProposal);
+                AuctionProposal acceptProposal = new AuctionProposal(atomicTask, timeSlotNumber, executionTime, bestProposal);
                 try {
                     accept.setContentObject(acceptProposal);
                 } catch (IOException ex) {
