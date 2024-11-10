@@ -11,11 +11,12 @@ public class AtomicTask implements Serializable {
     private int width;
     private int height;
     private int filament;
+    private int atomicTaskId;
 
     public AtomicTask() {
     }
 
-    public AtomicTask(String orderNumber, int deadline, String taskId, int length, int width, int height, int filament) {
+    public AtomicTask(String orderNumber, int deadline, String taskId, int length, int width, int height, int filament, int atomicTaskId) {
         this.orderNumber = orderNumber;
         this.deadline = deadline;
         this.taskId = taskId;
@@ -23,6 +24,7 @@ public class AtomicTask implements Serializable {
         this.width = width;
         this.height = height;
         this.filament = filament;
+        this.atomicTaskId = atomicTaskId;
     }
 
     public String getOrderNumber() {
@@ -77,6 +79,14 @@ public class AtomicTask implements Serializable {
 
     public void setFilament(int filament) {
         this.filament = filament;
+    }
+
+    public int getAtomicTaskId() {
+        return atomicTaskId;
+    }
+
+    public void setAtomicTaskId(int atomicTaskId) {
+        this.atomicTaskId = atomicTaskId;
     }
 
     @Override

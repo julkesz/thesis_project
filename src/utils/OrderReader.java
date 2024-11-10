@@ -30,12 +30,14 @@ public class OrderReader {
             throw new RuntimeException(e);
         }
 
+        int atomicTaskCount = 0;
         for (Order order : orderList.getOrders()) {
             String orderNumber = order.getOrderNumber();
             int deadline = order.getDeadline();
             for (Task task : order.getTasks()) {
                 for (int i = 0; i < task.getQuantity(); i++) {
-                    atomicTasksList.add(new AtomicTask(orderNumber, deadline, task.getTaskId(), task.getLength(), task.getWidth(), task.getHeight(), task.getFilament()));
+                    atomicTaskCount++;
+                    atomicTasksList.add(new AtomicTask(orderNumber, deadline, task.getTaskId(), task.getLength(), task.getWidth(), task.getHeight(), task.getFilament(), atomicTaskCount));
                 }
             }
         }

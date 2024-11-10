@@ -1,4 +1,4 @@
-package behaviours;
+package bahaviours.auctionresponder;
 
 import agents.ResourceAgent;
 import entities.AtomicTask;
@@ -9,10 +9,9 @@ import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
-public class AuctionResponseBehaviour extends CyclicBehaviour {
+public class AuctionProposalBehaviour extends CyclicBehaviour {
 
     public void action() {
         ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.CFP));
@@ -25,7 +24,6 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
                 reply.setPerformative(ACLMessage.PROPOSE);
                 AuctionProposal auctionProposal = evaluateAtomicTask(atomicTask);
                 reply.setContentObject(auctionProposal);
-                System.out.println("Agent " + myAgent.getLocalName() + " proposed " + auctionProposal);
 
                 myAgent.send(reply);
             } catch (Exception e) {
@@ -82,7 +80,7 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
             if (lastFilament != atomicTask.getFilament()){
                 executionTime = resourceAgent.getTotalExecutionTime() + ResourceAgent.FILAMENT_REPLACEMENT_TIME + executionTime;
                 timeSlotNumber++;
-            } else if(resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * boardSize) {
+            } else if(resourceAgent.getLastTimeSlotOccupancy() + taskSize > ResourceAgent.BOARD_HEURISTICS * boardSize) {
                 executionTime = resourceAgent.getTotalExecutionTime() + executionTime;
                 timeSlotNumber++;
             } else{
@@ -98,10 +96,12 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
 
     private float applyPriceBonuses(ResourceAgent resourceAgent, int timeSlotNumber, AtomicTask atomicTask, float price) {
         ArrayList<TimeSlot> timeSlotList = resourceAgent.getPrinterSchedule().getSchedule();
+        //System.out.println(resourceAgent.getLocalName() + " has the following schedule: " + timeSlotList);
         if (timeSlotList.size() < timeSlotNumber + 1){
             return price;
         }
         ArrayList<AtomicTask> taskList= timeSlotList.get(timeSlotNumber).getTasks();
+        System.out.println();
         float newPrice = price;
 
         int sameTaskCount = 0;
@@ -114,13 +114,12 @@ public class AuctionResponseBehaviour extends CyclicBehaviour {
             }
         }
         if (sameTaskCount > 0){
-            newPrice = newPrice - (sameTaskCount/10);
+            newPrice = newPrice - ((float) sameTaskCount/10);
         }
         if (heightSum > 0 ){
             float heightMean = (float) heightSum/taskList.size();
             newPrice = newPrice + Math.abs(heightMean - atomicTask.getHeight())/10;
         }
-
         return newPrice;
 
     }

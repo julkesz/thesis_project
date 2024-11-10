@@ -23,33 +23,18 @@ public class AuctionProposal implements Serializable {
         return atomicTask;
     }
 
-    public void setAtomicTask(AtomicTask atomicTask) {
-        this.atomicTask = atomicTask;
-    }
-
     public int getTimeSlotNumber() {
         return timeSlotNumber;
-    }
-
-    public void setTimeSlotNumber(int timeSlotNumber) {
-        this.timeSlotNumber = timeSlotNumber;
     }
 
     public int getExecutionTime() {
         return executionTime;
     }
 
-    public void setExecutionTime(int executionTime) {
-        this.executionTime = executionTime;
-    }
-
     public float getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
-    }
 
     @Override
     public String toString() {

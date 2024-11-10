@@ -1,4 +1,4 @@
-package behaviours;
+package bahaviours.auctionresponder;
 
 import agents.ResourceAgent;
 import entities.AtomicTask;
@@ -12,7 +12,7 @@ import jade.lang.acl.UnreadableException;
 
 import java.util.NoSuchElementException;
 
-public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
+public class AuctionAcceptanceBehaviour extends CyclicBehaviour {
 
     public void action() {
         ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.ACCEPT_PROPOSAL));
@@ -48,14 +48,10 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
                     int stop = start + executionTime;
                     printerSchedule.getSchedule().get(timeSlotNumber).setStop(stop);
 
-                    int taskSize = atomicTask.getLength()* atomicTask.getWidth();
-                    if(resourceAgent.getTotalSize()!=0 && resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardLength()*resourceAgent.getBoardWidth()) {
-                        resourceAgent.setTotalSize(taskSize);
-                    }else{
-                        resourceAgent.setTotalSize(resourceAgent.getTotalSize() + taskSize);
-                    }
                     resourceAgent.setTotalExecutionTime(stop);
                     resourceAgent.setFilament(atomicTask.getFilament());
+
+                    System.out.println(resourceAgent.getLocalName() + " added atomic task " + atomicTask.getAtomicTaskId() + " to timeslot " + timeSlotNumber);
 
                     ACLMessage reply = msg.createReply();
                     reply.setPerformative(ACLMessage.INFORM);
@@ -80,8 +76,9 @@ public class AuctionHandleAcceptBehaviour extends CyclicBehaviour {
 
         if (!printerSchedule.isEmpty()){
             int lastTimeSlot = printerSchedule.getSchedule().size() - 1;
+
             if (printerSchedule.getSchedule().get(lastTimeSlot).getTasks().get(0).getFilament() != task.getFilament()
-                    || resourceAgent.getTotalSize() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardWidth() * resourceAgent.getBoardLength()){
+                    || resourceAgent.getLastTimeSlotOccupancy() + taskSize > ResourceAgent.BOARD_HEURISTICS * resourceAgent.getBoardWidth() * resourceAgent.getBoardLength()){
                 timeSlot = lastTimeSlot + 1;
             } else{
                 timeSlot =  lastTimeSlot;
