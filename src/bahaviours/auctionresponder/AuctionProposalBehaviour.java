@@ -2,9 +2,8 @@ package bahaviours.auctionresponder;
 
 import agents.ResourceAgent;
 import entities.AtomicTask;
-import entities.AuctionProposal;
+import entities.messages.AuctionProposal;
 import entities.TimeSlot;
-import entities.TimeSlotCalculation;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
@@ -37,60 +36,52 @@ public class AuctionProposalBehaviour extends CyclicBehaviour {
     private AuctionProposal evaluateAtomicTask(AtomicTask atomicTask) {
 
         ResourceAgent resourceAgent = (ResourceAgent) myAgent;
-        TimeSlotCalculation timeSlotCalculation = calculateTimeSlot(resourceAgent, atomicTask, false);
-        int executionTime = timeSlotCalculation.getExecutionTime();
+        int timeSlotNumber = resourceAgent.calculateTimeSlotNumber(atomicTask);
 
-        if (executionTime == 0){
-            return new AuctionProposal(atomicTask,-1, 0, Integer.MAX_VALUE);
-        }else{
-            float price = (float) executionTime;
-            int timeSlotNumber = timeSlotCalculation.getTimeSlotNumber();
-            price = applyPriceBonuses(resourceAgent, timeSlotNumber, atomicTask, price);
-
-            return new AuctionProposal(atomicTask, timeSlotNumber, executionTime, price);
-
+        if (timeSlotNumber == -1) {
+            return new AuctionProposal(atomicTask, -1, 0, Integer.MAX_VALUE);
         }
+
+        int executionTime = calculateExecutionTime(resourceAgent, timeSlotNumber, atomicTask);
+        float price = (float) executionTime;
+        price = applyPriceBonuses(resourceAgent, timeSlotNumber, atomicTask, price);
+
+        return new AuctionProposal(atomicTask, timeSlotNumber, executionTime, price);
 
     }
 
-    private TimeSlotCalculation calculateTimeSlot(ResourceAgent resourceAgent, AtomicTask atomicTask, boolean scanAllTimeSlots) {
+    private int calculateExecutionTime(ResourceAgent resourceAgent, int timeSlotNumber, AtomicTask atomicTask) {
+        ArrayList<TimeSlot> timeSlotList = resourceAgent.getPrinterSchedule().getSchedule();
 
-        int taskSize =  atomicTask.getLength() * atomicTask.getWidth();
-        int boardSize = resourceAgent.getBoardWidth() * resourceAgent.getBoardLength();
-        if (taskSize > boardSize) {
-            return new TimeSlotCalculation();
-        }
-        int executionTime = Math.round((float) atomicTask.getHeight() / resourceAgent.getPrintingSpeed() * 60);
+        int taskExecutionTime = (int) Math.ceil((float) atomicTask.getHeight() / resourceAgent.getPrintingSpeed() * 60);
+        int executionTime = 0;
 
-        if (resourceAgent.getPrinterSchedule().isEmpty()) {
-            if (resourceAgent.getFilament() != atomicTask.getFilament()) {
-                executionTime = executionTime + ResourceAgent.FILAMENT_REPLACEMENT_TIME;
+        if(timeSlotNumber == timeSlotList.size()){
+            executionTime = resourceAgent.getTotalExecutionTime() + taskExecutionTime;
+            if(atomicTask.getFilament() != resourceAgent.getCurrentFilament()){
+                executionTime += resourceAgent.FILAMENT_REPLACEMENT_TIME;
             }
-            return new TimeSlotCalculation(0, executionTime);
-        }
-
-        if (!scanAllTimeSlots){
-            ArrayList<TimeSlot> timeSlotList = resourceAgent.getPrinterSchedule().getSchedule();
-            int lastTimeSlot = timeSlotList.size() - 1;
-            int lastFilament = timeSlotList.get(lastTimeSlot).getTasks().get(0).getFilament();
-            //int lastTimeSlotSize = timeSlotList.get(lastTimeSlot).getTasks().size();
-            //AtomicTask lastAtomicTask = timeSlotList.get(lastTimeSlot).getTasks().get(lastTimeSlotSize-1);
-
-            int timeSlotNumber = lastTimeSlot;
-            if (lastFilament != atomicTask.getFilament()){
-                executionTime = resourceAgent.getTotalExecutionTime() + ResourceAgent.FILAMENT_REPLACEMENT_TIME + executionTime;
-                timeSlotNumber++;
-            } else if(resourceAgent.getLastTimeSlotOccupancy() + taskSize > ResourceAgent.BOARD_HEURISTICS * boardSize) {
-                executionTime = resourceAgent.getTotalExecutionTime() + executionTime;
-                timeSlotNumber++;
+        }else if(timeSlotNumber == timeSlotList.size() - 1){
+            TimeSlot lastTimeSlot = timeSlotList.get(timeSlotNumber);
+            if (taskExecutionTime > lastTimeSlot.getExecutionTime()){
+                executionTime = resourceAgent.getTotalExecutionTime() + (taskExecutionTime -lastTimeSlot.getExecutionTime());
             } else{
-                executionTime = Math.max(executionTime, resourceAgent.getTotalExecutionTime());
+                executionTime = resourceAgent.getTotalExecutionTime();
             }
-            return new TimeSlotCalculation(timeSlotNumber, executionTime);
-        } else{
+        }else{
+            for (int i = 0; i <= timeSlotNumber; i++) {
+                TimeSlot timeSlot = timeSlotList.get(i);
+                if (timeSlot.isFilamentChanged()){
+                    executionTime += resourceAgent.FILAMENT_REPLACEMENT_TIME;
+                }
+                if (i == timeSlotNumber){
+                    executionTime += Math.max(timeSlot.getExecutionTime(), taskExecutionTime);
+                } else{
+                    executionTime += timeSlot.getExecutionTime();
+                }
+            }
         }
-
-        return new TimeSlotCalculation();
+        return executionTime;
 
     }
 
@@ -101,7 +92,6 @@ public class AuctionProposalBehaviour extends CyclicBehaviour {
             return price;
         }
         ArrayList<AtomicTask> taskList= timeSlotList.get(timeSlotNumber).getTasks();
-        System.out.println();
         float newPrice = price;
 
         int sameTaskCount = 0;
@@ -121,6 +111,5 @@ public class AuctionProposalBehaviour extends CyclicBehaviour {
             newPrice = newPrice + Math.abs(heightMean - atomicTask.getHeight())/10;
         }
         return newPrice;
-
     }
 }

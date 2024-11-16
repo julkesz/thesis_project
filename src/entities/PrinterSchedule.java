@@ -68,8 +68,9 @@ public class PrinterSchedule implements Serializable {
         return schedule;
     }
 
-    public void addTimeSlot(int start){
-        schedule.add(new TimeSlot(start, 0));
+    public void addTimeSlot(boolean filamentReplacementFlag, AtomicTask atomicTask){
+        int taskExecutionTime = (int) Math.ceil((float) atomicTask.getHeight() / printingSpeed * 60);
+        schedule.add(new TimeSlot(filamentReplacementFlag, atomicTask, taskExecutionTime));
     }
 
     public boolean isEmpty(){

@@ -5,7 +5,7 @@ import jade.core.behaviours.SequentialBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import entities.AtomicTask;
-import entities.AtomicTaskList;
+import entities.messages.AuctionRequest;
 import agents.AdvancedResourceAgent;
 
 public class AuctionRequestBehaviour extends CyclicBehaviour {
@@ -21,11 +21,11 @@ public class AuctionRequestBehaviour extends CyclicBehaviour {
 
         if (msg != null) {
             try {
-                AtomicTaskList atomicTaskList = (AtomicTaskList) msg.getContentObject();
-                System.out.println(agent.getAID().getLocalName() + " received " + atomicTaskList.getAtomicTasks().size() + " tasks: " + atomicTaskList.getAtomicTaskIds());
+                AuctionRequest auctionRequest = (AuctionRequest) msg.getContentObject();
+                System.out.println(agent.getAID().getLocalName() + " received " + auctionRequest.getAtomicTasks().size() + " tasks: " + auctionRequest.getAtomicTaskIds());
 
                 SequentialBehaviour auctionSequence = new SequentialBehaviour();
-                for (AtomicTask atomicTask : atomicTaskList.getAtomicTasks()) {
+                for (AtomicTask atomicTask : auctionRequest.getAtomicTasks()) {
                     auctionSequence.addSubBehaviour(new AuctionInitiationBehaviour(agent, atomicTask, agent.getReceivers()));
                 }
                 auctionSequence.addSubBehaviour(new AuctionCompletionBehaviour(agent.getReceivers()));

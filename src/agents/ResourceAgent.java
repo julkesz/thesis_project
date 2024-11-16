@@ -16,7 +16,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Objects;
 
 
 public class ResourceAgent extends Agent {
@@ -28,21 +30,31 @@ public class ResourceAgent extends Agent {
     protected int maxHeight;
     protected int printingSpeed; //20-36 mm/h
 
-    protected int filament;
+    protected int originalFilament;
+    protected int currentFilament;
     protected PrinterSchedule printerSchedule;
     protected int totalExecutionTime;
+    protected boolean scanAllTimeSlots;
     public static final int FILAMENT_REPLACEMENT_TIME = 20;
     public static final double BOARD_HEURISTICS = 0.8;
 
     protected void setup() {
 
         Object[] args = getArguments();
-        if (args != null && args.length == 5) {
+        if (args != null && args.length == 6) {
             boardWidth = Integer.parseInt((String) args[0]);
             boardLength = Integer.parseInt((String) args[1]);
             maxHeight = Integer.parseInt((String) args[2]);
             printingSpeed = Integer.parseInt((String) args[3]);
-            filament = Integer.parseInt((String) args[4]);
+            originalFilament = Integer.parseInt((String) args[4]);
+            currentFilament = Integer.parseInt((String) args[4]);
+            if (Objects.equals(args[5].toString(), "scanall")){
+                scanAllTimeSlots = true;
+            } else if (Objects.equals(args[5].toString(), "scanlast")) {
+                scanAllTimeSlots = false;
+            } else{
+                System.out.println("Wrong argument provided.");
+            }
         } else {
             System.out.println("No arguments provided.");
         }
@@ -101,8 +113,12 @@ public class ResourceAgent extends Agent {
         this.printingSpeed = printingSpeed;
     }
 
-    public int getFilament() {
-        return filament;
+    public int getCurrentFilament() {
+        return currentFilament;
+    }
+
+    public void setCurrentFilament(int filament) {
+        this.currentFilament = filament;
     }
 
     public PrinterSchedule getPrinterSchedule() {
@@ -113,26 +129,47 @@ public class ResourceAgent extends Agent {
         return totalExecutionTime;
     }
 
-
-    public void setFilament(int filament) {
-        this.filament = filament;
+    public void increaseTotalExecutionTime(int time) {
+        this.totalExecutionTime += time;
     }
 
-    public void setTotalExecutionTime(int totalExecutionTime) {
-        this.totalExecutionTime = totalExecutionTime;
-    }
-
-    public int getLastTimeSlotOccupancy() {
+    public int getTimeSlotOccupancy(int timeSlotNumber) {
         if (printerSchedule.getSchedule().isEmpty()){
             return 0;
         }
-        int lastTimeSlotNumber = printerSchedule.getSchedule().size() - 1;
-        TimeSlot lastTimeSlot = printerSchedule.getSchedule().get(lastTimeSlotNumber);
-        int lastTimeSlotOccupancy = 0;
-        for (AtomicTask task : lastTimeSlot.getTasks()){
-            lastTimeSlotOccupancy += task.getWidth() * task.getLength();
+        TimeSlot timeSlot = printerSchedule.getSchedule().get(timeSlotNumber);
+        return timeSlot.getOccupancy();
+    }
+
+    public int calculateTimeSlotNumber(AtomicTask atomicTask) {
+
+        int taskSize = atomicTask.getLength() * atomicTask.getWidth();
+        int boardSize = boardWidth * boardLength;
+        if ((taskSize > boardSize) || (atomicTask.getHeight() > maxHeight)) {
+            return -1;
         }
-        return lastTimeSlotOccupancy;
+        if (printerSchedule.isEmpty()) {
+            return 0;
+        }
+
+        ArrayList<TimeSlot> timeSlotList = printerSchedule.getSchedule();
+        if (scanAllTimeSlots){
+            for (int timeSlotNumber = 0; timeSlotNumber < timeSlotList.size(); timeSlotNumber++) {
+                TimeSlot timeSlot = timeSlotList.get(timeSlotNumber);
+                if ((timeSlot.getFilament() == atomicTask.getFilament())
+                        && (timeSlot.getOccupancy() + taskSize <= ResourceAgent.BOARD_HEURISTICS * boardSize)) {
+                    return timeSlotNumber;
+                }
+            }
+        }
+        int lastTimeSlotNumber = timeSlotList.size() - 1;
+        int lastFilament = timeSlotList.get(lastTimeSlotNumber).getFilament();
+        int timeSlotNumber = lastTimeSlotNumber;
+        if ((lastFilament != atomicTask.getFilament()) ||
+                (this.getTimeSlotOccupancy(lastTimeSlotNumber) + taskSize > ResourceAgent.BOARD_HEURISTICS * boardSize)) {
+            timeSlotNumber++;
+        }
+        return timeSlotNumber;
     }
 
     public void generateJSONSchedule() {
@@ -148,6 +185,19 @@ public class ResourceAgent extends Agent {
             fileWriter.write(jsonString);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    public void completePrinterSchedule() {
+        int startTime = 0;
+        ArrayList<TimeSlot> timeSlotList = printerSchedule.getSchedule();
+        for (TimeSlot timeSlot : timeSlotList){
+            if (timeSlot.isFilamentChanged()){
+                startTime += ResourceAgent.FILAMENT_REPLACEMENT_TIME;
+            }
+            timeSlot.setStart(startTime);
+            timeSlot.setStop(startTime + timeSlot.getExecutionTime());
+            startTime += timeSlot.getExecutionTime();
         }
     }
 

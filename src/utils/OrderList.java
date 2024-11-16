@@ -1,4 +1,6 @@
-package entities;
+package utils;
+
+import entities.Order;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -24,3 +26,4 @@ public class OrderList implements Serializable {
         this.orders = orders;
     }
 }
+

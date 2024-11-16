@@ -1,17 +1,17 @@
-package entities;
+package entities.messages;
 
 
-import jade.core.AID;
+import entities.AtomicTask;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AtomicTaskList implements Serializable {
+public class AuctionRequest implements Serializable {
     private List<AtomicTask> atomicTasks;
     private List<Integer> atomicTaskIds;
 
-    public AtomicTaskList(List<AtomicTask> atomicTasks) {
+    public AuctionRequest(List<AtomicTask> atomicTasks) {
 
         this.atomicTasks = atomicTasks;
         this.atomicTaskIds = new ArrayList<>();

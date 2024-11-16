@@ -5,9 +5,8 @@ import jade.core.AID;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.UnreadableException;
 import jade.proto.ContractNetInitiator;
-import agents.AdvancedResourceAgent;
 import entities.AtomicTask;
-import entities.AuctionProposal;
+import entities.messages.AuctionProposal;
 
 import java.io.IOException;
 import java.util.Enumeration;

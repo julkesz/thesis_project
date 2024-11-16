@@ -28,8 +28,8 @@
       "tasks": [
         {
           "taskId": "01",
-          "length": 60,
-          "width": 40,
+          "length": 30,
+          "width": 20,
           "height": 25,
           "filament": 1,
           "quantity": 3
@@ -75,6 +75,14 @@
           "height": 22,
           "filament": 2,
           "quantity": 7
+        },
+        {
+          "taskId": "02",
+          "length": 55,
+          "width": 25,
+          "height": 22,
+          "filament": 1,
+          "quantity": 5
         }
       ]
     }

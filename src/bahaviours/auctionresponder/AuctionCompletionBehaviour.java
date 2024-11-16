@@ -4,7 +4,6 @@ import agents.ResourceAgent;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
-import agents.AdvancedResourceAgent;
 
 public class AuctionCompletionBehaviour extends CyclicBehaviour {
     private final ResourceAgent agent;
@@ -23,6 +22,7 @@ public class AuctionCompletionBehaviour extends CyclicBehaviour {
 
             // Check if all auctions have completed
             if (agent.getCompletionMessageCount()== agent.getAuctionInitiatorCount()) {
+                agent.completePrinterSchedule();
                 agent.generateJSONSchedule();
                 System.out.println("All auctions completed; JSON schedule generated.");
             }

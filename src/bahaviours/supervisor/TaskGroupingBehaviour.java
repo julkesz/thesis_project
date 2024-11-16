@@ -1,9 +1,8 @@
 package bahaviours.supervisor;
 
-import agents.AdvancedResourceAgent;
 import agents.SupervisorAgent;
 import entities.AtomicTask;
-import entities.AtomicTaskList;
+import entities.messages.AuctionRequest;
 import jade.core.AID;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.domain.DFService;
@@ -50,9 +49,9 @@ public class TaskGroupingBehaviour extends OneShotBehaviour {
 
         // Send each group to a printer
         for (int i = 0; i < taskGroups.size(); i++) {
-            AtomicTaskList atomicTaskList = new AtomicTaskList(taskGroups.get(i));
+            AuctionRequest auctionRequest = new AuctionRequest(taskGroups.get(i));
             AID printerAID = printers.get(i);
-            sendTaskList(printerAID, atomicTaskList);
+            sendTaskList(printerAID, auctionRequest);
         }
     }
 
@@ -124,12 +123,12 @@ public class TaskGroupingBehaviour extends OneShotBehaviour {
     }
 
 
-    private void sendTaskList(AID printerAID, AtomicTaskList atomicTaskList) {
+    private void sendTaskList(AID printerAID, AuctionRequest auctionRequest) {
         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
         msg.addReceiver(printerAID);
 
         try {
-            msg.setContentObject(atomicTaskList);
+            msg.setContentObject(auctionRequest);
         } catch (Exception e) {
             e.printStackTrace();
         }

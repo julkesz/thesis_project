@@ -1,5 +1,7 @@
-package entities;
+package entities.messages;
 
+
+import entities.AtomicTask;
 
 import java.io.Serializable;
 import java.util.ArrayList;
