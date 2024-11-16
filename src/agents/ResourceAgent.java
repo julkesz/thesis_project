@@ -22,6 +22,8 @@ import java.util.Objects;
 
 
 public class ResourceAgent extends Agent {
+    private long startTime;
+    private long elapsedTime;
     private int auctionInitiatorCount = 1;
     private int completionMessageCount = 0;
 
@@ -77,6 +79,21 @@ public class ResourceAgent extends Agent {
         }
     }
 
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
+    }
+
+    public long getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(long elapsedTime) {
+        this.elapsedTime = elapsedTime;
+    }
 
     public int getAuctionInitiatorCount() {
         return auctionInitiatorCount;
@@ -189,6 +206,7 @@ public class ResourceAgent extends Agent {
     }
 
     public void completePrinterSchedule() {
+        printerSchedule.setElapsedTime(elapsedTime);
         int startTime = 0;
         ArrayList<TimeSlot> timeSlotList = printerSchedule.getSchedule();
         for (TimeSlot timeSlot : timeSlotList){

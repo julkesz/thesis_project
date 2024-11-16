@@ -5,6 +5,16 @@ from pathlib import Path
 from collections import defaultdict
 from statistics import stdev
 
+
+def get_elapsed_time(timestamp):
+    """Retrieve elapsedTime from one JSON file."""
+    input_dir = Path("src/output/output_jsons")
+    for json_file in input_dir.glob(f"*schedule_{timestamp}.json"):
+        with open(json_file, 'r') as file:
+            data = json.load(file)
+            return data.get("elapsedTime", None)
+    return None
+
 def calculate_max_execution_time(data):
     """Calculate the maximum stop time for the given printer's schedule."""
     if len(data["schedule"]) == 0:
@@ -116,6 +126,11 @@ def calculate_statistics(timestamp):
             printer_statistics["taskHeightStandardDeviations"][printer_name] = height_std_devs
 
     printer_statistics["tardiness"] = calculate_order_tardiness(timestamp)
+
+    # Add elapsedTime
+    elapsed_time = get_elapsed_time(timestamp)
+    if elapsed_time is not None:
+        printer_statistics["elapsedTime"] = elapsed_time
 
     output_file = output_dir / f"printing_statistics_{timestamp}.json"
     with open(output_file, 'w') as file:

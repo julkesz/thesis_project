@@ -38,7 +38,7 @@ def plot_schedule_from_files(date_time, source_directory, output_directory, scal
     add_legends(fig, ax, order_color_map, filament_color_map)
 
     # Save the plot to a file
-    plt.savefig(output_directory + '/combined_schedule_plot_' + date_time + '.png', bbox_inches='tight')
+    plt.savefig(output_directory + '/schedule_' + date_time + '.png', bbox_inches='tight')
     plt.close()
 
 
@@ -221,4 +221,4 @@ if __name__ == '__main__':
     # Plot the schedules from JSON files and save the plot to a file
     plot_schedule_from_files(timestamp, json_directory, plot_directory)
 
-    print(f"The plot has been saved to {plot_directory + '/combined_schedule_plot_' + timestamp + '.png'}")
+    print(f"The plot has been saved to {plot_directory + '/schedule_' + timestamp + '.png'}")

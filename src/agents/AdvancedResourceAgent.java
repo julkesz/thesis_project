@@ -4,7 +4,7 @@ import bahaviours.auctionresponder.AuctionAcceptanceBehaviour;
 import bahaviours.auctionresponder.AuctionProposalBehaviour;
 import bahaviours.auctionresponder.AuctionCompletionBehaviour;
 import bahaviours.auctioninitiator.AuctionRequestBehaviour;
-import bahaviours.auctionresponder.AuctionInitiatorCountBehaviour;
+import bahaviours.auctionresponder.AuctionInformationBehaviour;
 
 import jade.core.AID;
 import jade.core.behaviours.*;
@@ -17,13 +17,12 @@ import java.util.*;
 
 
 public class AdvancedResourceAgent extends ResourceAgent {
-
     private List<AID> cachedReceivers = null;
 
     protected void setup() {
         super.setup();
 
-        addBehaviour(new AuctionInitiatorCountBehaviour(this));
+        addBehaviour(new AuctionInformationBehaviour(this));
 
         ParallelBehaviour parallelBehaviour = new ParallelBehaviour();
         parallelBehaviour.addSubBehaviour(new AuctionRequestBehaviour(this));

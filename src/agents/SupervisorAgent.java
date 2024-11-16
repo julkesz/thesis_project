@@ -5,6 +5,8 @@ import jade.core.Agent;
 
 
 public class SupervisorAgent extends Agent {
+
+    private long startTime;
     private int orderCount = 1;
     private int groupCount = 1;
     private String divisionMode = "random";
@@ -40,5 +42,13 @@ public class SupervisorAgent extends Agent {
 
     public String getDivisionMode() {
         return divisionMode;
+    }
+
+    public long getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 }

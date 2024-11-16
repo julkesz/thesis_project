@@ -2,6 +2,7 @@ package bahaviours.supervisor;
 
 import agents.SupervisorAgent;
 import entities.AtomicTask;
+import entities.messages.AuctionInformation;
 import entities.messages.AuctionRequest;
 import jade.core.AID;
 import jade.core.behaviours.OneShotBehaviour;
@@ -12,6 +13,7 @@ import jade.domain.FIPAException;
 import jade.lang.acl.ACLMessage;
 import utils.OrderReader;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -24,6 +26,7 @@ public class TaskGroupingBehaviour extends OneShotBehaviour {
         this.agent = agent;
     }
     public void action() {
+        agent.setStartTime(System.currentTimeMillis());
         // Read tasks
         OrderReader orderReader = new OrderReader(agent.getOrderCount());
         orderReader.retrieveOrders();
@@ -44,7 +47,7 @@ public class TaskGroupingBehaviour extends OneShotBehaviour {
         // Inform printers how many auction initiators there are going to be
         for (int i = 0; i < printers.size(); i++) {
             AID printerAID = printers.get(i);
-            sendNumberOfAuctionInitiators(printerAID);
+            sendAuctionInformation(printerAID);
         }
 
         // Send each group to a printer
@@ -135,16 +138,18 @@ public class TaskGroupingBehaviour extends OneShotBehaviour {
         agent.send(msg);
     }
 
-    private void sendNumberOfAuctionInitiators(AID printerAID) {
-        ACLMessage msg = new ACLMessage(ACLMessage.INFORM);
-        msg.addReceiver(printerAID);
+    private void sendAuctionInformation(AID printerAID) {
 
+        AuctionInformation auctionInformation = new AuctionInformation(agent.getStartTime(), agent.getGroupCount());
+        ACLMessage informationMessage = new ACLMessage(ACLMessage.INFORM);
         try {
-            msg.setContent(String.valueOf(agent.getGroupCount()));
-        } catch (Exception e) {
-            e.printStackTrace();
+            informationMessage.setContentObject(auctionInformation);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        agent.send(msg);
+        informationMessage.addReceiver(printerAID);
+        agent.send(informationMessage);
+
     }
 
 }

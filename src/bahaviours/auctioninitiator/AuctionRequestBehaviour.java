@@ -28,7 +28,7 @@ public class AuctionRequestBehaviour extends CyclicBehaviour {
                 for (AtomicTask atomicTask : auctionRequest.getAtomicTasks()) {
                     auctionSequence.addSubBehaviour(new AuctionInitiationBehaviour(agent, atomicTask, agent.getReceivers()));
                 }
-                auctionSequence.addSubBehaviour(new AuctionCompletionBehaviour(agent.getReceivers()));
+                auctionSequence.addSubBehaviour(new AuctionCompletionBehaviour(agent.getReceivers(), agent.getStartTime()));
                 agent.addBehaviour(auctionSequence);
             } catch (Exception e) {
                 e.printStackTrace();

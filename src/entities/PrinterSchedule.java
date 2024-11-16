@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class PrinterSchedule implements Serializable {
+
+    private long elapsedTime;
     private String printerName;
     private int boardWidth;
     private int boardLength;
@@ -18,6 +20,14 @@ public class PrinterSchedule implements Serializable {
         this.maxHeight = maxHeight;
         this.printingSpeed = printingSpeed;
         this.schedule = new ArrayList<>();
+    }
+
+    public long getElapsedTime() {
+        return elapsedTime;
+    }
+
+    public void setElapsedTime(long elapsedTime) {
+        this.elapsedTime = elapsedTime;
     }
 
     public String getPrinterName() {
@@ -80,7 +90,8 @@ public class PrinterSchedule implements Serializable {
     @Override
     public String toString() {
         return "PrinterSchedule{" +
-                "printerName='" + printerName + '\'' +
+                "elapsedTime=" + elapsedTime +
+                ", printerName='" + printerName + '\'' +
                 ", boardWidth=" + boardWidth +
                 ", boardLength=" + boardLength +
                 ", maxHeight=" + maxHeight +
