@@ -87,7 +87,7 @@ public class AuctionProposalBehaviour extends CyclicBehaviour {
 
     private float applyPriceBonuses(ResourceAgent resourceAgent, int timeSlotNumber, AtomicTask atomicTask, float price) {
         ArrayList<TimeSlot> timeSlotList = resourceAgent.getPrinterSchedule().getSchedule();
-        //System.out.println(resourceAgent.getLocalName() + " has the following schedule: " + timeSlotList);
+
         if (timeSlotList.size() < timeSlotNumber + 1){
             return price;
         }
@@ -110,6 +110,10 @@ public class AuctionProposalBehaviour extends CyclicBehaviour {
             float heightMean = (float) heightSum/taskList.size();
             newPrice = newPrice + Math.abs(heightMean - atomicTask.getHeight())/10;
         }
+
+        // Round to two decimal places
+        newPrice = (float) (Math.round(newPrice * 100.0) / 100.0);
+
         return newPrice;
     }
 }

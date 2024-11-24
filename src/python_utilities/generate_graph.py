@@ -2,49 +2,49 @@ import sys
 import os
 import json
 import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
 from matplotlib.patches import Patch, Rectangle
+from matplotlib import colormaps
 
 def plot_schedule_from_files(date_time, source_directory, output_directory, scale=1):
     fig, ax = plt.subplots(figsize=(32, 20))
-    colors = list(mcolors.TABLEAU_COLORS.values())
-    filament_colors = list(mcolors.CSS4_COLORS.values())
+    colors = [colormaps.get_cmap('tab10')(i) for i in range(20)]
+    resin_colors = [colormaps.get_cmap('Set3')(i) for i in range(20)]
 
     machine_padding = 0.5
     bottom_margin = 0.3
     top_margin = 0.3
     bar_height = 1.0
-    filament_bar_height = 0.1
+    resin_bar_height = 0.1
 
     order_color_map = {}
-    filament_color_map = {}
+    resin_color_map = {}
     color_index = 0
-    filament_color_index = 0
+    resin_color_index = 0
 
     machine_schedules = []
     machine_number = 0
 
     for filename in sorted(os.listdir(source_directory)):
         if filename.endswith(date_time + '.json'):
-            machine_schedule, machine_y_pos, color_index, filament_color_index = process_machine_schedule_with_occupancy(
-                ax, filename, source_directory, colors, filament_colors, order_color_map, filament_color_map,
-                color_index, filament_color_index, machine_number, scale,
-                machine_padding, bottom_margin, bar_height, filament_bar_height)
+            machine_schedule, machine_y_pos, color_index, resin_color_index = process_machine_schedule_with_occupancy(
+                ax, filename, source_directory, colors, resin_colors, order_color_map, resin_color_map,
+                color_index, resin_color_index, machine_number, scale,
+                machine_padding, bottom_margin, bar_height, resin_bar_height)
             machine_schedules.append((machine_number, machine_y_pos, machine_schedule))
             machine_number += 1
 
     set_plot_properties(ax, machine_number, machine_schedules, source_directory, date_time, scale, bar_height, machine_padding, bottom_margin, top_margin)
 
-    add_legends(fig, ax, order_color_map, filament_color_map)
+    add_legends(fig, ax, order_color_map, resin_color_map)
 
     # Save the plot to a file
     plt.savefig(output_directory + '/schedule_' + date_time + '.png', bbox_inches='tight')
     plt.close()
 
 
-def process_machine_schedule_with_occupancy(ax, filename, source_directory, colors, filament_colors, order_color_map, filament_color_map,
-                                            color_index, filament_color_index, machine_number, scale,
-                                            machine_padding, bottom_margin, bar_height, filament_bar_height):
+def process_machine_schedule_with_occupancy(ax, filename, source_directory, colors, resin_colors, order_color_map, resin_color_map,
+                                            color_index, resin_color_index, machine_number, scale,
+                                            machine_padding, bottom_margin, bar_height, resin_bar_height):
     filepath = os.path.join(source_directory, filename)
 
     with open(filepath, 'r') as f:
@@ -61,18 +61,18 @@ def process_machine_schedule_with_occupancy(ax, filename, source_directory, colo
         task_heights = [task['width'] * task['length'] / machine_board_size for task in timeslot['tasks']]
         total_task_height = sum(task_heights)
 
-        # Filament handling
-        filament_number = timeslot['tasks'][0]['filament']
-        filament_color, filament_color_index = get_color_for_filament(filament_number, filament_colors, filament_color_map, filament_color_index)
+        # resin handling
+        resin_number = timeslot['tasks'][0]['filament']
+        resin_color, resin_color_index = get_color_for_resin(resin_number, resin_colors, resin_color_map, resin_color_index)
 
-        # Filament y-position: aligned with the tasks, no space between filament and tasks
-        filament_y_pos = machine_y_pos - bar_height - filament_bar_height
-        filament_y_pos = round(filament_y_pos, 1)
+        # resin y-position: aligned with the tasks, no space between resin and tasks
+        resin_y_pos = machine_y_pos - bar_height - resin_bar_height
+        resin_y_pos = round(resin_y_pos, 1)
 
-        ax.broken_barh([(start * scale, (stop - start) * scale)], (filament_y_pos, filament_bar_height), facecolors=filament_color, edgecolors='black', linewidth=0.5)
-        ax.text(((start + stop) / 2) * scale, filament_y_pos + filament_bar_height / 2, f'{filament_number}', ha='center', va='center', color='black', fontsize='x-small')
+        ax.broken_barh([(start * scale, (stop - start) * scale)], (resin_y_pos, resin_bar_height), facecolors=resin_color, edgecolors='black', linewidth=0.5)
+        ax.text(((start + stop) / 2) * scale, resin_y_pos + resin_bar_height / 2, f'{resin_number}', ha='center', va='center', color='black', fontsize='x-small')
 
-        # Task bars: stacked on top of the filament bar
+        # Task bars: stacked on top of the resin bar
         current_y_pos = machine_y_pos - bar_height
         for task_index, task in enumerate(timeslot['tasks']):
             task_height = task_heights[task_index]
@@ -80,7 +80,7 @@ def process_machine_schedule_with_occupancy(ax, filename, source_directory, colo
             task_number = task['taskId']
 
             # Assign order color
-            color, color_index = get_color_for_order(order_number, colors, order_color_map, color_index)
+            color = get_color_for_order(order_number, colors, order_color_map)
 
             # Plot task bar
             ax.broken_barh([(start * scale, (stop - start) * scale)], (current_y_pos, task_height), facecolors=color, edgecolors='black', linewidth=0.5)
@@ -95,7 +95,7 @@ def process_machine_schedule_with_occupancy(ax, filename, source_directory, colo
 
         machine_schedule.append((start, stop))
 
-    return machine_schedule, machine_y_pos, color_index, filament_color_index
+    return machine_schedule, machine_y_pos, color_index, resin_color_index
 
 
 def set_plot_properties(ax, machine_number, machine_schedules, source_directory, date_time, scale, bar_height, machine_padding, bottom_margin, top_margin):
@@ -120,13 +120,15 @@ def set_plot_properties(ax, machine_number, machine_schedules, source_directory,
     add_machine_borders(ax, machine_schedules, bar_height, scale)
 
 
-def add_legends(fig, ax, order_color_map, filament_color_map):
-    # Create order number legend
-    order_handles = [Patch(color=color, label=f'Zamówienie {order}') for order, color in order_color_map.items()]
-    filament_patch = Patch(color='lightgrey', label='Zmiana filamentu')
+def add_legends(fig, ax, order_color_map, resin_color_map):
 
-    # Create filament color legend
-    filament_handles = [Patch(color=color, label=f'Filament {filament}') for filament, color in sorted(filament_color_map.items())]
+    # Create order number legend in sorted order
+    sorted_orders = sorted(order_color_map.keys(), key=lambda x: int(x))
+    order_handles = [Patch(color=order_color_map[order], label=f'Zamówienie {order}') for order in sorted_orders]
+    resin_patch = Patch(color='lightgrey', label='Zmiana materiału')
+
+    # Create resin color legend
+    resin_handles = [Patch(color=color, label=f'Materiał {resin}') for resin, color in sorted(resin_color_map.items())]
 
     # Increase font size and handle size for better visibility
     legend_font_size = 'large'  # You can adjust this to 'medium', 'x-large', etc.
@@ -137,31 +139,38 @@ def add_legends(fig, ax, order_color_map, filament_color_map):
     fig_height = box.height  # Get the height of the plot area
 
     # Create and position the legends dynamically based on the height of the plot
-    order_legend = fig.legend(handles=order_handles + [filament_patch], loc='upper center',
+    order_legend = fig.legend(handles=order_handles + [resin_patch], loc='upper center',
                               bbox_to_anchor=(0.73, 0.07),
                               fontsize=legend_font_size, handleheight=legend_handle_height, bbox_transform=fig.transFigure)
 
-    filament_legend = fig.legend(handles=filament_handles, loc='upper center',
+    resin_legend = fig.legend(handles=resin_handles, loc='upper center',
                                  bbox_to_anchor=(0.8, 0.07),
                                  fontsize=legend_font_size, handleheight=legend_handle_height, bbox_transform=fig.transFigure)
 
     # Add legends to figure without overlap
     fig.add_artist(order_legend)  # Add the order legend separately to avoid overlap
-    fig.add_artist(filament_legend)
+    fig.add_artist(resin_legend)
 
 
-def get_color_for_filament(filament_number, filament_colors, filament_color_map, filament_color_index):
-    if filament_number not in filament_color_map:
-        filament_color_map[filament_number] = filament_colors[filament_color_index % len(filament_colors)]
-        filament_color_index += 1
-    return filament_color_map[filament_number], filament_color_index
+def get_color_for_resin(resin_number, resin_colors, resin_color_map, resin_color_index):
+    if resin_number not in resin_color_map:
+        resin_color_map[resin_number] = resin_colors[resin_color_index % len(resin_colors)]
+        resin_color_index += 1
+    return resin_color_map[resin_number], resin_color_index
 
+def get_color_for_order(order_number, colors, order_color_map):
+    # Convert the order number to an integer
+    order_index = int(order_number) - 1  # Subtract 1 to make it zero-based
 
-def get_color_for_order(order_number, colors, order_color_map, color_index):
+    # Determine the color index deterministically
+    color_index = order_index % len(colors)
+
+    # Assign the color from the palette
     if order_number not in order_color_map:
-        order_color_map[order_number] = colors[color_index % len(colors)]
-        color_index += 1
-    return order_color_map[order_number], color_index
+        order_color_map[order_number] = colors[color_index]
+
+    return order_color_map[order_number]
+
 
 
 def get_max_stop_time(source_directory, date_time):
@@ -188,7 +197,7 @@ def fill_schedule_gaps(ax, schedule, machine_y_pos, bar_height, scale):
 
 
 def add_machine_borders(ax, machine_schedules, bar_height, scale):
-    filament_bar_height = 0.1
+    resin_bar_height = 0.1
     for machine_number, machine_y_pos, schedule in machine_schedules:
         end_times = [s[1] for s in schedule]
         start = 0
@@ -201,9 +210,9 @@ def add_machine_borders(ax, machine_schedules, bar_height, scale):
         rect = Rectangle((start * scale, machine_y_pos - bar_height), (end - start) * scale, bar_height, fill=False, edgecolor='black', linewidth=1)
         ax.add_patch(rect)
 
-        # Add border for filament schedule
-        filament_rect = Rectangle((start * scale, machine_y_pos - bar_height - filament_bar_height), (end - start) * scale, filament_bar_height, fill=False, edgecolor='black', linewidth=1)
-        ax.add_patch(filament_rect)
+        # Add border for resin schedule
+        resin_rect = Rectangle((start * scale, machine_y_pos - bar_height - resin_bar_height), (end - start) * scale, resin_bar_height, fill=False, edgecolor='black', linewidth=1)
+        ax.add_patch(resin_rect)
 
 
 

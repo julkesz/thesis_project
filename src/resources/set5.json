@@ -18,7 +18,7 @@
           "width": 20,
           "height": 15,
           "filament": 3,
-          "quantity": 8
+          "quantity": 4
         }
       ]
     },
@@ -32,6 +32,22 @@
           "width": 20,
           "height": 25,
           "filament": 1,
+          "quantity": 3
+        },
+        {
+          "taskId": "02",
+          "length": 30,
+          "width": 20,
+          "height": 25,
+          "filament": 2,
+          "quantity": 3
+        },
+        {
+          "taskId": "03",
+          "length": 30,
+          "width": 20,
+          "height": 25,
+          "filament": 3,
           "quantity": 3
         }
       ]
