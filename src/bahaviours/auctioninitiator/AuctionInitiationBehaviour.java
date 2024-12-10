@@ -1,5 +1,6 @@
 package bahaviours.auctioninitiator;
 
+import agents.AdvancedResourceAgent;
 import jade.core.Agent;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
@@ -11,15 +12,26 @@ import entities.messages.AuctionProposal;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Objects;
 import java.util.Vector;
 
 public class AuctionInitiationBehaviour extends ContractNetInitiator {
+    private final AID originalAuctionInitiator;
     private final Agent agent;
     private final AtomicTask atomicTask;
     private final List<AID> receivers;
 
     public AuctionInitiationBehaviour(Agent agent, AtomicTask atomicTask, List<AID> receivers) {
         super(agent, createCFP(agent, atomicTask, receivers));
+        this.originalAuctionInitiator = agent.getAID();
+        this.agent = agent;
+        this.atomicTask = atomicTask;
+        this.receivers = receivers;
+    }
+
+    public AuctionInitiationBehaviour(Agent agent, AtomicTask atomicTask, List<AID> receivers, AID originalAuctionInitiator, String originalConversationId) {
+        super(agent, createCFP(agent, atomicTask, receivers, originalConversationId));
+        this.originalAuctionInitiator = originalAuctionInitiator;
         this.agent = agent;
         this.atomicTask = atomicTask;
         this.receivers = receivers;
@@ -37,9 +49,30 @@ public class AuctionInitiationBehaviour extends ContractNetInitiator {
             cfp.addReceiver(receiver);
         }
 
-        System.out.println(agent.getLocalName() + " started auction for atomic task " + atomicTask.getAtomicTaskId());
+        System.out.println(agent.getLocalName() + " started auction for atomic task " + atomicTask.getAtomicTaskId() +
+                " with conversation ID: " + cfp.getConversationId());
         return cfp;
     }
+
+    private static ACLMessage createCFP(Agent agent, AtomicTask atomicTask, List<AID> receivers, String originalConversationId) {
+        ACLMessage cfp = new ACLMessage(ACLMessage.CFP);
+
+        try {
+            cfp.setContentObject(atomicTask);
+            cfp.setConversationId(originalConversationId); // Pass the original conversation ID
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        for (AID receiver : receivers) {
+            cfp.addReceiver(receiver);
+        }
+
+        System.out.println(agent.getLocalName() + " started auction for atomic task " + atomicTask.getAtomicTaskId() +
+                " with conversation ID: " + originalConversationId);
+        return cfp;
+    }
+
 
     @Override
     protected void handlePropose(ACLMessage propose, Vector v) {
@@ -87,6 +120,7 @@ public class AuctionInitiationBehaviour extends ContractNetInitiator {
         Enumeration e = responses.elements();
         while (e.hasMoreElements()) {
             ACLMessage msg = (ACLMessage) e.nextElement();
+            String conversationId = msg.getConversationId();
             if (msg.getPerformative() == ACLMessage.PROPOSE) {
                 ACLMessage reply = msg.createReply();
                 reply.setPerformative(ACLMessage.REJECT_PROPOSAL);
@@ -132,8 +166,49 @@ public class AuctionInitiationBehaviour extends ContractNetInitiator {
         }
     }
 
+
     @Override
     protected void handleInform(ACLMessage inform) {
+
+        System.out.println(agent.getLocalName() +" received INFORM from " + inform.getSender().getLocalName() +
+                " about atomicTask " + inform.getContent());
+        /*
+        try {
+            Integer atomicTaskId = Integer.valueOf(inform.getContent());
+            String conversationId = inform.getConversationId();
+            AID originalInitiator = (AID) inform.getAllReplyTo().next();
+
+            System.out.println(myAgent.getLocalName() + " received INFORM for conversation ID: " + conversationId);
+
+            AdvancedResourceAgent agent = (AdvancedResourceAgent) myAgent;
+
+            if (agent.getAID().equals(originalInitiator)) {
+                // If this is the original initiator, finalize the task
+                System.out.println(myAgent.getLocalName() + ": All subtasks completed for " + conversationId);
+                agent.markAtomicTaskAllocated(atomicTaskId);
+
+                // Check if all tasks are complete
+                if (agent.areAllTasksAllocated()) {
+                    System.out.println(myAgent.getLocalName() + ": All tasks successfully distributed and completed.");
+                    //agent.addBehaviour(new AuctionCompletionBehaviour(agent.getReceivers(), agent.getStartTime()));
+                }
+            } else {
+                // If this is an intermediate agent, forward the INFORM
+                System.out.println(myAgent.getLocalName() + ": Forwarding INFORM to " + originalInitiator.getLocalName());
+
+                ACLMessage forwardInform = inform.createReply();
+                forwardInform.setPerformative(ACLMessage.INFORM);
+                forwardInform.clearAllReceiver();
+                forwardInform.addReceiver(originalInitiator);
+                forwardInform.setContent(String.valueOf(atomicTaskId));
+                myAgent.send(forwardInform);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        */
     }
+
+
 }
 

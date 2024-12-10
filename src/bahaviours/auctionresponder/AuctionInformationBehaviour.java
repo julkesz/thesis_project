@@ -21,7 +21,6 @@ public class AuctionInformationBehaviour extends SimpleBehaviour {
         if (msg != null) {
             try {
                 AuctionInformation auctionInformation = (AuctionInformation) msg.getContentObject();
-                agent.increaseCompletionMessageCount();
 
                 long startTime = auctionInformation.getStartTime();
                 agent.setStartTime(startTime);
@@ -35,12 +34,6 @@ public class AuctionInformationBehaviour extends SimpleBehaviour {
         } else {
             block();
         }
-
-
-
-
-
-
 
 
         if (msg != null && msg.getContent().matches("\\d+")) {

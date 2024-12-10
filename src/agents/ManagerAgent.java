@@ -31,7 +31,6 @@ public class ManagerAgent extends Agent {
                 // First argument: number of orders
                 orderCount = Integer.parseInt(args[0].toString());
                 // Second argument: task division mode
-                System.err.println("HALOO " + args[1].toString());
                 divisionMode = args[1].toString();
             } catch (Exception e) {
                 System.err.println("Error parsing agent parameters: " + e.getMessage());

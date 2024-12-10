@@ -43,7 +43,7 @@ public class ResourceAgent extends Agent {
     protected void setup() {
 
         Object[] args = getArguments();
-        if (args != null && args.length == 6) {
+        if (args != null && args.length >= 6) {
             boardWidth = Integer.parseInt((String) args[0]);
             boardLength = Integer.parseInt((String) args[1]);
             maxHeight = Integer.parseInt((String) args[2]);
@@ -103,11 +103,11 @@ public class ResourceAgent extends Agent {
         this.auctionInitiatorCount = auctionInitiatorCount;
     }
 
-    public int getCompletionMessageCount() {
+    public synchronized int getCompletionMessageCount() {
         return completionMessageCount;
     }
 
-    public void increaseCompletionMessageCount() {
+    public synchronized void increaseCompletionMessageCount() {
         this.completionMessageCount++;
     }
     public int getBoardWidth() {

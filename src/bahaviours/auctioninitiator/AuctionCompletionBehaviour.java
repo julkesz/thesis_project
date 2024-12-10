@@ -28,6 +28,7 @@ public class AuctionCompletionBehaviour extends OneShotBehaviour {
 
         AuctionCompletion auctionCompletion = new AuctionCompletion(elapsedTime);
         ACLMessage completionMessage = new ACLMessage(ACLMessage.CONFIRM);
+
         try {
             completionMessage.setContentObject(auctionCompletion);
         } catch (IOException e) {
@@ -37,6 +38,8 @@ public class AuctionCompletionBehaviour extends OneShotBehaviour {
         for (AID receiver : receivers) {
             completionMessage.addReceiver(receiver);
         }
+
+        System.out.println("AUCTION COMPLETION IS SENT!!!!!");
 
         myAgent.send(completionMessage);
     }

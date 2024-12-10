@@ -18,9 +18,22 @@ import java.util.*;
 
 public class AdvancedResourceAgent extends ResourceAgent {
     private List<AID> cachedReceivers = null;
+    private String parallelAuctionMode; //overbook, newauction
+    private Set<Integer> atomicTaskIdsForAllocation = new HashSet<>();
+
 
     protected void setup() {
         super.setup();
+
+        Object[] args = getArguments();
+        if (args != null && args.length == 7) {
+            try {
+                //Seventh argument:
+                parallelAuctionMode = args[6].toString();
+            } catch (Exception e) {
+                System.err.println("Error parsing agent parameters: " + e.getMessage());
+            }
+        }
 
         addBehaviour(new AuctionInformationBehaviour(this));
 
@@ -31,6 +44,23 @@ public class AdvancedResourceAgent extends ResourceAgent {
         parallelBehaviour.addSubBehaviour(new AuctionCompletionBehaviour(this));
 
         addBehaviour(parallelBehaviour);
+    }
+
+    public String getParallelAuctionMode() {
+        return parallelAuctionMode;
+    }
+
+    public void setAtomicTaskIdsForAllocation(Set<Integer> atomicTaskIdsForAllocation) {
+        this.atomicTaskIdsForAllocation = atomicTaskIdsForAllocation;
+    }
+
+    public synchronized void markAtomicTaskAllocated(Integer atomicTaskId) {
+        if (atomicTaskIdsForAllocation.contains(atomicTaskId)) {
+            atomicTaskIdsForAllocation.remove(atomicTaskId);
+        }
+    }
+    public synchronized boolean areAllTasksAllocated() {
+        return atomicTaskIdsForAllocation.isEmpty();
     }
 
     public List<AID> getReceivers() {

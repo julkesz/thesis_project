@@ -8,6 +8,9 @@ import entities.AtomicTask;
 import entities.messages.AuctionRequest;
 import agents.AdvancedResourceAgent;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class AuctionRequestBehaviour extends CyclicBehaviour {
     private final AdvancedResourceAgent agent;
 
@@ -23,6 +26,10 @@ public class AuctionRequestBehaviour extends CyclicBehaviour {
             try {
                 AuctionRequest auctionRequest = (AuctionRequest) msg.getContentObject();
                 System.out.println(agent.getAID().getLocalName() + " received " + auctionRequest.getAtomicTasks().size() + " tasks: " + auctionRequest.getAtomicTaskIds());
+                System.out.println(agent.getAID().getLocalName() + " has completion messagecount " + agent.getCompletionMessageCount());
+
+                Set<Integer> atomicTaskIdsSet = auctionRequest.getAtomicTaskIds().stream().collect(Collectors.toSet());
+                agent.setAtomicTaskIdsForAllocation(atomicTaskIdsSet);
 
                 SequentialBehaviour auctionSequence = new SequentialBehaviour();
                 for (AtomicTask atomicTask : auctionRequest.getAtomicTasks()) {
