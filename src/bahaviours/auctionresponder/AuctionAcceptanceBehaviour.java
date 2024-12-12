@@ -37,7 +37,7 @@ public class AuctionAcceptanceBehaviour extends CyclicBehaviour {
                     timeSlotNumber = resourceAgent.calculateTimeSlotNumber(atomicTask);
 
                     if (resourceAgent instanceof AdvancedResourceAgent &&
-                            Objects.equals(((AdvancedResourceAgent) resourceAgent).getParallelAuctionMode(), "newauction") &&
+                            Objects.equals(((AdvancedResourceAgent) resourceAgent).getParallelAuctionMode(), "startauction") &&
                             timeSlotNumber != auctionProposal.getTimeSlotNumber()) {
 
                         System.out.println(resourceAgent.getLocalName() +
@@ -64,20 +64,6 @@ public class AuctionAcceptanceBehaviour extends CyclicBehaviour {
                                 reply.setPerformative(ACLMessage.INFORM);
                                 reply.setContent(atomicTaskId);
                                 myAgent.send(reply);
-                                /*
-                                AID parentInitiator = proposalAcceptanceMessage.getSender();
-                                String atomicTaskId = String.valueOf(atomicTask.getAtomicTaskId());
-                                String originalConversationId = proposalAcceptanceMessage.getConversationId();
-
-
-                                ACLMessage parentInform = new ACLMessage(ACLMessage.INFORM);
-                                parentInform.addReceiver(parentInitiator); // Parent who delegated the task
-                                parentInform.setConversationId(originalConversationId); // Pass the original conversation ID
-                                parentInform.addReplyTo(parentInitiator); // Include the original auction initiator's AID
-                                parentInform.setContent(atomicTaskId); // Example status
-                                parentInform.setInReplyTo(proposalAcceptanceMessage.getReplyWith());
-                                System.out.println(resourceAgent.getLocalName() + " sending INFORM message to " + parentInitiator.getLocalName() +  " with IN REPLY TO: " + proposalAcceptanceMessage.getReplyWith());
-                                myAgent.send(parentInform);*/
                             }
                         });
 
@@ -114,21 +100,7 @@ public class AuctionAcceptanceBehaviour extends CyclicBehaviour {
                     reply.setPerformative(ACLMessage.INFORM);
                     reply.setContent(atomicTaskId);
                     myAgent.send(reply);
-                    /*
-                    AID parentInitiator = proposalAcceptanceMessage.getSender();
-                    String atomicTaskId = String.valueOf(atomicTask.getAtomicTaskId());
-                    String originalConversationId = proposalAcceptanceMessage.getConversationId();
 
-
-                    ACLMessage parentInform = new ACLMessage(ACLMessage.INFORM);
-                    parentInform.addReceiver(parentInitiator); // Parent who delegated the task
-                    parentInform.setConversationId(originalConversationId); // Pass the original conversation ID
-                    parentInform.addReplyTo(parentInitiator); // Include the original auction initiator's AID
-                    parentInform.setContent(atomicTaskId); // Example status
-                    parentInform.setInReplyTo(proposalAcceptanceMessage.getReplyWith());
-                    System.out.println(resourceAgent.getLocalName() + " sending INFORM message to " + parentInitiator.getLocalName() +  " with IN REPLY TO: " + proposalAcceptanceMessage.getReplyWith());
-                    myAgent.send(parentInform);
-*/
                 } catch (UnreadableException e) {
                     throw new RuntimeException(e);
                 }

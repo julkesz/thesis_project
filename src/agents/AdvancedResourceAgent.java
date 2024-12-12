@@ -18,8 +18,7 @@ import java.util.*;
 
 public class AdvancedResourceAgent extends ResourceAgent {
     private List<AID> cachedReceivers = null;
-    private String parallelAuctionMode; //overbook, newauction
-    private Set<Integer> atomicTaskIdsForAllocation = new HashSet<>();
+    private String parallelAuctionMode; //overbook, startauction
 
 
     protected void setup() {
@@ -48,19 +47,6 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
     public String getParallelAuctionMode() {
         return parallelAuctionMode;
-    }
-
-    public void setAtomicTaskIdsForAllocation(Set<Integer> atomicTaskIdsForAllocation) {
-        this.atomicTaskIdsForAllocation = atomicTaskIdsForAllocation;
-    }
-
-    public synchronized void markAtomicTaskAllocated(Integer atomicTaskId) {
-        if (atomicTaskIdsForAllocation.contains(atomicTaskId)) {
-            atomicTaskIdsForAllocation.remove(atomicTaskId);
-        }
-    }
-    public synchronized boolean areAllTasksAllocated() {
-        return atomicTaskIdsForAllocation.isEmpty();
     }
 
     public List<AID> getReceivers() {

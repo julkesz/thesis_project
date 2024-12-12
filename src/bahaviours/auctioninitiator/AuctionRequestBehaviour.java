@@ -28,9 +28,6 @@ public class AuctionRequestBehaviour extends CyclicBehaviour {
                 System.out.println(agent.getAID().getLocalName() + " received " + auctionRequest.getAtomicTasks().size() + " tasks: " + auctionRequest.getAtomicTaskIds());
                 System.out.println(agent.getAID().getLocalName() + " has completion messagecount " + agent.getCompletionMessageCount());
 
-                Set<Integer> atomicTaskIdsSet = auctionRequest.getAtomicTaskIds().stream().collect(Collectors.toSet());
-                agent.setAtomicTaskIdsForAllocation(atomicTaskIdsSet);
-
                 SequentialBehaviour auctionSequence = new SequentialBehaviour();
                 for (AtomicTask atomicTask : auctionRequest.getAtomicTasks()) {
                     auctionSequence.addSubBehaviour(new AuctionInitiationBehaviour(agent, atomicTask, agent.getReceivers()));
