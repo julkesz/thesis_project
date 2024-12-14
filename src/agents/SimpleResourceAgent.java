@@ -11,7 +11,7 @@ public class SimpleResourceAgent extends ResourceAgent {
 
 		System.out.println("Agent " + getLocalName() + " waiting for CFP...");
 
-		addBehaviour(new AuctionProposalBehaviour());
+		addBehaviour(new AuctionProposalBehaviour(this));
 		addBehaviour(new AuctionAcceptanceBehaviour());
 		addBehaviour(new AuctionCompletionBehaviour(this));
 	}

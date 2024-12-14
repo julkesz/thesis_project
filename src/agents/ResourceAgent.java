@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import entities.AtomicTask;
 import entities.PrinterSchedule;
 import entities.TimeSlot;
+import entities.messages.AuctionProposal;
 import jade.core.Agent;
 import jade.domain.DFService;
 import jade.domain.FIPAAgentManagement.DFAgentDescription;
@@ -158,6 +159,22 @@ public class ResourceAgent extends Agent {
         return timeSlot.getOccupancy();
     }
 
+
+    public AuctionProposal evaluateAtomicTask(AtomicTask atomicTask) {
+
+        int timeSlotNumber = calculateTimeSlotNumber(atomicTask);
+
+        if (timeSlotNumber == -1) {
+            return new AuctionProposal(atomicTask, -1, 0, Integer.MAX_VALUE);
+        }
+
+        int executionTime = calculateExecutionTime(timeSlotNumber, atomicTask);
+        float price = (float) executionTime;
+        price = applyPriceBonuses(timeSlotNumber, atomicTask, price);
+
+        return new AuctionProposal(atomicTask, timeSlotNumber, executionTime, price);
+
+    }
     public int calculateTimeSlotNumber(AtomicTask atomicTask) {
 
         int taskSize = atomicTask.getLength() * atomicTask.getWidth();
@@ -188,6 +205,73 @@ public class ResourceAgent extends Agent {
         }
         return timeSlotNumber;
     }
+
+    private int calculateExecutionTime(int timeSlotNumber, AtomicTask atomicTask) {
+        ArrayList<TimeSlot> timeSlotList = getPrinterSchedule().getSchedule();
+
+        int taskExecutionTime = (int) Math.ceil((float) atomicTask.getHeight() / getPrintingSpeed() * 60);
+        int executionTime = 0;
+
+        if(timeSlotNumber == timeSlotList.size()){
+            executionTime = getTotalExecutionTime() + taskExecutionTime;
+            if(atomicTask.getFilament() != getCurrentFilament()){
+                executionTime += FILAMENT_REPLACEMENT_TIME;
+            }
+        }else if(timeSlotNumber == timeSlotList.size() - 1){
+            TimeSlot lastTimeSlot = timeSlotList.get(timeSlotNumber);
+            if (taskExecutionTime > lastTimeSlot.getExecutionTime()){
+                executionTime = getTotalExecutionTime() + (taskExecutionTime -lastTimeSlot.getExecutionTime());
+            } else{
+                executionTime = getTotalExecutionTime();
+            }
+        }else{
+            for (int i = 0; i <= timeSlotNumber; i++) {
+                TimeSlot timeSlot = timeSlotList.get(i);
+                if (timeSlot.isFilamentChanged()){
+                    executionTime += FILAMENT_REPLACEMENT_TIME;
+                }
+                if (i == timeSlotNumber){
+                    executionTime += Math.max(timeSlot.getExecutionTime(), taskExecutionTime);
+                } else{
+                    executionTime += timeSlot.getExecutionTime();
+                }
+            }
+        }
+        return executionTime;
+
+    }
+
+    private float applyPriceBonuses(int timeSlotNumber, AtomicTask atomicTask, float price) {
+        ArrayList<TimeSlot> timeSlotList = getPrinterSchedule().getSchedule();
+
+        if (timeSlotList.size() < timeSlotNumber + 1){
+            return price;
+        }
+        ArrayList<AtomicTask> taskList= timeSlotList.get(timeSlotNumber).getTasks();
+        float newPrice = price;
+
+        int sameTaskCount = 0;
+        int heightSum = 0;
+
+        for (AtomicTask task : taskList) {
+            heightSum += task.getHeight();
+            if (task.equals(atomicTask)) {
+                sameTaskCount++;
+            }
+        }
+        if (sameTaskCount > 0){
+            newPrice = newPrice - ((float) sameTaskCount/10);
+        }
+        if (heightSum > 0 ){
+            float heightMean = (float) heightSum/taskList.size();
+            newPrice = newPrice + Math.abs(heightMean - atomicTask.getHeight())/10;
+        }
+
+        newPrice = (float) (Math.round(newPrice * 100.0) / 100.0);
+
+        return newPrice;
+    }
+
 
     public void generateJSONSchedule() {
         Gson gson = new GsonBuilder()

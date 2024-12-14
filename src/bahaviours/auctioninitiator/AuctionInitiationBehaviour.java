@@ -27,13 +27,6 @@ public class AuctionInitiationBehaviour extends ContractNetInitiator {
         this.receivers = receivers;
     }
 
-    public AuctionInitiationBehaviour(Agent agent, AtomicTask atomicTask, List<AID> receivers, AID originalAuctionInitiator, String originalConversationId) {
-        super(agent, createCFP(agent, atomicTask, receivers, originalConversationId));
-        this.agent = agent;
-        this.atomicTask = atomicTask;
-        this.receivers = receivers;
-    }
-
     private static ACLMessage createCFP(Agent agent, AtomicTask atomicTask, List<AID> receivers) {
         ACLMessage cfp = new ACLMessage(ACLMessage.CFP);
         try {
@@ -48,25 +41,6 @@ public class AuctionInitiationBehaviour extends ContractNetInitiator {
 
         System.out.println(agent.getLocalName() + " started auction for atomic task " + atomicTask.getAtomicTaskId() +
                 " with conversation ID: " + cfp.getConversationId());
-        return cfp;
-    }
-
-    private static ACLMessage createCFP(Agent agent, AtomicTask atomicTask, List<AID> receivers, String originalConversationId) {
-        ACLMessage cfp = new ACLMessage(ACLMessage.CFP);
-
-        try {
-            cfp.setContentObject(atomicTask);
-            cfp.setConversationId(originalConversationId); // Pass the original conversation ID
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        for (AID receiver : receivers) {
-            cfp.addReceiver(receiver);
-        }
-
-        System.out.println(agent.getLocalName() + " started auction for atomic task " + atomicTask.getAtomicTaskId() +
-                " with conversation ID: " + originalConversationId);
         return cfp;
     }
 
@@ -117,7 +91,6 @@ public class AuctionInitiationBehaviour extends ContractNetInitiator {
         Enumeration e = responses.elements();
         while (e.hasMoreElements()) {
             ACLMessage msg = (ACLMessage) e.nextElement();
-            String conversationId = msg.getConversationId();
             if (msg.getPerformative() == ACLMessage.PROPOSE) {
                 ACLMessage reply = msg.createReply();
                 reply.setPerformative(ACLMessage.REJECT_PROPOSAL);

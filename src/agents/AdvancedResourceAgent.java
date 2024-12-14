@@ -38,7 +38,7 @@ public class AdvancedResourceAgent extends ResourceAgent {
 
         ParallelBehaviour parallelBehaviour = new ParallelBehaviour();
         parallelBehaviour.addSubBehaviour(new AuctionRequestBehaviour(this));
-        parallelBehaviour.addSubBehaviour(new AuctionProposalBehaviour());
+        parallelBehaviour.addSubBehaviour(new AuctionProposalBehaviour(this));
         parallelBehaviour.addSubBehaviour(new AuctionAcceptanceBehaviour());
         parallelBehaviour.addSubBehaviour(new AuctionCompletionBehaviour(this));
 

@@ -4,7 +4,7 @@ package entities.messages;
 import entities.AtomicTask;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+
 
 public class AuctionProposal implements Serializable {
     private AtomicTask atomicTask;
