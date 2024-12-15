@@ -3,18 +3,18 @@ package entities;
 import java.io.Serializable;
 
 public class Task implements Serializable {
-    private String taskId;
+    private int taskId;
     private int length;
     private int width;
     private int height;
     private int filament;
     private int quantity;
 
-    public String getTaskId() {
+    public int getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(String taskId) {
+    public void setTaskId(int taskId) {
         this.taskId = taskId;
     }
 

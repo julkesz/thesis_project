@@ -22,10 +22,9 @@ public class AuctionCompletionBehaviour extends CyclicBehaviour {
         if (msg != null) {
             try {
                 AuctionCompletion auctionCompletion = (AuctionCompletion) msg.getContentObject();
-                System.out.println(agent.getLocalName() + " RECEIVED AUCTION COMPLETION: MESSAGE COUNT: " + agent.getCompletionMessageCount());
+
                 agent.increaseCompletionMessageCount();
-                System.out.println(agent.getLocalName() + " RECEIVED AUCTION COMPLETION: MESSAGE COUNT: " + agent.getCompletionMessageCount() + " AUCTION INITIATORS: " + agent.getAuctionInitiatorCount());
-                // Check if all auctions have completed
+
                 if (agent.getCompletionMessageCount()== agent.getAuctionInitiatorCount()) {
                     agent.setElapsedTime(auctionCompletion.getElapsedTime());
                     agent.completePrinterSchedule();

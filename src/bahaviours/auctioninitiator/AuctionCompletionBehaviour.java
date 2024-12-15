@@ -39,8 +39,6 @@ public class AuctionCompletionBehaviour extends OneShotBehaviour {
             completionMessage.addReceiver(receiver);
         }
 
-        System.out.println("AUCTION COMPLETION IS SENT!!!!!");
-
         myAgent.send(completionMessage);
     }
 }

@@ -4,25 +4,25 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Order implements Serializable {
-    private String orderNumber;
+    private int orderId;
     private int deadline;
     public ArrayList<Task> tasks;
 
     @Override
     public String toString() {
         return "Order{" +
-                "orderNumber='" + orderNumber + '\'' +
+                "orderId='" + orderId + '\'' +
                 ", deadline=" + deadline +
                 ", tasks=" + tasks +
                 '}';
     }
 
-    public String getOrderNumber() {
-        return orderNumber;
+    public int getOrderId() {
+        return orderId;
     }
 
-    public void setOrderNumber(String orderNumber) {
-        this.orderNumber = orderNumber;
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
     }
 
     public int getDeadline() {

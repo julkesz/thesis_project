@@ -1,108 +1,195 @@
 {
   "orders": [
     {
-      "orderNumber": "01",
-      "deadline": 200,
+      "orderId": 1,
+      "deadline": 100,
       "tasks": [
         {
-          "taskId": "01",
-          "length": 50,
-          "width": 30,
-          "height": 20,
-          "filament": 2,
+          "taskId": 1,
+          "length": 39,
+          "width": 49,
+          "height": 83,
+          "filament": 6,
+          "quantity": 4
+        },
+        {
+          "taskId": 2,
+          "length": 48,
+          "width": 22,
+          "height": 226,
+          "filament": 6,
+          "quantity": 10
+        },
+        {
+          "taskId": 3,
+          "length": 75,
+          "width": 27,
+          "height": 231,
+          "filament": 3,
           "quantity": 5
         },
         {
-          "taskId": "02",
-          "length": 40,
-          "width": 20,
-          "height": 15,
-          "filament": 3,
-          "quantity": 4
-        }
-      ]
-    },
-    {
-      "orderNumber": "02",
-      "deadline": 210,
-      "tasks": [
-        {
-          "taskId": "01",
-          "length": 30,
-          "width": 20,
-          "height": 25,
-          "filament": 1,
-          "quantity": 3
+          "taskId": 4,
+          "length": 19,
+          "width": 19,
+          "height": 165,
+          "filament": 6,
+          "quantity": 8
         },
         {
-          "taskId": "02",
-          "length": 30,
-          "width": 20,
-          "height": 25,
-          "filament": 2,
-          "quantity": 3
-        },
-        {
-          "taskId": "03",
-          "length": 30,
-          "width": 20,
-          "height": 25,
-          "filament": 3,
-          "quantity": 3
-        }
-      ]
-    },
-    {
-      "orderNumber": "03",
-      "deadline": 230,
-      "tasks": [
-        {
-          "taskId": "01",
-          "length": 45,
-          "width": 35,
-          "height": 18,
-          "filament": 4,
-          "quantity": 6
-        }
-      ]
-    },
-    {
-      "orderNumber": "04",
-      "deadline": 250,
-      "tasks": [
-        {
-          "taskId": "01",
-          "length": 70,
-          "width": 50,
-          "height": 30,
+          "taskId": 5,
+          "length": 51,
+          "width": 13,
+          "height": 152,
           "filament": 5,
           "quantity": 4
         }
       ]
     },
     {
-      "orderNumber": "05",
-      "deadline": 270,
+      "orderId": 2,
+      "deadline": 150,
       "tasks": [
         {
-          "taskId": "01",
-          "length": 55,
-          "width": 25,
-          "height": 22,
+          "taskId": 1,
+          "length": 75,
+          "width": 66,
+          "height": 229,
           "filament": 2,
+          "quantity": 10
+        },
+        {
+          "taskId": 2,
+          "length": 23,
+          "width": 12,
+          "height": 218,
+          "filament": 3,
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "orderId": 3,
+      "deadline": 200,
+      "tasks": [
+        {
+          "taskId": 1,
+          "length": 52,
+          "width": 71,
+          "height": 71,
+          "filament": 3,
+          "quantity": 4
+        },
+        {
+          "taskId": 2,
+          "length": 52,
+          "width": 53,
+          "height": 183,
+          "filament": 3,
+          "quantity": 1
+        },
+        {
+          "taskId": 3,
+          "length": 35,
+          "width": 14,
+          "height": 24,
+          "filament": 4,
+          "quantity": 8
+        }
+      ]
+    },
+    {
+      "orderId": 4,
+      "deadline": 250,
+      "tasks": [
+        {
+          "taskId": 1,
+          "length": 41,
+          "width": 11,
+          "height": 87,
+          "filament": 1,
+          "quantity": 5
+        },
+        {
+          "taskId": 2,
+          "length": 78,
+          "width": 71,
+          "height": 143,
+          "filament": 5,
           "quantity": 7
         },
         {
-          "taskId": "02",
-          "length": 55,
-          "width": 25,
-          "height": 22,
+          "taskId": 3,
+          "length": 54,
+          "width": 10,
+          "height": 98,
           "filament": 1,
-          "quantity": 5
+          "quantity": 8
+        },
+        {
+          "taskId": 4,
+          "length": 35,
+          "width": 46,
+          "height": 230,
+          "filament": 1,
+          "quantity": 6
+        },
+        {
+          "taskId": 5,
+          "length": 53,
+          "width": 35,
+          "height": 39,
+          "filament": 3,
+          "quantity": 4
+        }
+      ]
+    },
+    {
+      "orderId": 5,
+      "deadline": 300,
+      "tasks": [
+        {
+          "taskId": 1,
+          "length": 50,
+          "width": 21,
+          "height": 235,
+          "filament": 4,
+          "quantity": 2
+        },
+        {
+          "taskId": 2,
+          "length": 29,
+          "width": 39,
+          "height": 120,
+          "filament": 1,
+          "quantity": 7
+        },
+        {
+          "taskId": 3,
+          "length": 65,
+          "width": 24,
+          "height": 26,
+          "filament": 6,
+          "quantity": 9
+        },
+        {
+          "taskId": 4,
+          "length": 52,
+          "width": 14,
+          "height": 140,
+          "filament": 2,
+          "quantity": 9
+        },
+        {
+          "taskId": 5,
+          "length": 47,
+          "width": 20,
+          "height": 124,
+          "filament": 1,
+          "quantity": 7
         }
       ]
     }
   ]
 }
 
-  

@@ -65,7 +65,7 @@ public class ManagerAgent extends Agent {
                     if (size1 != size2) {
                         return Integer.compare(size2, size1);
                     }
-                    return task1.getOrderNumber().compareTo(task2.getOrderNumber());
+                    return Integer.compare(task1.getOrderId(), task2.getOrderId());
                 });
                 break;
             case "deadline":

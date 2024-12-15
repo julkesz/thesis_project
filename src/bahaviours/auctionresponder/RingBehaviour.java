@@ -86,7 +86,7 @@ public class RingBehaviour extends CyclicBehaviour {
         }
         agent.send(newMsg);
 
-        System.out.println(agent.getLocalName() + ": Task received. Proposal price: " + price);
+        System.out.println(agent.getLocalName() + ": Task received: " + atomicTask + ". Proposal price: " + price);
     }
 
     private void handleAcceptProposalMessage(ACLMessage msg) {

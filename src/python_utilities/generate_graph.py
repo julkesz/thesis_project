@@ -76,15 +76,15 @@ def process_machine_schedule_with_occupancy(ax, filename, source_directory, colo
         current_y_pos = machine_y_pos - bar_height
         for task_index, task in enumerate(timeslot['tasks']):
             task_height = task_heights[task_index]
-            order_number = task['orderNumber']
-            task_number = task['taskId']
+            order_id = task['orderId']
+            task_id = task['taskId']
 
             # Assign order color
-            color = get_color_for_order(order_number, colors, order_color_map)
+            color = get_color_for_order(order_id, colors, order_color_map)
 
             # Plot task bar
             ax.broken_barh([(start * scale, (stop - start) * scale)], (current_y_pos, task_height), facecolors=color, edgecolors='black', linewidth=0.5)
-            ax.text(((start + stop) / 2) * scale, current_y_pos + task_height / 2, f'{order_number}:{task_number}', ha='center', va='center', color='white', fontsize='small')
+            ax.text(((start + stop) / 2) * scale, current_y_pos + task_height / 2, f'{order_id}:{task_id}', ha='center', va='center', color='white', fontsize='small')
 
             current_y_pos += task_height  # Move up for the next task
 
@@ -158,18 +158,18 @@ def get_color_for_resin(resin_number, resin_colors, resin_color_map, resin_color
         resin_color_index += 1
     return resin_color_map[resin_number], resin_color_index
 
-def get_color_for_order(order_number, colors, order_color_map):
+def get_color_for_order(order_id, colors, order_color_map):
     # Convert the order number to an integer
-    order_index = int(order_number) - 1  # Subtract 1 to make it zero-based
+    order_index = int(order_id) - 1  # Subtract 1 to make it zero-based
 
     # Determine the color index deterministically
     color_index = order_index % len(colors)
 
     # Assign the color from the palette
-    if order_number not in order_color_map:
-        order_color_map[order_number] = colors[color_index]
+    if order_id not in order_color_map:
+        order_color_map[order_id] = colors[color_index]
 
-    return order_color_map[order_number]
+    return order_color_map[order_id]
 
 
 

@@ -39,8 +39,6 @@ public class AuctionInitiationBehaviour extends ContractNetInitiator {
             cfp.addReceiver(receiver);
         }
 
-        System.out.println(agent.getLocalName() + " started auction for atomic task " + atomicTask.getAtomicTaskId() +
-                " with conversation ID: " + cfp.getConversationId());
         return cfp;
     }
 

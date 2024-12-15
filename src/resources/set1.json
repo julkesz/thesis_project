@@ -1,24 +1,32 @@
 {
   "orders": [
     {
-      "orderNumber": "01",
-      "deadline": 200,
+      "orderId": 1,
+      "deadline": 100,
       "tasks": [
         {
-          "taskId": "01",
-          "length": 50,
-          "width": 30,
-          "height": 20,
-          "filament": 2,
-          "quantity": 5
+          "taskId": 1,
+          "length": 71,
+          "width": 25,
+          "height": 65,
+          "filament": 3,
+          "quantity": 1
         },
         {
-          "taskId": "02",
-          "length": 40,
-          "width": 20,
-          "height": 15,
-          "filament": 3,
-          "quantity": 2
+          "taskId": 2,
+          "length": 50,
+          "width": 51,
+          "height": 192,
+          "filament": 4,
+          "quantity": 3
+        },
+        {
+          "taskId": 3,
+          "length": 57,
+          "width": 31,
+          "height": 44,
+          "filament": 5,
+          "quantity": 1
         }
       ]
     }
