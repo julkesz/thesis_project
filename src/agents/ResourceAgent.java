@@ -179,7 +179,13 @@ public class ResourceAgent extends Agent {
 
         int taskSize = atomicTask.getLength() * atomicTask.getWidth();
         int boardSize = boardWidth * boardLength;
-        if ((taskSize > boardSize) || (atomicTask.getHeight() > maxHeight)) {
+
+
+        if ((taskSize > boardSize) || (atomicTask.getHeight() > maxHeight) ||
+                Math.max(atomicTask.getLength(), atomicTask.getWidth()) > Math.max(boardLength, boardWidth) ||
+                Math.min(atomicTask.getLength(), atomicTask.getWidth()) > Math.min(boardLength, boardWidth) ) {
+
+            //((atomicTask.getLength() > boardLength || atomicTask.getLength() > boardWidth) && (atomicTask.getWidth() > boardLength || atomicTask.getWidth() > boardWidth))){
             return -1;
         }
         if (printerSchedule.isEmpty()) {
