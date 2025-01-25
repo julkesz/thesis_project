@@ -7,7 +7,7 @@ import jade.core.Agent;
 public class SupervisorAgent extends Agent {
 
     private long startTime;
-    private int orderCount = 1;
+    private String orderFileName;
     private int groupCount = 1;
     private String divisionMode = "random";
 
@@ -18,7 +18,7 @@ public class SupervisorAgent extends Agent {
         if (args != null && args.length > 0) {
             try {
                 // First argument: number of orders
-                orderCount = Integer.parseInt(args[0].toString());
+                orderFileName = args[0].toString();
                 // Second argument: number of groups
                 groupCount = Integer.parseInt(args[1].toString());
                 // Third argument: task division mode
@@ -29,11 +29,11 @@ public class SupervisorAgent extends Agent {
         }
 
         // Add the behavior to divide tasks and send to printers
-        addBehaviour(new TaskGroupingBehaviour(this));
+        addBehaviour(new TaskGroupingBehaviour());
     }
 
-    public int getOrderCount() {
-        return orderCount;
+    public String getOrderFileName() {
+        return orderFileName;
     }
 
     public int getGroupCount() {

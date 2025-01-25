@@ -1,0 +1,130 @@
+{
+  "orders": [
+    {
+      "orderId": 1,
+      "deadline": 100,
+      "tasks": [
+        {
+          "taskId": 1,
+          "length": 110,
+          "width": 119,
+          "height": 236,
+          "material": 1,
+          "quantity": 1
+        },
+        {
+          "taskId": 2,
+          "length": 132,
+          "width": 62,
+          "height": 223,
+          "material": 1,
+          "quantity": 2
+        },
+        {
+          "taskId": 3,
+          "length": 84,
+          "width": 122,
+          "height": 88,
+          "material": 4,
+          "quantity": 3
+        }
+      ]
+    },
+    {
+      "orderId": 2,
+      "deadline": 150,
+      "tasks": [
+        {
+          "taskId": 1,
+          "length": 140,
+          "width": 37,
+          "height": 181,
+          "material": 1,
+          "quantity": 8
+        },
+        {
+          "taskId": 2,
+          "length": 90,
+          "width": 35,
+          "height": 138,
+          "material": 4,
+          "quantity": 2
+        }
+      ]
+    },
+    {
+      "orderId": 3,
+      "deadline": 200,
+      "tasks": [
+        {
+          "taskId": 1,
+          "length": 120,
+          "width": 50,
+          "height": 233,
+          "material": 5,
+          "quantity": 8
+        },
+        {
+          "taskId": 2,
+          "length": 86,
+          "width": 99,
+          "height": 116,
+          "material": 5,
+          "quantity": 3
+        }
+      ]
+    },
+    {
+      "orderId": 4,
+      "deadline": 250,
+      "tasks": [
+        {
+          "taskId": 1,
+          "length": 133,
+          "width": 41,
+          "height": 224,
+          "material": 2,
+          "quantity": 8
+        },
+        {
+          "taskId": 2,
+          "length": 107,
+          "width": 77,
+          "height": 32,
+          "material": 4,
+          "quantity": 5
+        },
+        {
+          "taskId": 3,
+          "length": 158,
+          "width": 106,
+          "height": 200,
+          "material": 1,
+          "quantity": 3
+        }
+      ]
+    },
+    {
+      "orderId": 5,
+      "deadline": 300,
+      "tasks": [
+        {
+          "taskId": 1,
+          "length": 114,
+          "width": 120,
+          "height": 71,
+          "material": 3,
+          "quantity": 2
+        },
+        {
+          "taskId": 2,
+          "length": 131,
+          "width": 106,
+          "height": 60,
+          "material": 4,
+          "quantity": 2
+        }
+      ]
+    }
+  ]
+}

@@ -9,7 +9,7 @@
           "length": 39,
           "width": 49,
           "height": 83,
-          "filament": 6,
+          "material": 6,
           "quantity": 4
         },
         {
@@ -17,7 +17,7 @@
           "length": 48,
           "width": 22,
           "height": 226,
-          "filament": 6,
+          "material": 6,
           "quantity": 10
         },
         {
@@ -25,7 +25,7 @@
           "length": 75,
           "width": 27,
           "height": 231,
-          "filament": 3,
+          "material": 3,
           "quantity": 5
         },
         {
@@ -33,7 +33,7 @@
           "length": 19,
           "width": 19,
           "height": 165,
-          "filament": 6,
+          "material": 6,
           "quantity": 8
         },
         {
@@ -41,7 +41,7 @@
           "length": 51,
           "width": 13,
           "height": 152,
-          "filament": 5,
+          "material": 5,
           "quantity": 4
         }
       ]
@@ -55,7 +55,7 @@
           "length": 75,
           "width": 66,
           "height": 229,
-          "filament": 2,
+          "material": 2,
           "quantity": 10
         },
         {
@@ -63,7 +63,7 @@
           "length": 23,
           "width": 12,
           "height": 218,
-          "filament": 3,
+          "material": 3,
           "quantity": 4
         }
       ]
@@ -77,7 +77,7 @@
           "length": 52,
           "width": 71,
           "height": 71,
-          "filament": 3,
+          "material": 3,
           "quantity": 4
         },
         {
@@ -85,7 +85,7 @@
           "length": 52,
           "width": 53,
           "height": 183,
-          "filament": 3,
+          "material": 3,
           "quantity": 1
         },
         {
@@ -93,7 +93,7 @@
           "length": 35,
           "width": 14,
           "height": 24,
-          "filament": 4,
+          "material": 4,
           "quantity": 8
         }
       ]
@@ -107,7 +107,7 @@
           "length": 41,
           "width": 11,
           "height": 87,
-          "filament": 1,
+          "material": 1,
           "quantity": 5
         },
         {
@@ -115,7 +115,7 @@
           "length": 78,
           "width": 71,
           "height": 143,
-          "filament": 5,
+          "material": 5,
           "quantity": 7
         },
         {
@@ -123,7 +123,7 @@
           "length": 54,
           "width": 10,
           "height": 98,
-          "filament": 1,
+          "material": 1,
           "quantity": 8
         },
         {
@@ -131,7 +131,7 @@
           "length": 35,
           "width": 46,
           "height": 230,
-          "filament": 1,
+          "material": 1,
           "quantity": 6
         },
         {
@@ -139,7 +139,7 @@
           "length": 53,
           "width": 35,
           "height": 39,
-          "filament": 3,
+          "material": 3,
           "quantity": 4
         }
       ]
@@ -153,7 +153,7 @@
           "length": 50,
           "width": 21,
           "height": 235,
-          "filament": 4,
+          "material": 4,
           "quantity": 2
         },
         {
@@ -161,7 +161,7 @@
           "length": 29,
           "width": 39,
           "height": 120,
-          "filament": 1,
+          "material": 1,
           "quantity": 7
         },
         {
@@ -169,7 +169,7 @@
           "length": 65,
           "width": 24,
           "height": 26,
-          "filament": 6,
+          "material": 6,
           "quantity": 9
         },
         {
@@ -177,7 +177,7 @@
           "length": 52,
           "width": 14,
           "height": 140,
-          "filament": 2,
+          "material": 2,
           "quantity": 9
         },
         {
@@ -185,7 +185,7 @@
           "length": 47,
           "width": 20,
           "height": 124,
-          "filament": 1,
+          "material": 1,
           "quantity": 7
         }
       ]

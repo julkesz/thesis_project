@@ -7,8 +7,6 @@ import entities.AtomicTask;
 import entities.messages.AuctionProposal;
 import entities.PrinterSchedule;
 import entities.TimeSlot;
-import entities.messages.AuctionRequest;
-import jade.core.AID;
 import jade.core.behaviours.CyclicBehaviour;
 import jade.core.behaviours.OneShotBehaviour;
 import jade.core.behaviours.SequentialBehaviour;
@@ -16,8 +14,6 @@ import jade.lang.acl.ACLMessage;
 import jade.lang.acl.MessageTemplate;
 import jade.lang.acl.UnreadableException;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class AuctionAcceptanceBehaviour extends CyclicBehaviour {
@@ -37,7 +33,7 @@ public class AuctionAcceptanceBehaviour extends CyclicBehaviour {
                     timeSlotNumber = resourceAgent.calculateTimeSlotNumber(atomicTask);
 
                     if (resourceAgent instanceof AdvancedResourceAgent &&
-                            Objects.equals(((AdvancedResourceAgent) resourceAgent).getParallelAuctionMode(), "startauction") &&
+                            Objects.equals(((AdvancedResourceAgent) resourceAgent).getParallelAcceptanceMode(), "startauction") &&
                             timeSlotNumber != auctionProposal.getTimeSlotNumber()) {
 
                         System.out.println(resourceAgent.getLocalName() +
@@ -76,13 +72,13 @@ public class AuctionAcceptanceBehaviour extends CyclicBehaviour {
                     int taskExecutionTime = (int) Math.ceil((float) atomicTask.getHeight() / resourceAgent.getPrintingSpeed() * 60);
 
                     if (timeSlotNumber == printerSchedule.getSchedule().size()) {
-                        boolean filamentReplacementFlag = false;
-                        if (atomicTask.getFilament() != resourceAgent.getCurrentFilament()) {
-                            filamentReplacementFlag = true;
-                            resourceAgent.setCurrentFilament(atomicTask.getFilament());
-                            resourceAgent.increaseTotalExecutionTime(ResourceAgent.FILAMENT_REPLACEMENT_TIME);
+                        boolean materialReplacementFlag = false;
+                        if (atomicTask.getMaterial() != resourceAgent.getCurrentMaterial()) {
+                            materialReplacementFlag = true;
+                            resourceAgent.setCurrentMaterial(atomicTask.getMaterial());
+                            resourceAgent.increaseTotalExecutionTime(ResourceAgent.MATERIAL_REPLACEMENT_TIME);
                         }
-                        printerSchedule.addTimeSlot(filamentReplacementFlag, atomicTask);
+                        printerSchedule.addTimeSlot(materialReplacementFlag, atomicTask);
                         resourceAgent.increaseTotalExecutionTime(taskExecutionTime);
                     } else {
                         TimeSlot timeSlot = printerSchedule.getSchedule().get(timeSlotNumber);

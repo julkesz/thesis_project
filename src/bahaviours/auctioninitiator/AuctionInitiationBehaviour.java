@@ -1,6 +1,5 @@
 package bahaviours.auctioninitiator;
 
-import agents.AdvancedResourceAgent;
 import jade.core.Agent;
 import jade.core.AID;
 import jade.lang.acl.ACLMessage;
@@ -12,22 +11,17 @@ import entities.messages.AuctionProposal;
 import java.io.IOException;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.Objects;
 import java.util.Vector;
 
 public class AuctionInitiationBehaviour extends ContractNetInitiator {
-    private final Agent agent;
-    private final AtomicTask atomicTask;
     private final List<AID> receivers;
 
     public AuctionInitiationBehaviour(Agent agent, AtomicTask atomicTask, List<AID> receivers) {
-        super(agent, createCFP(agent, atomicTask, receivers));
-        this.agent = agent;
-        this.atomicTask = atomicTask;
+        super(agent, createCFP(atomicTask, receivers));
         this.receivers = receivers;
     }
 
-    private static ACLMessage createCFP(Agent agent, AtomicTask atomicTask, List<AID> receivers) {
+    protected static ACLMessage createCFP(AtomicTask atomicTask, List<AID> receivers) {
         ACLMessage cfp = new ACLMessage(ACLMessage.CFP);
         try {
             cfp.setContentObject(atomicTask);
@@ -42,25 +36,6 @@ public class AuctionInitiationBehaviour extends ContractNetInitiator {
         return cfp;
     }
 
-
-    @Override
-    protected void handlePropose(ACLMessage propose, Vector v) {
-        // Handle propose
-    }
-
-    @Override
-    protected void handleRefuse(ACLMessage refuse) {
-        System.out.println("Agent " + refuse.getSender().getName() + " refused");
-    }
-
-    @Override
-    protected void handleFailure(ACLMessage failure) {
-        if (failure.getSender().equals(agent.getAMS())) {
-            System.out.println("Responder does not exist");
-        } else {
-            System.out.println("Agent " + failure.getSender().getName() + " failed");
-        }
-    }
 
     @Override
     protected void handleAllResponses(Vector responses, Vector acceptances) {
@@ -132,13 +107,6 @@ public class AuctionInitiationBehaviour extends ContractNetInitiator {
                 throw new RuntimeException(ex);
             }
         }
-    }
-
-
-    @Override
-    protected void handleInform(ACLMessage inform) {
-        System.out.println(agent.getLocalName() +" received INFORM from " + inform.getSender().getLocalName() +
-                " about atomicTask " + inform.getContent());
     }
 
 

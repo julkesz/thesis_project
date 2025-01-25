@@ -10,20 +10,20 @@ public class AtomicTask implements Serializable {
     private int length;
     private int width;
     private int height;
-    private int filament;
+    private int material;
     private int atomicTaskId;
 
     public AtomicTask() {
     }
 
-    public AtomicTask(int orderId, int deadline, int taskId, int length, int width, int height, int filament, int atomicTaskId) {
+    public AtomicTask(int orderId, int deadline, int taskId, int length, int width, int height, int material, int atomicTaskId) {
         this.orderId = orderId;
         this.deadline = deadline;
         this.taskId = taskId;
         this.length = length;
         this.width = width;
         this.height = height;
-        this.filament = filament;
+        this.material = material;
         this.atomicTaskId = atomicTaskId;
     }
 
@@ -73,12 +73,12 @@ public class AtomicTask implements Serializable {
 
     public void setHeight(int height) {this.height = height; }
 
-    public int getFilament() {
-        return filament;
+    public int getMaterial() {
+        return material;
     }
 
-    public void setFilament(int filament) {
-        this.filament = filament;
+    public void setMaterial(int material) {
+        this.material = material;
     }
 
     public int getAtomicTaskId() {
@@ -98,7 +98,7 @@ public class AtomicTask implements Serializable {
                 ", length=" + length +
                 ", width=" + width +
                 ", height=" + height +
-                ", filament=" + filament +
+                ", material=" + material +
                 '}';
     }
 
@@ -107,11 +107,11 @@ public class AtomicTask implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AtomicTask that = (AtomicTask) o;
-        return length == that.length && width == that.width && height == that.height && filament == that.filament && deadline == that.deadline && orderId==that.orderId  && taskId==that.taskId;
+        return length == that.length && width == that.width && height == that.height && material == that.material && deadline == that.deadline && orderId==that.orderId  && taskId==that.taskId;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orderId, deadline, taskId, length, width, height, filament);
+        return Objects.hash(orderId, deadline, taskId, length, width, height, material);
     }
 }

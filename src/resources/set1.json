@@ -9,7 +9,7 @@
           "length": 71,
           "width": 25,
           "height": 65,
-          "filament": 3,
+          "material": 3,
           "quantity": 1
         },
         {
@@ -17,7 +17,7 @@
           "length": 50,
           "width": 51,
           "height": 192,
-          "filament": 4,
+          "material": 4,
           "quantity": 3
         },
         {
@@ -25,7 +25,7 @@
           "length": 57,
           "width": 31,
           "height": 44,
-          "filament": 5,
+          "material": 5,
           "quantity": 1
         }
       ]

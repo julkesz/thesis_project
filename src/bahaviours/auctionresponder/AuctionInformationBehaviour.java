@@ -1,5 +1,6 @@
 package bahaviours.auctionresponder;
 
+import agents.ResourceAgent;
 import entities.messages.AuctionCompletion;
 import entities.messages.AuctionInformation;
 import jade.core.behaviours.SimpleBehaviour;
@@ -8,24 +9,22 @@ import jade.lang.acl.MessageTemplate;
 import agents.AdvancedResourceAgent;
 
 public class AuctionInformationBehaviour extends SimpleBehaviour {
-    private final AdvancedResourceAgent agent;
     private boolean receivedMessage = false;
 
-    public AuctionInformationBehaviour(AdvancedResourceAgent agent) {
-        this.agent = agent;
-    }
 
     @Override
     public void action() {
-        ACLMessage msg = agent.receive(MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+        AdvancedResourceAgent advancedResourceAgent = (AdvancedResourceAgent) myAgent;
+        ACLMessage msg = advancedResourceAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.INFORM));
+
         if (msg != null) {
             try {
                 AuctionInformation auctionInformation = (AuctionInformation) msg.getContentObject();
 
                 long startTime = auctionInformation.getStartTime();
-                agent.setStartTime(startTime);
+                advancedResourceAgent.setStartTime(startTime);
                 int auctionInitiatorCount = auctionInformation.getAuctionInitiatorCount();
-                agent.setAuctionInitiatorCount(auctionInitiatorCount);
+                advancedResourceAgent.setAuctionInitiatorCount(auctionInitiatorCount);
 
                 receivedMessage = true;
             } catch (Exception e) {
@@ -38,7 +37,7 @@ public class AuctionInformationBehaviour extends SimpleBehaviour {
 
         if (msg != null && msg.getContent().matches("\\d+")) {
             int count = Integer.parseInt(msg.getContent());
-            agent.setAuctionInitiatorCount(count);
+            advancedResourceAgent.setAuctionInitiatorCount(count);
             receivedMessage = true;
         } else {
             block();

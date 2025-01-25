@@ -6,11 +6,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 21,
-          "width": 48,
-          "height": 74,
-          "filament": 4,
-          "quantity": 3
+          "length": 105,
+          "width": 137,
+          "height": 101,
+          "material": 3,
+          "quantity": 2
+        },
+        {
+          "taskId": 2,
+          "length": 104,
+          "width": 49,
+          "height": 188,
+          "material": 4,
+          "quantity": 7
+        },
+        {
+          "taskId": 3,
+          "length": 132,
+          "width": 67,
+          "height": 156,
+          "material": 4,
+          "quantity": 2
+        },
+        {
+          "taskId": 4,
+          "length": 154,
+          "width": 140,
+          "height": 207,
+          "material": 3,
+          "quantity": 1
         }
       ]
     },
@@ -20,27 +44,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 73,
-          "width": 10,
-          "height": 227,
-          "filament": 3,
-          "quantity": 8
-        },
-        {
-          "taskId": 2,
-          "length": 53,
-          "width": 15,
-          "height": 214,
-          "filament": 4,
-          "quantity": 2
-        },
-        {
-          "taskId": 3,
-          "length": 52,
-          "width": 35,
-          "height": 33,
-          "filament": 2,
-          "quantity": 6
+          "length": 116,
+          "width": 86,
+          "height": 84,
+          "material": 2,
+          "quantity": 7
         }
       ]
     },
@@ -50,18 +58,18 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 72,
-          "width": 31,
-          "height": 136,
-          "filament": 2,
-          "quantity": 1
+          "length": 87,
+          "width": 135,
+          "height": 99,
+          "material": 4,
+          "quantity": 7
         },
         {
           "taskId": 2,
-          "length": 77,
-          "width": 78,
-          "height": 43,
-          "filament": 5,
+          "length": 119,
+          "width": 95,
+          "height": 139,
+          "material": 3,
           "quantity": 8
         }
       ]
@@ -72,11 +80,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 69,
-          "width": 26,
-          "height": 235,
-          "filament": 6,
-          "quantity": 2
+          "length": 123,
+          "width": 110,
+          "height": 117,
+          "material": 2,
+          "quantity": 6
+        },
+        {
+          "taskId": 2,
+          "length": 156,
+          "width": 93,
+          "height": 47,
+          "material": 3,
+          "quantity": 7
+        },
+        {
+          "taskId": 3,
+          "length": 156,
+          "width": 58,
+          "height": 116,
+          "material": 5,
+          "quantity": 4
+        },
+        {
+          "taskId": 4,
+          "length": 104,
+          "width": 93,
+          "height": 97,
+          "material": 2,
+          "quantity": 1
         }
       ]
     },
@@ -86,43 +118,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 43,
-          "width": 24,
-          "height": 34,
-          "filament": 6,
-          "quantity": 7
+          "length": 108,
+          "width": 136,
+          "height": 119,
+          "material": 1,
+          "quantity": 4
         },
         {
           "taskId": 2,
-          "length": 27,
-          "width": 67,
-          "height": 47,
-          "filament": 3,
-          "quantity": 4
+          "length": 150,
+          "width": 81,
+          "height": 214,
+          "material": 5,
+          "quantity": 8
         },
         {
           "taskId": 3,
-          "length": 53,
-          "width": 71,
-          "height": 205,
-          "filament": 4,
-          "quantity": 4
-        },
-        {
-          "taskId": 4,
-          "length": 32,
-          "width": 13,
-          "height": 235,
-          "filament": 4,
-          "quantity": 5
-        },
-        {
-          "taskId": 5,
-          "length": 39,
-          "width": 65,
-          "height": 178,
-          "filament": 2,
-          "quantity": 4
+          "length": 151,
+          "width": 61,
+          "height": 30,
+          "material": 2,
+          "quantity": 7
         }
       ]
     },
@@ -132,11 +148,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 62,
-          "width": 23,
-          "height": 24,
-          "filament": 4,
-          "quantity": 7
+          "length": 100,
+          "width": 139,
+          "height": 234,
+          "material": 4,
+          "quantity": 3
         }
       ]
     },
@@ -146,35 +162,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 14,
-          "width": 23,
-          "height": 43,
-          "filament": 6,
-          "quantity": 5
-        },
-        {
-          "taskId": 2,
-          "length": 47,
-          "width": 13,
-          "height": 136,
-          "filament": 2,
-          "quantity": 10
-        },
-        {
-          "taskId": 3,
-          "length": 77,
-          "width": 17,
-          "height": 68,
-          "filament": 4,
-          "quantity": 7
-        },
-        {
-          "taskId": 4,
-          "length": 73,
-          "width": 41,
-          "height": 67,
-          "filament": 4,
-          "quantity": 7
+          "length": 122,
+          "width": 50,
+          "height": 240,
+          "material": 5,
+          "quantity": 3
         }
       ]
     },
@@ -184,35 +176,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 69,
-          "width": 18,
-          "height": 53,
-          "filament": 6,
-          "quantity": 10
+          "length": 107,
+          "width": 89,
+          "height": 77,
+          "material": 3,
+          "quantity": 1
         },
         {
           "taskId": 2,
-          "length": 34,
-          "width": 30,
-          "height": 178,
-          "filament": 5,
-          "quantity": 2
+          "length": 143,
+          "width": 69,
+          "height": 123,
+          "material": 5,
+          "quantity": 4
         },
         {
           "taskId": 3,
-          "length": 31,
-          "width": 42,
-          "height": 159,
-          "filament": 5,
-          "quantity": 7
-        },
-        {
-          "taskId": 4,
-          "length": 29,
-          "width": 56,
-          "height": 183,
-          "filament": 5,
-          "quantity": 9
+          "length": 101,
+          "width": 85,
+          "height": 182,
+          "material": 3,
+          "quantity": 2
         }
       ]
     },
@@ -222,27 +206,19 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 33,
-          "width": 10,
-          "height": 129,
-          "filament": 6,
-          "quantity": 4
+          "length": 99,
+          "width": 102,
+          "height": 180,
+          "material": 5,
+          "quantity": 7
         },
         {
           "taskId": 2,
-          "length": 55,
-          "width": 64,
-          "height": 22,
-          "filament": 3,
-          "quantity": 4
-        },
-        {
-          "taskId": 3,
-          "length": 39,
-          "width": 56,
-          "height": 236,
-          "filament": 4,
-          "quantity": 6
+          "length": 121,
+          "width": 77,
+          "height": 112,
+          "material": 5,
+          "quantity": 8
         }
       ]
     },
@@ -252,35 +228,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 44,
-          "width": 58,
-          "height": 50,
-          "filament": 5,
-          "quantity": 3
+          "length": 121,
+          "width": 111,
+          "height": 93,
+          "material": 5,
+          "quantity": 5
         },
         {
           "taskId": 2,
-          "length": 25,
-          "width": 36,
-          "height": 192,
-          "filament": 4,
+          "length": 159,
+          "width": 108,
+          "height": 156,
+          "material": 4,
           "quantity": 3
         },
         {
           "taskId": 3,
-          "length": 38,
-          "width": 74,
-          "height": 154,
-          "filament": 1,
-          "quantity": 10
-        },
-        {
-          "taskId": 4,
-          "length": 57,
-          "width": 26,
-          "height": 21,
-          "filament": 3,
-          "quantity": 3
+          "length": 126,
+          "width": 96,
+          "height": 150,
+          "material": 5,
+          "quantity": 6
         }
       ]
     },
@@ -290,19 +258,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 12,
-          "width": 69,
-          "height": 201,
-          "filament": 3,
+          "length": 110,
+          "width": 68,
+          "height": 192,
+          "material": 2,
           "quantity": 5
-        },
-        {
-          "taskId": 2,
-          "length": 33,
-          "width": 80,
-          "height": 231,
-          "filament": 6,
-          "quantity": 6
         }
       ]
     },
@@ -312,35 +272,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 44,
-          "width": 70,
-          "height": 78,
-          "filament": 1,
-          "quantity": 10
+          "length": 144,
+          "width": 138,
+          "height": 210,
+          "material": 4,
+          "quantity": 3
         },
         {
           "taskId": 2,
-          "length": 45,
-          "width": 69,
-          "height": 65,
-          "filament": 5,
-          "quantity": 2
+          "length": 91,
+          "width": 80,
+          "height": 194,
+          "material": 1,
+          "quantity": 6
         },
         {
           "taskId": 3,
-          "length": 31,
-          "width": 57,
-          "height": 192,
-          "filament": 3,
-          "quantity": 1
+          "length": 128,
+          "width": 49,
+          "height": 198,
+          "material": 5,
+          "quantity": 6
         },
         {
           "taskId": 4,
-          "length": 56,
-          "width": 66,
-          "height": 240,
-          "filament": 5,
-          "quantity": 5
+          "length": 148,
+          "width": 45,
+          "height": 50,
+          "material": 2,
+          "quantity": 4
         }
       ]
     },
@@ -350,11 +310,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 72,
-          "width": 75,
-          "height": 64,
-          "filament": 5,
-          "quantity": 1
+          "length": 143,
+          "width": 51,
+          "height": 194,
+          "material": 4,
+          "quantity": 7
+        },
+        {
+          "taskId": 2,
+          "length": 101,
+          "width": 50,
+          "height": 196,
+          "material": 5,
+          "quantity": 3
+        },
+        {
+          "taskId": 3,
+          "length": 98,
+          "width": 62,
+          "height": 60,
+          "material": 3,
+          "quantity": 2
+        },
+        {
+          "taskId": 4,
+          "length": 146,
+          "width": 125,
+          "height": 133,
+          "material": 3,
+          "quantity": 6
         }
       ]
     },
@@ -364,11 +348,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 57,
-          "width": 40,
-          "height": 112,
-          "filament": 1,
-          "quantity": 4
+          "length": 121,
+          "width": 73,
+          "height": 232,
+          "material": 2,
+          "quantity": 6
         }
       ]
     },
@@ -378,11 +362,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 27,
-          "width": 20,
-          "height": 95,
-          "filament": 1,
-          "quantity": 8
+          "length": 135,
+          "width": 86,
+          "height": 174,
+          "material": 4,
+          "quantity": 7
+        },
+        {
+          "taskId": 2,
+          "length": 88,
+          "width": 42,
+          "height": 122,
+          "material": 4,
+          "quantity": 5
+        },
+        {
+          "taskId": 3,
+          "length": 149,
+          "width": 57,
+          "height": 88,
+          "material": 2,
+          "quantity": 6
         }
       ]
     },
@@ -392,27 +392,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 79,
-          "width": 43,
-          "height": 95,
-          "filament": 6,
-          "quantity": 10
-        },
-        {
-          "taskId": 2,
-          "length": 31,
-          "width": 47,
-          "height": 78,
-          "filament": 2,
+          "length": 96,
+          "width": 94,
+          "height": 70,
+          "material": 3,
           "quantity": 5
-        },
-        {
-          "taskId": 3,
-          "length": 68,
-          "width": 37,
-          "height": 23,
-          "filament": 2,
-          "quantity": 10
         }
       ]
     },
@@ -422,35 +406,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 35,
-          "width": 76,
-          "height": 38,
-          "filament": 1,
-          "quantity": 7
-        },
-        {
-          "taskId": 2,
-          "length": 78,
-          "width": 61,
-          "height": 85,
-          "filament": 4,
+          "length": 105,
+          "width": 83,
+          "height": 131,
+          "material": 3,
           "quantity": 8
         },
         {
+          "taskId": 2,
+          "length": 142,
+          "width": 47,
+          "height": 84,
+          "material": 2,
+          "quantity": 4
+        },
+        {
           "taskId": 3,
-          "length": 11,
-          "width": 75,
-          "height": 28,
-          "filament": 5,
-          "quantity": 7
+          "length": 87,
+          "width": 129,
+          "height": 127,
+          "material": 5,
+          "quantity": 1
         },
         {
           "taskId": 4,
-          "length": 43,
-          "width": 29,
-          "height": 168,
-          "filament": 6,
-          "quantity": 5
+          "length": 141,
+          "width": 110,
+          "height": 202,
+          "material": 4,
+          "quantity": 3
         }
       ]
     },
@@ -460,43 +444,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 67,
-          "width": 62,
-          "height": 136,
-          "filament": 1,
-          "quantity": 7
+          "length": 114,
+          "width": 38,
+          "height": 33,
+          "material": 3,
+          "quantity": 6
         },
         {
           "taskId": 2,
-          "length": 53,
-          "width": 21,
-          "height": 151,
-          "filament": 1,
-          "quantity": 5
+          "length": 137,
+          "width": 47,
+          "height": 45,
+          "material": 5,
+          "quantity": 3
         },
         {
           "taskId": 3,
-          "length": 50,
-          "width": 73,
-          "height": 143,
-          "filament": 2,
-          "quantity": 1
-        },
-        {
-          "taskId": 4,
-          "length": 22,
-          "width": 18,
-          "height": 178,
-          "filament": 3,
-          "quantity": 10
-        },
-        {
-          "taskId": 5,
-          "length": 66,
-          "width": 16,
-          "height": 217,
-          "filament": 2,
-          "quantity": 4
+          "length": 96,
+          "width": 102,
+          "height": 239,
+          "material": 4,
+          "quantity": 5
         }
       ]
     },
@@ -506,19 +474,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 45,
-          "width": 63,
-          "height": 188,
-          "filament": 3,
-          "quantity": 8
+          "length": 138,
+          "width": 98,
+          "height": 157,
+          "material": 3,
+          "quantity": 7
         },
         {
           "taskId": 2,
-          "length": 12,
-          "width": 64,
-          "height": 178,
-          "filament": 3,
-          "quantity": 9
+          "length": 118,
+          "width": 132,
+          "height": 42,
+          "material": 1,
+          "quantity": 5
+        },
+        {
+          "taskId": 3,
+          "length": 107,
+          "width": 117,
+          "height": 75,
+          "material": 5,
+          "quantity": 4
+        },
+        {
+          "taskId": 4,
+          "length": 140,
+          "width": 116,
+          "height": 209,
+          "material": 2,
+          "quantity": 5
         }
       ]
     },
@@ -528,19 +512,19 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 76,
-          "width": 69,
-          "height": 83,
-          "filament": 4,
-          "quantity": 5
+          "length": 107,
+          "width": 137,
+          "height": 109,
+          "material": 5,
+          "quantity": 2
         },
         {
           "taskId": 2,
-          "length": 73,
-          "width": 37,
-          "height": 185,
-          "filament": 1,
-          "quantity": 7
+          "length": 141,
+          "width": 33,
+          "height": 130,
+          "material": 2,
+          "quantity": 5
         }
       ]
     },
@@ -550,19 +534,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 42,
-          "width": 57,
-          "height": 184,
-          "filament": 6,
+          "length": 121,
+          "width": 58,
+          "height": 72,
+          "material": 2,
           "quantity": 1
         },
         {
           "taskId": 2,
-          "length": 28,
-          "width": 46,
-          "height": 88,
-          "filament": 1,
-          "quantity": 8
+          "length": 153,
+          "width": 74,
+          "height": 194,
+          "material": 1,
+          "quantity": 7
+        },
+        {
+          "taskId": 3,
+          "length": 159,
+          "width": 68,
+          "height": 147,
+          "material": 4,
+          "quantity": 3
+        },
+        {
+          "taskId": 4,
+          "length": 101,
+          "width": 38,
+          "height": 127,
+          "material": 2,
+          "quantity": 5
         }
       ]
     },
@@ -572,11 +572,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 80,
-          "width": 41,
-          "height": 68,
-          "filament": 1,
-          "quantity": 3
+          "length": 129,
+          "width": 33,
+          "height": 194,
+          "material": 5,
+          "quantity": 4
+        },
+        {
+          "taskId": 2,
+          "length": 129,
+          "width": 89,
+          "height": 119,
+          "material": 2,
+          "quantity": 7
+        },
+        {
+          "taskId": 3,
+          "length": 110,
+          "width": 105,
+          "height": 127,
+          "material": 1,
+          "quantity": 4
         }
       ]
     },
@@ -586,19 +602,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 74,
-          "width": 17,
-          "height": 69,
-          "filament": 6,
-          "quantity": 4
+          "length": 94,
+          "width": 81,
+          "height": 93,
+          "material": 2,
+          "quantity": 1
         },
         {
           "taskId": 2,
-          "length": 41,
-          "width": 35,
-          "height": 147,
-          "filament": 1,
-          "quantity": 2
+          "length": 110,
+          "width": 113,
+          "height": 215,
+          "material": 1,
+          "quantity": 4
+        },
+        {
+          "taskId": 3,
+          "length": 99,
+          "width": 72,
+          "height": 76,
+          "material": 2,
+          "quantity": 5
+        },
+        {
+          "taskId": 4,
+          "length": 134,
+          "width": 89,
+          "height": 74,
+          "material": 5,
+          "quantity": 6
         }
       ]
     },
@@ -608,11 +640,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 52,
-          "width": 37,
-          "height": 122,
-          "filament": 2,
-          "quantity": 7
+          "length": 84,
+          "width": 31,
+          "height": 136,
+          "material": 3,
+          "quantity": 3
         }
       ]
     },
@@ -622,27 +654,19 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 44,
-          "width": 19,
-          "height": 127,
-          "filament": 3,
-          "quantity": 1
+          "length": 122,
+          "width": 123,
+          "height": 223,
+          "material": 2,
+          "quantity": 6
         },
         {
           "taskId": 2,
-          "length": 76,
-          "width": 15,
-          "height": 61,
-          "filament": 6,
-          "quantity": 9
-        },
-        {
-          "taskId": 3,
-          "length": 45,
-          "width": 25,
-          "height": 123,
-          "filament": 1,
-          "quantity": 5
+          "length": 94,
+          "width": 132,
+          "height": 234,
+          "material": 2,
+          "quantity": 8
         }
       ]
     },
@@ -652,19 +676,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 78,
-          "width": 67,
-          "height": 140,
-          "filament": 2,
+          "length": 160,
+          "width": 61,
+          "height": 163,
+          "material": 1,
           "quantity": 3
         },
         {
           "taskId": 2,
-          "length": 33,
-          "width": 15,
-          "height": 168,
-          "filament": 5,
-          "quantity": 2
+          "length": 141,
+          "width": 35,
+          "height": 63,
+          "material": 1,
+          "quantity": 7
+        },
+        {
+          "taskId": 3,
+          "length": 124,
+          "width": 102,
+          "height": 201,
+          "material": 1,
+          "quantity": 1
+        },
+        {
+          "taskId": 4,
+          "length": 156,
+          "width": 108,
+          "height": 166,
+          "material": 2,
+          "quantity": 3
         }
       ]
     },
@@ -674,27 +714,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 18,
-          "width": 60,
-          "height": 128,
-          "filament": 3,
-          "quantity": 9
-        },
-        {
-          "taskId": 2,
-          "length": 72,
-          "width": 20,
-          "height": 102,
-          "filament": 2,
-          "quantity": 5
-        },
-        {
-          "taskId": 3,
-          "length": 39,
-          "width": 60,
-          "height": 141,
-          "filament": 3,
-          "quantity": 6
+          "length": 131,
+          "width": 95,
+          "height": 174,
+          "material": 1,
+          "quantity": 2
         }
       ]
     },
@@ -704,27 +728,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 37,
-          "width": 59,
-          "height": 163,
-          "filament": 1,
-          "quantity": 4
-        },
-        {
-          "taskId": 2,
-          "length": 34,
-          "width": 69,
-          "height": 228,
-          "filament": 3,
-          "quantity": 3
-        },
-        {
-          "taskId": 3,
-          "length": 67,
-          "width": 31,
-          "height": 199,
-          "filament": 2,
-          "quantity": 7
+          "length": 127,
+          "width": 137,
+          "height": 196,
+          "material": 4,
+          "quantity": 1
         }
       ]
     },
@@ -734,11 +742,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 38,
-          "width": 42,
-          "height": 36,
-          "filament": 2,
-          "quantity": 1
+          "length": 139,
+          "width": 134,
+          "height": 55,
+          "material": 2,
+          "quantity": 3
         }
       ]
     },
@@ -748,27 +756,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 26,
-          "width": 59,
-          "height": 232,
-          "filament": 4,
-          "quantity": 5
+          "length": 116,
+          "width": 73,
+          "height": 119,
+          "material": 4,
+          "quantity": 8
         },
         {
           "taskId": 2,
-          "length": 56,
-          "width": 20,
-          "height": 75,
-          "filament": 1,
-          "quantity": 9
+          "length": 138,
+          "width": 99,
+          "height": 97,
+          "material": 3,
+          "quantity": 3
         },
         {
           "taskId": 3,
-          "length": 22,
-          "width": 45,
-          "height": 228,
-          "filament": 3,
-          "quantity": 7
+          "length": 101,
+          "width": 78,
+          "height": 79,
+          "material": 5,
+          "quantity": 2
         }
       ]
     },
@@ -778,11 +786,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 42,
-          "width": 27,
-          "height": 210,
-          "filament": 4,
-          "quantity": 4
+          "length": 114,
+          "width": 134,
+          "height": 103,
+          "material": 5,
+          "quantity": 7
+        },
+        {
+          "taskId": 2,
+          "length": 152,
+          "width": 91,
+          "height": 46,
+          "material": 4,
+          "quantity": 5
+        },
+        {
+          "taskId": 3,
+          "length": 110,
+          "width": 84,
+          "height": 69,
+          "material": 4,
+          "quantity": 7
+        },
+        {
+          "taskId": 4,
+          "length": 88,
+          "width": 116,
+          "height": 63,
+          "material": 1,
+          "quantity": 1
         }
       ]
     },
@@ -792,11 +824,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 48,
-          "width": 52,
-          "height": 157,
-          "filament": 2,
+          "length": 115,
+          "width": 82,
+          "height": 114,
+          "material": 3,
           "quantity": 3
+        },
+        {
+          "taskId": 2,
+          "length": 82,
+          "width": 78,
+          "height": 235,
+          "material": 5,
+          "quantity": 2
+        },
+        {
+          "taskId": 3,
+          "length": 88,
+          "width": 84,
+          "height": 59,
+          "material": 5,
+          "quantity": 1
+        },
+        {
+          "taskId": 4,
+          "length": 101,
+          "width": 83,
+          "height": 119,
+          "material": 1,
+          "quantity": 7
         }
       ]
     },
@@ -806,27 +862,19 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 68,
-          "width": 23,
-          "height": 203,
-          "filament": 1,
-          "quantity": 2
+          "length": 104,
+          "width": 130,
+          "height": 70,
+          "material": 4,
+          "quantity": 5
         },
         {
           "taskId": 2,
-          "length": 37,
-          "width": 30,
-          "height": 97,
-          "filament": 2,
-          "quantity": 3
-        },
-        {
-          "taskId": 3,
-          "length": 39,
-          "width": 79,
-          "height": 52,
-          "filament": 4,
-          "quantity": 10
+          "length": 118,
+          "width": 77,
+          "height": 77,
+          "material": 4,
+          "quantity": 6
         }
       ]
     },
@@ -836,27 +884,19 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 18,
-          "width": 60,
-          "height": 130,
-          "filament": 1,
+          "length": 124,
+          "width": 85,
+          "height": 175,
+          "material": 3,
           "quantity": 3
         },
         {
           "taskId": 2,
-          "length": 12,
-          "width": 50,
-          "height": 149,
-          "filament": 6,
-          "quantity": 1
-        },
-        {
-          "taskId": 3,
-          "length": 55,
-          "width": 15,
-          "height": 184,
-          "filament": 5,
-          "quantity": 6
+          "length": 103,
+          "width": 104,
+          "height": 174,
+          "material": 1,
+          "quantity": 7
         }
       ]
     },
@@ -866,11 +906,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 68,
+          "length": 148,
+          "width": 100,
+          "height": 49,
+          "material": 2,
+          "quantity": 5
+        },
+        {
+          "taskId": 2,
+          "length": 145,
           "width": 51,
-          "height": 95,
-          "filament": 3,
-          "quantity": 1
+          "height": 161,
+          "material": 4,
+          "quantity": 6
+        },
+        {
+          "taskId": 3,
+          "length": 81,
+          "width": 121,
+          "height": 236,
+          "material": 1,
+          "quantity": 3
         }
       ]
     },
@@ -880,43 +936,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 47,
-          "width": 32,
-          "height": 157,
-          "filament": 6,
-          "quantity": 5
+          "length": 125,
+          "width": 84,
+          "height": 78,
+          "material": 2,
+          "quantity": 3
         },
         {
           "taskId": 2,
-          "length": 78,
-          "width": 69,
-          "height": 170,
-          "filament": 3,
-          "quantity": 9
+          "length": 87,
+          "width": 82,
+          "height": 120,
+          "material": 4,
+          "quantity": 4
         },
         {
           "taskId": 3,
-          "length": 14,
-          "width": 61,
-          "height": 32,
-          "filament": 1,
-          "quantity": 9
+          "length": 96,
+          "width": 37,
+          "height": 54,
+          "material": 1,
+          "quantity": 3
         },
         {
           "taskId": 4,
-          "length": 49,
-          "width": 17,
-          "height": 108,
-          "filament": 1,
-          "quantity": 2
-        },
-        {
-          "taskId": 5,
-          "length": 75,
-          "width": 65,
-          "height": 238,
-          "filament": 1,
-          "quantity": 3
+          "length": 136,
+          "width": 53,
+          "height": 149,
+          "material": 4,
+          "quantity": 4
         }
       ]
     },
@@ -926,27 +974,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 74,
-          "width": 79,
-          "height": 58,
-          "filament": 2,
-          "quantity": 5
+          "length": 124,
+          "width": 115,
+          "height": 170,
+          "material": 3,
+          "quantity": 2
         },
         {
           "taskId": 2,
-          "length": 15,
-          "width": 44,
-          "height": 107,
-          "filament": 4,
-          "quantity": 8
+          "length": 140,
+          "width": 73,
+          "height": 218,
+          "material": 3,
+          "quantity": 7
         },
         {
           "taskId": 3,
-          "length": 53,
-          "width": 34,
-          "height": 41,
-          "filament": 1,
-          "quantity": 10
+          "length": 145,
+          "width": 71,
+          "height": 173,
+          "material": 1,
+          "quantity": 4
+        },
+        {
+          "taskId": 4,
+          "length": 146,
+          "width": 140,
+          "height": 166,
+          "material": 2,
+          "quantity": 2
         }
       ]
     },
@@ -956,43 +1012,19 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 51,
-          "width": 23,
-          "height": 138,
-          "filament": 3,
-          "quantity": 6
+          "length": 150,
+          "width": 102,
+          "height": 112,
+          "material": 1,
+          "quantity": 5
         },
         {
           "taskId": 2,
-          "length": 29,
-          "width": 31,
-          "height": 111,
-          "filament": 3,
+          "length": 85,
+          "width": 37,
+          "height": 237,
+          "material": 1,
           "quantity": 1
-        },
-        {
-          "taskId": 3,
-          "length": 66,
-          "width": 55,
-          "height": 225,
-          "filament": 3,
-          "quantity": 10
-        },
-        {
-          "taskId": 4,
-          "length": 68,
-          "width": 35,
-          "height": 93,
-          "filament": 1,
-          "quantity": 7
-        },
-        {
-          "taskId": 5,
-          "length": 37,
-          "width": 63,
-          "height": 133,
-          "filament": 6,
-          "quantity": 5
         }
       ]
     },
@@ -1002,18 +1034,18 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 69,
-          "width": 13,
-          "height": 189,
-          "filament": 5,
-          "quantity": 4
+          "length": 158,
+          "width": 42,
+          "height": 59,
+          "material": 4,
+          "quantity": 1
         },
         {
           "taskId": 2,
-          "length": 26,
-          "width": 35,
-          "height": 144,
-          "filament": 4,
+          "length": 160,
+          "width": 93,
+          "height": 240,
+          "material": 3,
           "quantity": 1
         }
       ]
@@ -1024,35 +1056,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 19,
-          "width": 12,
-          "height": 216,
-          "filament": 2,
-          "quantity": 7
-        },
-        {
-          "taskId": 2,
-          "length": 39,
-          "width": 78,
-          "height": 75,
-          "filament": 6,
-          "quantity": 2
-        },
-        {
-          "taskId": 3,
-          "length": 46,
-          "width": 35,
-          "height": 153,
-          "filament": 1,
-          "quantity": 1
-        },
-        {
-          "taskId": 4,
-          "length": 15,
-          "width": 15,
-          "height": 88,
-          "filament": 6,
-          "quantity": 6
+          "length": 155,
+          "width": 33,
+          "height": 55,
+          "material": 4,
+          "quantity": 5
         }
       ]
     },
@@ -1062,35 +1070,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 60,
-          "width": 80,
-          "height": 42,
-          "filament": 1,
-          "quantity": 10
-        },
-        {
-          "taskId": 2,
-          "length": 75,
-          "width": 48,
-          "height": 153,
-          "filament": 4,
-          "quantity": 6
-        },
-        {
-          "taskId": 3,
-          "length": 42,
-          "width": 49,
-          "height": 186,
-          "filament": 3,
-          "quantity": 2
-        },
-        {
-          "taskId": 4,
-          "length": 56,
-          "width": 19,
-          "height": 78,
-          "filament": 1,
-          "quantity": 3
+          "length": 80,
+          "width": 38,
+          "height": 206,
+          "material": 2,
+          "quantity": 1
         }
       ]
     },
@@ -1100,35 +1084,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 36,
-          "width": 57,
-          "height": 160,
-          "filament": 6,
+          "length": 85,
+          "width": 62,
+          "height": 137,
+          "material": 2,
           "quantity": 2
         },
         {
           "taskId": 2,
-          "length": 79,
-          "width": 11,
-          "height": 127,
-          "filament": 2,
-          "quantity": 4
+          "length": 154,
+          "width": 80,
+          "height": 201,
+          "material": 3,
+          "quantity": 1
         },
         {
           "taskId": 3,
-          "length": 71,
-          "width": 43,
-          "height": 42,
-          "filament": 6,
-          "quantity": 5
-        },
-        {
-          "taskId": 4,
-          "length": 49,
-          "width": 75,
-          "height": 207,
-          "filament": 2,
-          "quantity": 3
+          "length": 83,
+          "width": 52,
+          "height": 81,
+          "material": 4,
+          "quantity": 8
         }
       ]
     },
@@ -1138,43 +1114,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 28,
-          "width": 24,
-          "height": 167,
-          "filament": 4,
-          "quantity": 10
+          "length": 96,
+          "width": 111,
+          "height": 236,
+          "material": 3,
+          "quantity": 4
         },
         {
           "taskId": 2,
-          "length": 40,
-          "width": 72,
-          "height": 34,
-          "filament": 4,
-          "quantity": 2
+          "length": 152,
+          "width": 77,
+          "height": 185,
+          "material": 2,
+          "quantity": 1
         },
         {
           "taskId": 3,
-          "length": 77,
-          "width": 46,
-          "height": 150,
-          "filament": 4,
-          "quantity": 9
+          "length": 100,
+          "width": 75,
+          "height": 30,
+          "material": 4,
+          "quantity": 1
         },
         {
           "taskId": 4,
-          "length": 18,
-          "width": 42,
-          "height": 225,
-          "filament": 6,
-          "quantity": 8
-        },
-        {
-          "taskId": 5,
-          "length": 80,
-          "width": 11,
-          "height": 124,
-          "filament": 3,
-          "quantity": 5
+          "length": 159,
+          "width": 123,
+          "height": 86,
+          "material": 4,
+          "quantity": 6
         }
       ]
     },
@@ -1184,42 +1152,26 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 13,
-          "width": 68,
-          "height": 96,
-          "filament": 5,
+          "length": 80,
+          "width": 63,
+          "height": 230,
+          "material": 5,
           "quantity": 8
         },
         {
           "taskId": 2,
-          "length": 58,
-          "width": 44,
-          "height": 188,
-          "filament": 4,
-          "quantity": 2
+          "length": 154,
+          "width": 62,
+          "height": 149,
+          "material": 2,
+          "quantity": 6
         },
         {
           "taskId": 3,
-          "length": 26,
-          "width": 70,
-          "height": 99,
-          "filament": 2,
-          "quantity": 4
-        },
-        {
-          "taskId": 4,
-          "length": 22,
-          "width": 42,
-          "height": 219,
-          "filament": 2,
-          "quantity": 7
-        },
-        {
-          "taskId": 5,
-          "length": 51,
-          "width": 74,
-          "height": 142,
-          "filament": 4,
+          "length": 153,
+          "width": 35,
+          "height": 82,
+          "material": 2,
           "quantity": 3
         }
       ]
@@ -1230,43 +1182,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 69,
-          "width": 52,
-          "height": 226,
-          "filament": 4,
-          "quantity": 3
-        },
-        {
-          "taskId": 2,
-          "length": 58,
-          "width": 11,
-          "height": 40,
-          "filament": 3,
-          "quantity": 2
-        },
-        {
-          "taskId": 3,
-          "length": 31,
-          "width": 38,
-          "height": 24,
-          "filament": 4,
-          "quantity": 8
-        },
-        {
-          "taskId": 4,
-          "length": 12,
-          "width": 50,
-          "height": 139,
-          "filament": 3,
-          "quantity": 10
-        },
-        {
-          "taskId": 5,
-          "length": 79,
-          "width": 58,
-          "height": 205,
-          "filament": 3,
-          "quantity": 3
+          "length": 128,
+          "width": 76,
+          "height": 149,
+          "material": 5,
+          "quantity": 5
         }
       ]
     },
@@ -1276,27 +1196,19 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 37,
-          "width": 51,
-          "height": 69,
-          "filament": 2,
+          "length": 148,
+          "width": 86,
+          "height": 140,
+          "material": 3,
           "quantity": 4
         },
         {
           "taskId": 2,
-          "length": 12,
-          "width": 73,
-          "height": 67,
-          "filament": 2,
-          "quantity": 4
-        },
-        {
-          "taskId": 3,
-          "length": 53,
-          "width": 52,
-          "height": 153,
-          "filament": 5,
-          "quantity": 6
+          "length": 119,
+          "width": 87,
+          "height": 227,
+          "material": 4,
+          "quantity": 7
         }
       ]
     },
@@ -1306,18 +1218,10 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 35,
-          "width": 67,
-          "height": 187,
-          "filament": 3,
-          "quantity": 10
-        },
-        {
-          "taskId": 2,
-          "length": 13,
-          "width": 18,
-          "height": 119,
-          "filament": 6,
+          "length": 123,
+          "width": 86,
+          "height": 114,
+          "material": 5,
           "quantity": 7
         }
       ]
@@ -1328,11 +1232,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 20,
-          "width": 27,
-          "height": 211,
-          "filament": 2,
-          "quantity": 3
+          "length": 95,
+          "width": 64,
+          "height": 240,
+          "material": 1,
+          "quantity": 7
         }
       ]
     },
@@ -1342,19 +1246,19 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 27,
-          "width": 34,
-          "height": 105,
-          "filament": 5,
-          "quantity": 9
+          "length": 98,
+          "width": 101,
+          "height": 44,
+          "material": 5,
+          "quantity": 2
         },
         {
           "taskId": 2,
-          "length": 80,
-          "width": 22,
-          "height": 173,
-          "filament": 4,
-          "quantity": 6
+          "length": 139,
+          "width": 133,
+          "height": 38,
+          "material": 1,
+          "quantity": 2
         }
       ]
     },
@@ -1364,35 +1268,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 58,
-          "width": 79,
-          "height": 79,
-          "filament": 1,
-          "quantity": 4
+          "length": 90,
+          "width": 48,
+          "height": 99,
+          "material": 5,
+          "quantity": 7
         },
         {
           "taskId": 2,
-          "length": 68,
-          "width": 57,
-          "height": 236,
-          "filament": 3,
-          "quantity": 1
+          "length": 154,
+          "width": 114,
+          "height": 148,
+          "material": 1,
+          "quantity": 3
         },
         {
           "taskId": 3,
-          "length": 40,
-          "width": 69,
-          "height": 145,
-          "filament": 5,
-          "quantity": 5
+          "length": 138,
+          "width": 42,
+          "height": 123,
+          "material": 3,
+          "quantity": 4
         },
         {
           "taskId": 4,
-          "length": 17,
-          "width": 32,
-          "height": 78,
-          "filament": 6,
-          "quantity": 9
+          "length": 94,
+          "width": 107,
+          "height": 92,
+          "material": 5,
+          "quantity": 3
         }
       ]
     },
@@ -1402,27 +1306,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 20,
-          "width": 71,
-          "height": 141,
-          "filament": 1,
-          "quantity": 7
-        },
-        {
-          "taskId": 2,
-          "length": 74,
-          "width": 11,
-          "height": 143,
-          "filament": 3,
-          "quantity": 7
-        },
-        {
-          "taskId": 3,
-          "length": 38,
-          "width": 66,
-          "height": 178,
-          "filament": 1,
-          "quantity": 1
+          "length": 109,
+          "width": 132,
+          "height": 53,
+          "material": 4,
+          "quantity": 4
         }
       ]
     },
@@ -1432,27 +1320,19 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 48,
-          "width": 41,
-          "height": 214,
-          "filament": 3,
-          "quantity": 8
+          "length": 128,
+          "width": 97,
+          "height": 47,
+          "material": 2,
+          "quantity": 1
         },
         {
           "taskId": 2,
-          "length": 35,
-          "width": 19,
-          "height": 76,
-          "filament": 3,
-          "quantity": 2
-        },
-        {
-          "taskId": 3,
-          "length": 76,
-          "width": 77,
-          "height": 117,
-          "filament": 1,
-          "quantity": 2
+          "length": 159,
+          "width": 44,
+          "height": 234,
+          "material": 1,
+          "quantity": 6
         }
       ]
     },
@@ -1462,35 +1342,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 76,
-          "width": 42,
-          "height": 219,
-          "filament": 6,
-          "quantity": 10
+          "length": 135,
+          "width": 134,
+          "height": 102,
+          "material": 2,
+          "quantity": 8
         },
         {
           "taskId": 2,
-          "length": 35,
-          "width": 44,
-          "height": 165,
-          "filament": 1,
-          "quantity": 10
+          "length": 99,
+          "width": 86,
+          "height": 112,
+          "material": 3,
+          "quantity": 5
         },
         {
           "taskId": 3,
-          "length": 26,
-          "width": 46,
-          "height": 119,
-          "filament": 4,
-          "quantity": 4
-        },
-        {
-          "taskId": 4,
-          "length": 62,
-          "width": 65,
-          "height": 135,
-          "filament": 1,
-          "quantity": 5
+          "length": 131,
+          "width": 56,
+          "height": 70,
+          "material": 5,
+          "quantity": 7
         }
       ]
     },
@@ -1500,19 +1372,11 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 59,
-          "width": 26,
-          "height": 75,
-          "filament": 3,
-          "quantity": 10
-        },
-        {
-          "taskId": 2,
-          "length": 62,
-          "width": 74,
-          "height": 115,
-          "filament": 5,
-          "quantity": 4
+          "length": 81,
+          "width": 76,
+          "height": 211,
+          "material": 3,
+          "quantity": 2
         }
       ]
     },
@@ -1522,11 +1386,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 22,
+          "length": 147,
+          "width": 107,
+          "height": 183,
+          "material": 3,
+          "quantity": 3
+        },
+        {
+          "taskId": 2,
+          "length": 122,
           "width": 35,
-          "height": 193,
-          "filament": 5,
-          "quantity": 6
+          "height": 124,
+          "material": 5,
+          "quantity": 3
+        },
+        {
+          "taskId": 3,
+          "length": 111,
+          "width": 127,
+          "height": 90,
+          "material": 3,
+          "quantity": 7
+        },
+        {
+          "taskId": 4,
+          "length": 124,
+          "width": 117,
+          "height": 209,
+          "material": 4,
+          "quantity": 4
         }
       ]
     },
@@ -1536,35 +1424,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 57,
-          "width": 60,
-          "height": 107,
-          "filament": 2,
-          "quantity": 6
+          "length": 128,
+          "width": 110,
+          "height": 113,
+          "material": 4,
+          "quantity": 8
         },
         {
           "taskId": 2,
-          "length": 74,
-          "width": 43,
-          "height": 51,
-          "filament": 6,
-          "quantity": 5
+          "length": 107,
+          "width": 84,
+          "height": 141,
+          "material": 1,
+          "quantity": 3
         },
         {
           "taskId": 3,
-          "length": 59,
-          "width": 77,
-          "height": 169,
-          "filament": 3,
-          "quantity": 4
-        },
-        {
-          "taskId": 4,
-          "length": 51,
-          "width": 18,
-          "height": 156,
-          "filament": 5,
-          "quantity": 6
+          "length": 142,
+          "width": 129,
+          "height": 61,
+          "material": 5,
+          "quantity": 7
         }
       ]
     },
@@ -1574,27 +1454,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 79,
-          "width": 64,
-          "height": 177,
-          "filament": 2,
-          "quantity": 5
+          "length": 107,
+          "width": 38,
+          "height": 166,
+          "material": 2,
+          "quantity": 6
         },
         {
           "taskId": 2,
-          "length": 63,
-          "width": 63,
-          "height": 42,
-          "filament": 1,
-          "quantity": 7
+          "length": 155,
+          "width": 66,
+          "height": 240,
+          "material": 4,
+          "quantity": 2
         },
         {
           "taskId": 3,
-          "length": 58,
-          "width": 44,
-          "height": 40,
-          "filament": 2,
-          "quantity": 2
+          "length": 100,
+          "width": 31,
+          "height": 208,
+          "material": 5,
+          "quantity": 3
         }
       ]
     },
@@ -1604,43 +1484,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 77,
-          "width": 62,
-          "height": 206,
-          "filament": 2,
-          "quantity": 7
+          "length": 112,
+          "width": 138,
+          "height": 46,
+          "material": 4,
+          "quantity": 8
         },
         {
           "taskId": 2,
-          "length": 70,
-          "width": 46,
-          "height": 74,
-          "filament": 6,
-          "quantity": 9
+          "length": 94,
+          "width": 74,
+          "height": 42,
+          "material": 2,
+          "quantity": 8
         },
         {
           "taskId": 3,
-          "length": 38,
-          "width": 80,
-          "height": 212,
-          "filament": 3,
-          "quantity": 3
+          "length": 159,
+          "width": 98,
+          "height": 87,
+          "material": 3,
+          "quantity": 4
         },
         {
           "taskId": 4,
-          "length": 15,
-          "width": 62,
-          "height": 202,
-          "filament": 3,
-          "quantity": 1
-        },
-        {
-          "taskId": 5,
-          "length": 76,
-          "width": 67,
-          "height": 193,
-          "filament": 2,
-          "quantity": 1
+          "length": 136,
+          "width": 52,
+          "height": 52,
+          "material": 4,
+          "quantity": 5
         }
       ]
     },
@@ -1650,11 +1522,35 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 45,
-          "width": 47,
-          "height": 33,
-          "filament": 5,
-          "quantity": 8
+          "length": 127,
+          "width": 123,
+          "height": 223,
+          "material": 5,
+          "quantity": 6
+        },
+        {
+          "taskId": 2,
+          "length": 133,
+          "width": 100,
+          "height": 40,
+          "material": 4,
+          "quantity": 3
+        },
+        {
+          "taskId": 3,
+          "length": 132,
+          "width": 108,
+          "height": 89,
+          "material": 2,
+          "quantity": 2
+        },
+        {
+          "taskId": 4,
+          "length": 154,
+          "width": 58,
+          "height": 228,
+          "material": 1,
+          "quantity": 7
         }
       ]
     },
@@ -1664,35 +1560,27 @@
       "tasks": [
         {
           "taskId": 1,
-          "length": 63,
-          "width": 47,
-          "height": 234,
-          "filament": 5,
-          "quantity": 8
+          "length": 108,
+          "width": 78,
+          "height": 69,
+          "material": 5,
+          "quantity": 5
         },
         {
           "taskId": 2,
-          "length": 29,
-          "width": 13,
-          "height": 104,
-          "filament": 3,
+          "length": 100,
+          "width": 126,
+          "height": 58,
+          "material": 1,
           "quantity": 5
         },
         {
           "taskId": 3,
-          "length": 72,
-          "width": 24,
-          "height": 80,
-          "filament": 1,
-          "quantity": 1
-        },
-        {
-          "taskId": 4,
-          "length": 61,
-          "width": 37,
-          "height": 239,
-          "filament": 1,
-          "quantity": 1
+          "length": 147,
+          "width": 136,
+          "height": 215,
+          "material": 4,
+          "quantity": 5
         }
       ]
     }

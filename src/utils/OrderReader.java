@@ -14,8 +14,8 @@ public class OrderReader {
     private OrderList orderList;
     private ArrayList<AtomicTask> atomicTasksList;
 
-    public OrderReader(int orderCount) {
-        filePath = "src/resources/set" + orderCount + ".json";
+    public OrderReader(String orderFileName) {
+        filePath = "src/resources/" + orderFileName + ".json";
         orderList = new OrderList();
         atomicTasksList = new ArrayList<>();
     }
@@ -36,7 +36,7 @@ public class OrderReader {
             for (Task task : order.getTasks()) {
                 for (int i = 0; i < task.getQuantity(); i++) {
                     atomicTaskCount++;
-                    atomicTasksList.add(new AtomicTask(orderId, deadline, task.getTaskId(), task.getLength(), task.getWidth(), task.getHeight(), task.getFilament(), atomicTaskCount));
+                    atomicTasksList.add(new AtomicTask(orderId, deadline, task.getTaskId(), task.getLength(), task.getWidth(), task.getHeight(), task.getMaterial(), atomicTaskCount));
                 }
             }
         }

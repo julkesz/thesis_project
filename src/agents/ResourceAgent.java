@@ -23,23 +23,23 @@ import java.util.Objects;
 
 
 public class ResourceAgent extends Agent {
-    private long startTime;
-    private long elapsedTime;
-    private int auctionInitiatorCount = 1;
-    private int completionMessageCount = 0;
+    protected long startTime;
+    protected long elapsedTime;
+    protected int auctionInitiatorCount = 1;
+    protected int completionMessageCount = 0;
 
     protected int boardWidth;
     protected int boardLength;
     protected int maxHeight;
     protected int printingSpeed; //20-36 mm/h
 
-    protected int originalFilament;
-    protected int currentFilament;
+    protected int originalMaterial;
+    protected int currentMaterial;
     protected PrinterSchedule printerSchedule;
     protected int totalExecutionTime;
     protected boolean scanAllTimeSlots;
-    public static final int FILAMENT_REPLACEMENT_TIME = 20;
-    public static final double BOARD_HEURISTICS = 0.8;
+    public static final int MATERIAL_REPLACEMENT_TIME = 20;
+    public static final double MAX_BOARD_OCCUPANCY = 0.85;
 
     protected void setup() {
 
@@ -49,8 +49,8 @@ public class ResourceAgent extends Agent {
             boardLength = Integer.parseInt((String) args[1]);
             maxHeight = Integer.parseInt((String) args[2]);
             printingSpeed = Integer.parseInt((String) args[3]);
-            originalFilament = Integer.parseInt((String) args[4]);
-            currentFilament = Integer.parseInt((String) args[4]);
+            originalMaterial = Integer.parseInt((String) args[4]);
+            currentMaterial = Integer.parseInt((String) args[4]);
             if (Objects.equals(args[5].toString(), "scanall")){
                 scanAllTimeSlots = true;
             } else if (Objects.equals(args[5].toString(), "scanlast")) {
@@ -131,12 +131,12 @@ public class ResourceAgent extends Agent {
         this.printingSpeed = printingSpeed;
     }
 
-    public int getCurrentFilament() {
-        return currentFilament;
+    public int getCurrentMaterial() {
+        return currentMaterial;
     }
 
-    public void setCurrentFilament(int filament) {
-        this.currentFilament = filament;
+    public void setCurrentMaterial(int material) {
+        this.currentMaterial = material;
     }
 
     public PrinterSchedule getPrinterSchedule() {
@@ -190,17 +190,17 @@ public class ResourceAgent extends Agent {
         if (scanAllTimeSlots){
             for (int timeSlotNumber = 0; timeSlotNumber < timeSlotList.size(); timeSlotNumber++) {
                 TimeSlot timeSlot = timeSlotList.get(timeSlotNumber);
-                if ((timeSlot.getFilament() == atomicTask.getFilament())
-                        && (timeSlot.getOccupancy() + taskSize <= ResourceAgent.BOARD_HEURISTICS * boardSize)) {
+                if ((timeSlot.getMaterial() == atomicTask.getMaterial())
+                        && (timeSlot.getOccupancy() + taskSize <= ResourceAgent.MAX_BOARD_OCCUPANCY * boardSize)) {
                     return timeSlotNumber;
                 }
             }
         }
         int lastTimeSlotNumber = timeSlotList.size() - 1;
-        int lastFilament = timeSlotList.get(lastTimeSlotNumber).getFilament();
+        int lastMaterial = timeSlotList.get(lastTimeSlotNumber).getMaterial();
         int timeSlotNumber = lastTimeSlotNumber;
-        if ((lastFilament != atomicTask.getFilament()) ||
-                (this.getTimeSlotOccupancy(lastTimeSlotNumber) + taskSize > ResourceAgent.BOARD_HEURISTICS * boardSize)) {
+        if ((lastMaterial != atomicTask.getMaterial()) ||
+                (this.getTimeSlotOccupancy(lastTimeSlotNumber) + taskSize > ResourceAgent.MAX_BOARD_OCCUPANCY * boardSize)) {
             timeSlotNumber++;
         }
         return timeSlotNumber;
@@ -214,8 +214,8 @@ public class ResourceAgent extends Agent {
 
         if(timeSlotNumber == timeSlotList.size()){
             executionTime = getTotalExecutionTime() + taskExecutionTime;
-            if(atomicTask.getFilament() != getCurrentFilament()){
-                executionTime += FILAMENT_REPLACEMENT_TIME;
+            if(atomicTask.getMaterial() != getCurrentMaterial()){
+                executionTime += MATERIAL_REPLACEMENT_TIME;
             }
         }else if(timeSlotNumber == timeSlotList.size() - 1){
             TimeSlot lastTimeSlot = timeSlotList.get(timeSlotNumber);
@@ -227,8 +227,8 @@ public class ResourceAgent extends Agent {
         }else{
             for (int i = 0; i <= timeSlotNumber; i++) {
                 TimeSlot timeSlot = timeSlotList.get(i);
-                if (timeSlot.isFilamentChanged()){
-                    executionTime += FILAMENT_REPLACEMENT_TIME;
+                if (timeSlot.isMaterialChanged()){
+                    executionTime += MATERIAL_REPLACEMENT_TIME;
                 }
                 if (i == timeSlotNumber){
                     executionTime += Math.max(timeSlot.getExecutionTime(), taskExecutionTime);
@@ -294,8 +294,8 @@ public class ResourceAgent extends Agent {
         int startTime = 0;
         ArrayList<TimeSlot> timeSlotList = printerSchedule.getSchedule();
         for (TimeSlot timeSlot : timeSlotList){
-            if (timeSlot.isFilamentChanged()){
-                startTime += ResourceAgent.FILAMENT_REPLACEMENT_TIME;
+            if (timeSlot.isMaterialChanged()){
+                startTime += ResourceAgent.MATERIAL_REPLACEMENT_TIME;
             }
             timeSlot.setStart(startTime);
             timeSlot.setStop(startTime + timeSlot.getExecutionTime());

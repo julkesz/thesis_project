@@ -20,20 +20,16 @@ import java.util.List;
 
 public class TaskGroupingBehaviour extends OneShotBehaviour {
 
-    private final SupervisorAgent agent;
-
-    public TaskGroupingBehaviour(SupervisorAgent agent) {
-        this.agent = agent;
-    }
     public void action() {
-        agent.setStartTime(System.currentTimeMillis());
+        SupervisorAgent supervisorAgent = (SupervisorAgent) myAgent;
+        supervisorAgent.setStartTime(System.currentTimeMillis());
         // Read tasks
-        OrderReader orderReader = new OrderReader(agent.getOrderCount());
+        OrderReader orderReader = new OrderReader(supervisorAgent.getOrderFileName());
         orderReader.retrieveOrders();
         List<AtomicTask> allAtomicTasks = orderReader.getAtomicTasksList();
 
         // Divide the tasks into groups
-        List<List<AtomicTask>> taskGroups = divideTasksIntoGroups(allAtomicTasks, agent.getGroupCount(), agent.getDivisionMode());
+        List<List<AtomicTask>> taskGroups = divideAtomicTasksIntoGroups(allAtomicTasks, supervisorAgent.getGroupCount(), supervisorAgent.getDivisionMode());
 
         // Search for printer agents
         List<AID> printers = getReceivers();
@@ -54,7 +50,7 @@ public class TaskGroupingBehaviour extends OneShotBehaviour {
         for (int i = 0; i < taskGroups.size(); i++) {
             AuctionRequest auctionRequest = new AuctionRequest(taskGroups.get(i));
             AID printerAID = printers.get(i);
-            sendTaskList(printerAID, auctionRequest);
+            sendAtomicTaskList(printerAID, auctionRequest);
         }
     }
 
@@ -90,7 +86,7 @@ public class TaskGroupingBehaviour extends OneShotBehaviour {
     }
 
 
-    private List<List<AtomicTask>> divideTasksIntoGroups(List<AtomicTask> allAtomicTasks, int groupCount, String divisionMode) {
+    private List<List<AtomicTask>> divideAtomicTasksIntoGroups(List<AtomicTask> allAtomicTasks, int groupCount, String divisionMode) {
         List<List<AtomicTask>> groups = new ArrayList<>();
 
         switch(divisionMode) {
@@ -126,7 +122,7 @@ public class TaskGroupingBehaviour extends OneShotBehaviour {
     }
 
 
-    private void sendTaskList(AID printerAID, AuctionRequest auctionRequest) {
+    private void sendAtomicTaskList(AID printerAID, AuctionRequest auctionRequest) {
         ACLMessage msg = new ACLMessage(ACLMessage.REQUEST);
         msg.addReceiver(printerAID);
 
@@ -135,12 +131,12 @@ public class TaskGroupingBehaviour extends OneShotBehaviour {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        agent.send(msg);
+        myAgent.send(msg);
     }
 
     private void sendAuctionInformation(AID printerAID) {
-
-        AuctionInformation auctionInformation = new AuctionInformation(agent.getStartTime(), agent.getGroupCount());
+        SupervisorAgent supervisorAgent = (SupervisorAgent) myAgent;
+        AuctionInformation auctionInformation = new AuctionInformation(supervisorAgent.getStartTime(), supervisorAgent.getGroupCount());
         ACLMessage informationMessage = new ACLMessage(ACLMessage.INFORM);
         try {
             informationMessage.setContentObject(auctionInformation);
@@ -148,7 +144,7 @@ public class TaskGroupingBehaviour extends OneShotBehaviour {
             throw new RuntimeException(e);
         }
         informationMessage.addReceiver(printerAID);
-        agent.send(informationMessage);
+        supervisorAgent.send(informationMessage);
 
     }
 

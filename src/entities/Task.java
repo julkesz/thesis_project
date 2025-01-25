@@ -7,7 +7,7 @@ public class Task implements Serializable {
     private int length;
     private int width;
     private int height;
-    private int filament;
+    private int material;
     private int quantity;
 
     public int getTaskId() {
@@ -51,12 +51,12 @@ public class Task implements Serializable {
     }
 
 
-    public int getFilament() {
-        return filament;
+    public int getMaterial() {
+        return material;
     }
 
-    public void setFilament(int filament) {
-        this.filament = filament;
+    public void setMaterial(int material) {
+        this.material = material;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class Task implements Serializable {
                 ", length=" + length +
                 ", width=" + width +
                 ", height=" + height +
-                ", filament=" + filament +
+                ", material=" + material +
                 ", quantity=" + quantity +
                 '}';
     }

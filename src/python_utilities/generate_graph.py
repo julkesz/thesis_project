@@ -62,7 +62,7 @@ def process_machine_schedule_with_occupancy(ax, filename, source_directory, colo
         total_task_height = sum(task_heights)
 
         # resin handling
-        resin_number = timeslot['tasks'][0]['filament']
+        resin_number = timeslot['tasks'][0]['material']
         resin_color, resin_color_index = get_color_for_resin(resin_number, resin_colors, resin_color_map, resin_color_index)
 
         # resin y-position: aligned with the tasks, no space between resin and tasks
@@ -70,7 +70,7 @@ def process_machine_schedule_with_occupancy(ax, filename, source_directory, colo
         resin_y_pos = round(resin_y_pos, 1)
 
         ax.broken_barh([(start * scale, (stop - start) * scale)], (resin_y_pos, resin_bar_height), facecolors=resin_color, edgecolors='black', linewidth=0.5)
-        ax.text(((start + stop) / 2) * scale, resin_y_pos + resin_bar_height / 2, f'{resin_number}', ha='center', va='center', color='black', fontsize='x-small')
+        # ax.text(((start + stop) / 2) * scale, resin_y_pos + resin_bar_height / 2, f'{resin_number}', ha='center', va='center', color='black', fontsize='x-small')
 
         # Task bars: stacked on top of the resin bar
         current_y_pos = machine_y_pos - bar_height
@@ -84,7 +84,7 @@ def process_machine_schedule_with_occupancy(ax, filename, source_directory, colo
 
             # Plot task bar
             ax.broken_barh([(start * scale, (stop - start) * scale)], (current_y_pos, task_height), facecolors=color, edgecolors='black', linewidth=0.5)
-            ax.text(((start + stop) / 2) * scale, current_y_pos + task_height / 2, f'{order_id}:{task_id}', ha='center', va='center', color='white', fontsize='small')
+            ax.text(((start + stop) / 2) * scale, current_y_pos + task_height / 2, f'{order_id}:{task_id}', ha='center', va='center', color='white', fontsize=20)
 
             current_y_pos += task_height  # Move up for the next task
 
@@ -107,7 +107,8 @@ def set_plot_properties(ax, machine_number, machine_schedules, source_directory,
     ytick_positions = [machine_y_positions[j] - bar_height / 2 for j in range(machine_number)]
 
     ax.set_yticks(ytick_positions)
-    ax.set_yticklabels([f'Drukarka {i}' for i in range(1, machine_number + 1)])
+    ax.set_yticklabels([f'Drukarka {i}' for i in range(1, machine_number + 1)], fontsize=24)
+    ax.tick_params(axis='x', labelsize=20)  # Adjust font size here
 
     # Add grid lines
     ax.grid(True, axis='x')
@@ -119,44 +120,94 @@ def set_plot_properties(ax, machine_number, machine_schedules, source_directory,
     # Add machine borders
     add_machine_borders(ax, machine_schedules, bar_height, scale)
 
-
 def add_legends(fig, ax, order_color_map, resin_color_map):
-
     # Create order number legend in sorted order
     sorted_orders = sorted(order_color_map.keys(), key=lambda x: int(x))
     order_handles = [Patch(color=order_color_map[order], label=f'Zamówienie {order}') for order in sorted_orders]
     resin_patch = Patch(color='lightgrey', label='Zmiana materiału')
 
     # Create resin color legend
-    resin_handles = [Patch(color=color, label=f'Materiał {resin}') for resin, color in sorted(resin_color_map.items())]
+    resin_handles = [Patch(color=color, label=f'Żywica {resin}') for resin, color in sorted(resin_color_map.items())]
 
     # Increase font size and handle size for better visibility
-    legend_font_size = 'large'  # You can adjust this to 'medium', 'x-large', etc.
+    legend_font_size = 24  # You can adjust this to 'medium', 'x-large', etc.
     legend_handle_height = 2.0  # Adjust for larger handles
 
-    # Get the position of the axes to dynamically position the legend
-    box = ax.get_position()
-    fig_height = box.height  # Get the height of the plot area
+    # Place the order legend below the plot
+    order_legend = fig.legend(
+        handles=order_handles + [resin_patch],  # Order-related items
+        loc='upper center',  # Align to the center horizontally
+        bbox_to_anchor=(0.4, 0.05),  # Adjust position below the plot (-0.1 for vertical placement)
+        fontsize=legend_font_size,
+        handleheight=legend_handle_height
+    )
 
-    # Create and position the legends dynamically based on the height of the plot
-    order_legend = fig.legend(handles=order_handles + [resin_patch], loc='upper center',
-                              bbox_to_anchor=(0.73, 0.07),
-                              fontsize=legend_font_size, handleheight=legend_handle_height, bbox_transform=fig.transFigure)
+    # Place the resin legend below the order legend
+    resin_legend = fig.legend(
+        handles=resin_handles,  # Resin-related items
+        loc='upper center',  # Align to the center horizontally
+        bbox_to_anchor=(0.55, 0.05),  # Position further below (-0.2 for vertical placement)
+        fontsize=legend_font_size,
+        handleheight=legend_handle_height
+    )
 
-    resin_legend = fig.legend(handles=resin_handles, loc='upper center',
-                                 bbox_to_anchor=(0.8, 0.07),
-                                 fontsize=legend_font_size, handleheight=legend_handle_height, bbox_transform=fig.transFigure)
+    # Add both legends to the figure
+    fig.add_artist(order_legend)  # Add the order legend explicitly
+    fig.add_artist(resin_legend)  # Add the resin legend explicitly
 
-    # Add legends to figure without overlap
+
+
+def add_legends_side(fig, ax, order_color_map, resin_color_map):
+    # Create order number legend in sorted order
+    sorted_orders = sorted(order_color_map.keys(), key=lambda x: int(x))
+    order_handles = [Patch(color=order_color_map[order], label=f'Zamówienie {order}') for order in sorted_orders]
+    resin_patch = Patch(color='lightgrey', label='Zmiana materiału')
+
+    # Create resin color legend
+    resin_handles = [Patch(color=color, label=f'Żywica {resin}') for resin, color in sorted(resin_color_map.items())]
+
+    # Increase font size and handle size for better visibility
+    legend_font_size = 24  # You can adjust this to 'medium', 'x-large', etc.
+    legend_handle_height = 2.0  # Adjust for larger handles
+
+    # Place the order legend closer to the plot
+    order_legend = fig.legend(
+        handles=order_handles + [resin_patch],
+        loc='center left',  # Align to the left of the legend box
+        bbox_to_anchor=(0.91, 0.75),  # Adjust horizontal and vertical placement
+        fontsize=legend_font_size,
+        handleheight=legend_handle_height,
+        bbox_transform=fig.transFigure
+    )
+
+    # Place the resin legend higher and closer
+    resin_legend = fig.legend(
+        handles=resin_handles,
+        loc='center left',
+        bbox_to_anchor=(0.91, 0.5),  # Adjust horizontal and vertical placement
+        fontsize=legend_font_size,
+        handleheight=legend_handle_height,
+        bbox_transform=fig.transFigure
+    )
+
+    # Add legends to the figure without overlap
     fig.add_artist(order_legend)  # Add the order legend separately to avoid overlap
     fig.add_artist(resin_legend)
 
 
 def get_color_for_resin(resin_number, resin_colors, resin_color_map, resin_color_index):
+    # Convert resin_number to an integer
+    resin_index = int(resin_number) - 1  # Subtract 1 to make it zero-based
+
+    # Determine the color index deterministically
+    color_index = resin_index % len(resin_colors)
+
+    # Assign the color from the palette
     if resin_number not in resin_color_map:
-        resin_color_map[resin_number] = resin_colors[resin_color_index % len(resin_colors)]
-        resin_color_index += 1
+        resin_color_map[resin_number] = resin_colors[color_index]
+
     return resin_color_map[resin_number], resin_color_index
+
 
 def get_color_for_order(order_id, colors, order_color_map):
     # Convert the order number to an integer

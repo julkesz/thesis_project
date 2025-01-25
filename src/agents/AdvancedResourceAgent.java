@@ -18,7 +18,7 @@ import java.util.*;
 
 public class AdvancedResourceAgent extends ResourceAgent {
     private List<AID> cachedReceivers = null;
-    private String parallelAuctionMode; //overbook, startauction
+    private String parallelAcceptanceMode; //overbook, startauction
 
 
     protected void setup() {
@@ -28,25 +28,25 @@ public class AdvancedResourceAgent extends ResourceAgent {
         if (args != null && args.length == 7) {
             try {
                 //Seventh argument:
-                parallelAuctionMode = args[6].toString();
+                parallelAcceptanceMode = args[6].toString();
             } catch (Exception e) {
                 System.err.println("Error parsing agent parameters: " + e.getMessage());
             }
         }
 
-        addBehaviour(new AuctionInformationBehaviour(this));
+        addBehaviour(new AuctionInformationBehaviour());
 
         ParallelBehaviour parallelBehaviour = new ParallelBehaviour();
-        parallelBehaviour.addSubBehaviour(new AuctionRequestBehaviour(this));
-        parallelBehaviour.addSubBehaviour(new AuctionProposalBehaviour(this));
+        parallelBehaviour.addSubBehaviour(new AuctionRequestBehaviour());
+        parallelBehaviour.addSubBehaviour(new AuctionProposalBehaviour());
         parallelBehaviour.addSubBehaviour(new AuctionAcceptanceBehaviour());
-        parallelBehaviour.addSubBehaviour(new AuctionCompletionBehaviour(this));
+        parallelBehaviour.addSubBehaviour(new AuctionCompletionBehaviour());
 
         addBehaviour(parallelBehaviour);
     }
 
-    public String getParallelAuctionMode() {
-        return parallelAuctionMode;
+    public String getParallelAcceptanceMode() {
+        return parallelAcceptanceMode;
     }
 
     public List<AID> getReceivers() {

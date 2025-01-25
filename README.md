@@ -10,7 +10,7 @@ Agenci, w zależności od rodzaju, przyjmują różne argumenty.
   2. długość płyty drukarki [mm]
   3. maksymalna wysokość drukowanego elementu [mm]
   4. prędkość drukowania [mm/godz]
-  5. numer początkowego filamentu
+  5. numer początkowego materiału
 
 Przykładowa komenda uruchamiająca program:
 ```

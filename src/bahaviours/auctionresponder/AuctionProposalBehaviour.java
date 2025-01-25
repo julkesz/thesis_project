@@ -9,25 +9,22 @@ import jade.lang.acl.MessageTemplate;
 
 
 public class AuctionProposalBehaviour extends CyclicBehaviour {
-    private final ResourceAgent agent;
-
-    public AuctionProposalBehaviour(ResourceAgent agent) {
-        this.agent = agent;
-    }
 
     public void action() {
-        ACLMessage msg = agent.receive(MessageTemplate.MatchPerformative(ACLMessage.CFP));
+
+        ACLMessage msg = myAgent.receive(MessageTemplate.MatchPerformative(ACLMessage.CFP));
 
         if (msg != null) {
             try {
+                ResourceAgent resourceAgent = (ResourceAgent) myAgent;
                 AtomicTask atomicTask = (AtomicTask) msg.getContentObject();
 
                 ACLMessage reply = msg.createReply();
                 reply.setPerformative(ACLMessage.PROPOSE);
-                AuctionProposal auctionProposal = agent.evaluateAtomicTask(atomicTask);
+                AuctionProposal auctionProposal = resourceAgent.evaluateAtomicTask(atomicTask);
                 reply.setContentObject(auctionProposal);
 
-                myAgent.send(reply);
+                resourceAgent.send(reply);
             } catch (Exception e) {
                 e.printStackTrace();
             }

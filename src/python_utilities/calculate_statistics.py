@@ -22,20 +22,20 @@ def calculate_max_execution_time(data):
     else:
         return max(timeslot["stop"] for timeslot in data["schedule"])
 
-def calculate_filament_changes(data):
-    """Calculate the number of filament changes for the given printer's schedule."""
-    previous_filament = None
-    filament_changes = 0
+def calculate_material_changes(data):
+    """Calculate the number of material changes for the given printer's schedule."""
+    previous_material = None
+    material_changes = 0
 
     for timeslot in data["schedule"]:
-        current_filament = timeslot["tasks"][0]["filament"] if timeslot["tasks"] else None
+        current_material = timeslot["tasks"][0]["material"] if timeslot["tasks"] else None
 
-        if previous_filament is not None and current_filament != previous_filament:
-            filament_changes += 1
+        if previous_material is not None and current_material != previous_material:
+            material_changes += 1
 
-        previous_filament = current_filament
+        previous_material = current_material
 
-    return filament_changes
+    return material_changes
 
 def calculate_board_occupancies(data):
     """Calculate board occupancy for each timeslot in the printer's schedule."""
@@ -105,9 +105,9 @@ def calculate_means(printer_statistics):
     execution_times = list(printer_statistics["executionTimes"].values())
     mean_values["executionTimes"] = round(mean(execution_times), 2) if execution_times else 0
 
-    # Calculate mean for filamentChanges
-    filament_changes = list(printer_statistics["filamentChanges"].values())
-    mean_values["filamentChanges"] = round(mean(filament_changes), 2) if filament_changes else 0
+    # Calculate mean for materialChanges
+    material_changes = list(printer_statistics["materialChanges"].values())
+    mean_values["materialChanges"] = round(mean(material_changes), 2) if material_changes else 0
 
     # Calculate mean for boardOccupancies
     all_occupancies = [
@@ -134,7 +134,7 @@ def calculate_statistics(timestamp):
 
     printer_statistics = {
         "executionTimes": {},
-        "filamentChanges": {},
+        "materialChanges": {},
         "boardOccupancies": {},
         "tardiness": [],
         "taskHeightStandardDeviations": {}
@@ -146,12 +146,12 @@ def calculate_statistics(timestamp):
             printer_name = data["printerName"]
 
             max_execution_time = calculate_max_execution_time(data)
-            filament_changes = calculate_filament_changes(data)
+            material_changes = calculate_material_changes(data)
             board_occupancies = calculate_board_occupancies(data)
             height_std_devs = calculate_height_standard_deviations(data)
 
             printer_statistics["executionTimes"][printer_name] = max_execution_time
-            printer_statistics["filamentChanges"][printer_name] = filament_changes
+            printer_statistics["materialChanges"][printer_name] = material_changes
             printer_statistics["boardOccupancies"][printer_name] = board_occupancies
             printer_statistics["taskHeightStandardDeviations"][printer_name] = height_std_devs
 

@@ -19,7 +19,7 @@ import java.util.List;
 
 public class ManagerAgent extends Agent {
     private long startTime;
-    private int orderCount = 1;
+    private String orderFileName;
     private String divisionMode = "random";
     private List<AID> cachedReceivers = null;
 
@@ -29,7 +29,7 @@ public class ManagerAgent extends Agent {
         if (args != null && args.length > 0) {
             try {
                 // First argument: number of orders
-                orderCount = Integer.parseInt(args[0].toString());
+                orderFileName = args[0].toString();
                 // Second argument: task division mode
                 divisionMode = args[1].toString();
             } catch (Exception e) {
@@ -39,7 +39,7 @@ public class ManagerAgent extends Agent {
 
         startTime = System.currentTimeMillis();
         // Read tasks
-        OrderReader orderReader = new OrderReader(orderCount);
+        OrderReader orderReader = new OrderReader(orderFileName);
         orderReader.retrieveOrders();
         List<AtomicTask> atomicTaskList = sortAtomicTasks(orderReader.getAtomicTasksList());
 
@@ -74,7 +74,7 @@ public class ManagerAgent extends Agent {
         return atomicTasksList;
     }
 
-    public List<AID> getReceivers() {
+    private List<AID> getReceivers() {
         if (cachedReceivers == null) {
             cachedReceivers = new ArrayList<>();
             try {

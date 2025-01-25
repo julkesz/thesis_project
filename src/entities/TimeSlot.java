@@ -3,7 +3,7 @@ package entities;
 import java.util.ArrayList;
 
 public class TimeSlot {
-    private boolean filamentReplacementFlag;
+    private boolean materialReplacementFlag;
     private int executionTime = 0;
     private int start;
     private int stop;
@@ -11,15 +11,15 @@ public class TimeSlot {
     private ArrayList<AtomicTask> tasks;
 
 
-    public TimeSlot(boolean filamentReplacementFlag, AtomicTask atomicTask, int taskExecutionTime) {
-        this.filamentReplacementFlag = filamentReplacementFlag;
+    public TimeSlot(boolean materialReplacementFlag, AtomicTask atomicTask, int taskExecutionTime) {
+        this.materialReplacementFlag = materialReplacementFlag;
         this.tasks = new ArrayList<>();
         this.tasks.add(atomicTask);
         this.executionTime = taskExecutionTime;
     }
 
-    public int getFilament() {
-        return tasks.get(0).getFilament();
+    public int getMaterial() {
+        return tasks.get(0).getMaterial();
     }
 
     public int getExecutionTime() {
@@ -65,8 +65,8 @@ public class TimeSlot {
         return occupancy;
     }
 
-    public boolean isFilamentChanged() {
-        return filamentReplacementFlag;
+    public boolean isMaterialChanged() {
+        return materialReplacementFlag;
     }
 
     @Override

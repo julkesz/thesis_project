@@ -19,7 +19,7 @@ import java.util.List;
 
 public class RingSupervisorAgent extends Agent {
     private long startTime;
-    private int orderCount = 1;
+    private String orderFileName;
     private String divisionMode = "random";
     private List<AID> cachedReceivers = null;
 
@@ -28,7 +28,7 @@ public class RingSupervisorAgent extends Agent {
         Object[] args = getArguments();
         if (args != null && args.length > 0) {
             try {
-                orderCount = Integer.parseInt(args[0].toString());
+                orderFileName = args[0].toString();
                 divisionMode = args[1].toString();
             } catch (Exception e) {
                 System.err.println("Error parsing agent parameters: " + e.getMessage());
@@ -37,13 +37,13 @@ public class RingSupervisorAgent extends Agent {
 
         startTime = System.currentTimeMillis();
         // Read tasks
-        OrderReader orderReader = new OrderReader(orderCount);
+        OrderReader orderReader = new OrderReader(orderFileName);
         orderReader.retrieveOrders();
         List<AtomicTask> atomicTaskList = sortAtomicTasks(orderReader.getAtomicTasksList());
 
         SequentialBehaviour auctionSequence = new SequentialBehaviour();
         for (AtomicTask atomicTask : atomicTaskList) {
-            auctionSequence.addSubBehaviour(new RingBehaviour(this, atomicTask, getReceivers()));
+            auctionSequence.addSubBehaviour(new RingBehaviour(atomicTask, getReceivers()));
         }
         auctionSequence.addSubBehaviour(new AuctionCompletionBehaviour(getReceivers(), startTime));
         addBehaviour(auctionSequence);

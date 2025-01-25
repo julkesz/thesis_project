@@ -16,15 +16,10 @@ import java.util.Objects;
 
 
 public class RingBehaviour extends CyclicBehaviour {
-    private final RingResourceAgent agent;
-
-    public RingBehaviour(RingResourceAgent agent) {
-        this.agent = agent;
-    }
 
     @Override
     public void action() {
-        ACLMessage msg = agent.receive();
+        ACLMessage msg = myAgent.receive();
         if (msg != null) {
             switch (msg.getPerformative()) {
                 case ACLMessage.CFP:
@@ -34,7 +29,7 @@ public class RingBehaviour extends CyclicBehaviour {
                     handleAcceptProposalMessage(msg);
                     break;
                 default:
-                    System.out.println(agent.getLocalName() + ": Received unknown message type.");
+                    System.out.println(myAgent.getLocalName() + ": Received unknown message type.");
             }
         } else {
             block();
@@ -42,6 +37,8 @@ public class RingBehaviour extends CyclicBehaviour {
     }
 
     private void handleCfpMessage(ACLMessage msg) {
+        RingResourceAgent ringResourceAgent = (RingResourceAgent) myAgent;
+        
         RingMessage ringMessage;
         try {
             ringMessage = (RingMessage) msg.getContentObject();
@@ -49,47 +46,48 @@ public class RingBehaviour extends CyclicBehaviour {
             throw new RuntimeException(e);
         }
 
-        if (Objects.equals(ringMessage.getFirstProposer(), agent.getLocalName())) {
+        if (Objects.equals(ringMessage.getFirstProposer(), ringResourceAgent.getLocalName())) {
             ACLMessage proposalMsg = new ACLMessage(ACLMessage.PROPOSE);
-            proposalMsg.addReceiver(agent.getAID(ringMessage.getSupervisor()));
+            proposalMsg.addReceiver(ringResourceAgent.getAID(ringMessage.getSupervisor()));
             try {
                 proposalMsg.setContentObject(ringMessage);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            agent.send(proposalMsg);
+            ringResourceAgent.send(proposalMsg);
             return;
         }
 
         AtomicTask atomicTask = ringMessage.getAtomicTask();
 
-        AuctionProposal auctionProposal = agent.evaluateAtomicTask(atomicTask);
+        AuctionProposal auctionProposal = ringResourceAgent.evaluateAtomicTask(atomicTask);
         float price = auctionProposal.getPrice();
 
         if (ringMessage.getFirstProposer() == null){
-            ringMessage.setFirstProposer(agent.getLocalName());
-            ringMessage.setBestProposer(agent.getLocalName());
+            ringMessage.setFirstProposer(ringResourceAgent.getLocalName());
+            ringMessage.setBestProposer(ringResourceAgent.getLocalName());
             ringMessage.setBestPrice(price);
         } else {
              if(ringMessage.getBestPrice() > price){
-                 ringMessage.setBestProposer(agent.getLocalName());
+                 ringMessage.setBestProposer(ringResourceAgent.getLocalName());
                  ringMessage.setBestPrice(price);
              }
         }
 
         ACLMessage newMsg = new ACLMessage(ACLMessage.CFP);
-        newMsg.addReceiver(agent.getAID(agent.getNextAgent()));
+        newMsg.addReceiver(ringResourceAgent.getAID(ringResourceAgent.getNextAgent()));
         try {
             newMsg.setContentObject(ringMessage);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        agent.send(newMsg);
+        ringResourceAgent.send(newMsg);
 
-        System.out.println(agent.getLocalName() + ": Task received: " + atomicTask + ". Proposal price: " + price);
+        System.out.println(ringResourceAgent.getLocalName() + ": Task received: " + atomicTask + ". Proposal price: " + price);
     }
 
     private void handleAcceptProposalMessage(ACLMessage msg) {
+        RingResourceAgent ringResourceAgent = (RingResourceAgent) myAgent;
             try {
                 AtomicTask atomicTask;
                 int timeSlotNumber = 0;
@@ -97,36 +95,36 @@ public class RingBehaviour extends CyclicBehaviour {
                 try {
                     atomicTask = (AtomicTask) msg.getContentObject();
 
-                    timeSlotNumber = agent.calculateTimeSlotNumber(atomicTask);
+                    timeSlotNumber = ringResourceAgent.calculateTimeSlotNumber(atomicTask);
 
-                    PrinterSchedule printerSchedule = agent.getPrinterSchedule();
-                    int taskExecutionTime = (int) Math.ceil((float) atomicTask.getHeight() / agent.getPrintingSpeed() * 60);
+                    PrinterSchedule printerSchedule = ringResourceAgent.getPrinterSchedule();
+                    int taskExecutionTime = (int) Math.ceil((float) atomicTask.getHeight() / ringResourceAgent.getPrintingSpeed() * 60);
 
                     if (timeSlotNumber == printerSchedule.getSchedule().size()) {
-                        boolean filamentReplacementFlag = false;
-                        if (atomicTask.getFilament() != agent.getCurrentFilament()) {
-                            filamentReplacementFlag = true;
-                            agent.setCurrentFilament(atomicTask.getFilament());
-                            agent.increaseTotalExecutionTime(ResourceAgent.FILAMENT_REPLACEMENT_TIME);
+                        boolean materialReplacementFlag = false;
+                        if (atomicTask.getMaterial() != ringResourceAgent.getCurrentMaterial()) {
+                            materialReplacementFlag = true;
+                            ringResourceAgent.setCurrentMaterial(atomicTask.getMaterial());
+                            ringResourceAgent.increaseTotalExecutionTime(ResourceAgent.MATERIAL_REPLACEMENT_TIME);
                         }
-                        printerSchedule.addTimeSlot(filamentReplacementFlag, atomicTask);
-                        agent.increaseTotalExecutionTime(taskExecutionTime);
+                        printerSchedule.addTimeSlot(materialReplacementFlag, atomicTask);
+                        ringResourceAgent.increaseTotalExecutionTime(taskExecutionTime);
                     } else {
                         TimeSlot timeSlot = printerSchedule.getSchedule().get(timeSlotNumber);
                         int timeSlotPreviousExecutionTime = timeSlot.getExecutionTime();
                         timeSlot.addTask(atomicTask, taskExecutionTime);
                         if (taskExecutionTime > timeSlotPreviousExecutionTime) {
-                            agent.increaseTotalExecutionTime(taskExecutionTime - timeSlotPreviousExecutionTime);
+                            ringResourceAgent.increaseTotalExecutionTime(taskExecutionTime - timeSlotPreviousExecutionTime);
                         }
                     }
-                    System.out.println(agent.getLocalName() + " added atomic task " + atomicTask.getAtomicTaskId() + " to timeslot " + timeSlotNumber);
+                    System.out.println(ringResourceAgent.getLocalName() + " added atomic task " + atomicTask.getAtomicTaskId() + " to timeslot " + timeSlotNumber);
 
                     String atomicTaskId = String.valueOf(atomicTask.getAtomicTaskId());
 
                     ACLMessage reply = msg.createReply();
                     reply.setPerformative(ACLMessage.INFORM);
                     reply.setContent(atomicTaskId);
-                    agent.send(reply);
+                    ringResourceAgent.send(reply);
 
                 } catch (UnreadableException e) {
                     throw new RuntimeException(e);

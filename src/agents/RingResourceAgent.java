@@ -25,8 +25,8 @@ public class RingResourceAgent extends ResourceAgent {
         System.out.println(getLocalName() + " initialized. Next agent: " + nextAgent);
 
         // Add the cyclic behaviour to handle messages
-        addBehaviour(new RingBehaviour(this));
-        addBehaviour(new AuctionCompletionBehaviour(this));
+        addBehaviour(new RingBehaviour());
+        addBehaviour(new AuctionCompletionBehaviour());
     }
 
     public String getNextAgent() {
